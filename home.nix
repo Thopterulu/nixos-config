@@ -19,7 +19,7 @@
   ".config/alacritty/alacritty.toml".source = ./dotfiles/alacritty/alacritty.toml;
   # Rofi config 
   ".config/rofi/config.rasi".source = ./dotfiles/rofi/config.rasi;
-  }
+  };
   programs.neovim = {
     enable = true;
     viAlias = true;
