@@ -74,6 +74,8 @@ keys = [
     
     Key([mod, "control", "shift"], "h", move_to_prev_group, desc="Move window to previous group"),
     Key([mod, "control", "shift"], "l", move_to_next_group, desc="Move window to next group"),
+    Key([mod, "shift"], "x", lazy.spawn("i3lock-fancy"), desc="Lock screen"),
+
     # Toggle between split and unsplit sides of stack.
     # Split = all windows displayed
     # Unsplit = 1 window displayed, like Max layout, but still with
