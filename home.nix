@@ -12,14 +12,14 @@
 
 
 # Qtile config
-  home.file.".config/qtile/config.py".source = ./dotfiles/qtile/config.py;
-  
-  # Alacritty config (exemple)
-  home.file.".config/alacritty/alacritty.toml".source = ./dotfiles/alacritty/alacritty.toml;
-  
- # Rofi config 
-  home.file.".config/rofi/config.rasi".source = ./dotfiles/rofi/config.rasi;
-  
+  home.file = {
+  # qtile
+  ".config/qtile/config.py".source = ./dotfiles/qtile/config.py;
+  # Alacritty config
+  ".config/alacritty/alacritty.toml".source = ./dotfiles/alacritty/alacritty.toml;
+  # Rofi config 
+  ".config/rofi/config.rasi".source = ./dotfiles/rofi/config.rasi;
+  }
   programs.neovim = {
     enable = true;
     viAlias = true;
