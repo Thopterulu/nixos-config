@@ -13,7 +13,7 @@
     nixosConfigurations.thopter-nixos = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
-        /etc/nixos/hardware-configuration.nix  # Reste dans /etc/nixos
+        ./hardware/hardware-desktop.nix
         ./configuration.nix
         home-manager.nixosModules.home-manager
         {
