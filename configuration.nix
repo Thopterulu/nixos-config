@@ -144,8 +144,7 @@
    pulseaudio   
    # Monitoring
    pwvucontrol       # Contrôle PipeWire moderne
-   betterlockscreen
-   imagemagick
+   i3lock
 ];
 
  fonts.packages = with pkgs; [
