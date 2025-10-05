@@ -74,12 +74,49 @@ programs.zsh = {
   programs.starship = {
     enable = true;
     enableZshIntegration = true;
+    
     settings = {
-      add_newline = false;
+      add_newline = true;
+
       character = {
         success_symbol = "[➜](bold green)";
         error_symbol = "[➜](bold red)";
       };
+      # Afficher le répertoire
+      directory = {
+        truncation_length = 3;
+        truncate_to_repo = true;
+        style = "bold cyan";
+      };
+      
+      # Git
+      git_branch = {
+        symbol = " ";
+        style = "bold purple";
+      };
+      
+      git_status = {
+        style = "bold red";
+      };
+      
+      # Langages (affichés seulement dans les projets concernés)
+      nodejs.symbol = " ";
+      python.symbol = " ";
+      rust.symbol = " ";
+      
+      # Temps d'exécution des commandes
+      cmd_duration = {
+        min_time = 500;
+        format = "took [$duration](bold yellow)";
+      };
+      
+      # Heure
+      time = {
+        disabled = false;
+        format = "[$time]($style) ";
+        style = "bold white";
+      };
+
     };
   };
 
