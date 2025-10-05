@@ -1,11 +1,8 @@
-{ config, pkgs, nixvim, ... }:
+{ config, pkgs, ... }:
 
 {
  home.stateVersion = "25.05";
 
-  imports = [
-    nixvim.homeManagerModules.nixvim
-  ];
 
   home.packages = with pkgs; [
     ripgrep
@@ -56,13 +53,13 @@
       treesitter.enable = true;
       nvim-tree.enable = true;
       web-devicons.enable = true;
-       lsp = {
-         enable = true;
-         servers = {
-           nil_ls.enable = true; # Nix LSP
-           pyright.enable = true;  # Python
-         };
-       };
+      # lsp = {
+      #   enable = true;
+      #   servers = {
+      #     nil_ls.enable = true; # Nix LSP
+      #     pyright.enable = true;  # Python
+      #   };
+      # };
       
       cmp = {
         enable = true;
