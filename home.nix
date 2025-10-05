@@ -68,11 +68,11 @@
       telescope.enable = true;
       treesitter.enable = true;
       nvim-tree.enable = true;
-      
+      web-devicons.enable = true;
       lsp = {
         enable = true;
         servers = {
-          nil-ls.enable = true;  # Nix LSP
+          nil_ls.enable = true; # Nix LSP
           pyright.enable = true;  # Python
         };
       };
