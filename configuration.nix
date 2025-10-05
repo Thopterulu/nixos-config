@@ -149,6 +149,9 @@
    pulseaudio   
    # Monitoring
    pwvucontrol       # Contrôle PipeWire modern
+   gcc
+   gnumake
+   pkg-config
 ];
 
  fonts.packages = with pkgs; [
