@@ -103,7 +103,10 @@ keys = [
     Key([mod], "e", lazy.spawn("pcmanfm")), 
     Key([mod], "d", lazy.spawn("rofi -show drun")),
     Key([mod], "m", lazy.spawn("firefox")),
-    ]
+    Key(["mod1"], "Tab", lazy.layout.next(), desc="Next window"),
+    Key(["mod1", "shift"], "Tab", lazy.layout.previous(), desc="Previous window"),
+
+]
 
 # Add key bindings to switch VTs in Wayland.
 # We can't check qtile.core.name in default config as it is loaded before qtile is started

@@ -7,9 +7,13 @@
       url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixvim = {
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }: {
+  outputs = { self, nixpkgs, home-manager, nixvim, ... }: {
     nixosConfigurations.thopter-nixos = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
@@ -17,8 +21,11 @@
         ./configuration.nix
         home-manager.nixosModules.home-manager
         {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
           home-manager.users.thopter = import ./home.nix;
-        }
+          home-manager.extraSpecialArgs = { inherit nixvim; };
+	}
       ];
     };
   };

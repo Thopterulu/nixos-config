@@ -1,8 +1,11 @@
-{ config, pkgs, ... }:
+{ config, pkgs, nixvim, ... }:
 
 {
  home.stateVersion = "25.05";
 
+  imports = [
+    nixvim.homeManagerModules.nixvim
+  ];
 
   home.packages = with pkgs; [
     ripgrep
@@ -39,4 +42,46 @@
     userName = "thopterulu";
     userEmail = "guillaume.kergueris@gmail.com";
   };
+  
+  programs.nixvim = {
+    enable = true;
+    defaultEditor = true;
+    viAlias = true;
+    vimAlias = true;
+    
+    colorschemes.catppuccin = {
+      enable = true;
+      settings.flavour = "mocha";
+    };
+    
+    opts = {
+      number = true;
+      relativenumber = true;
+      shiftwidth = 2;
+      tabstop = 2;
+      expandtab = true;
+      mouse = "a";
+    };
+    
+    plugins = {
+      lualine.enable = true;
+      telescope.enable = true;
+      treesitter.enable = true;
+      nvim-tree.enable = true;
+      
+      lsp = {
+        enable = true;
+        servers = {
+          nil-ls.enable = true;  # Nix LSP
+          pyright.enable = true;  # Python
+        };
+      };
+      
+      cmp = {
+        enable = true;
+        autoEnableSources = true;
+      };
+    };
+  };
+
 }
