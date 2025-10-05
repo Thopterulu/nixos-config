@@ -12,6 +12,7 @@
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
+  boot.loader.systemd-boot.configurationLimit = 5;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.supportedFilesystems = [ "ntfs" ];
   boot.kernelModules = [ "snd-usb-audio" ];
@@ -107,6 +108,7 @@
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.thopter = {
+    shell = pkgs.zsh;
     isNormalUser = true;
     extraGroups = [ "wheel" "audio" ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
@@ -116,6 +118,7 @@
 
   programs.firefox.enable = true;
   programs.fuse.userAllowOther = true;
+  programs.zsh.enable = true;
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
  environment.systemPackages = with pkgs; [

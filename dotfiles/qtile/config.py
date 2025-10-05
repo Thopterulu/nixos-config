@@ -30,6 +30,12 @@ from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
 
+
+@hook.subscribe.screen_change
+def set_screens(event):
+    """Dynamically reconfigure screens when they change"""
+    lazy.restart()
+
 @lazy.function
 def move_to_next_group(qtile):
     current_group = qtile.current_screen.group
