@@ -76,47 +76,64 @@ programs.zsh = {
     enableZshIntegration = true;
     
     settings = {
-      add_newline = true;
+      add_newline = false;
+      format = "$username$hostname$directory$git_branch$git_status$cmd_duration $character";
 
+      # Username
+    
+      username = {
+        show_always = true;
+        style_user = "bold green";
+        style_root = "bold red";
+        format = "[$user]($style)";
+      };
+      
+      # Hostname
+      hostname = {
+        ssh_only = false;  # Toujours afficher
+        style = "bold green";
+        format = "[@$hostname]($style):";
+      };
+      
+      # Directory
+      directory = {
+        style = "bold cyan";
+        truncation_length = 3;
+        truncate_to_repo = true;
+        format = "[$path]($style)";
+      };
+      
+      # Git branch
+      git_branch = {
+        symbol = "";
+        style = "bold purple";
+        format = " on [$symbol$branch]($style)";
+      };
+      
+      # Git status
+      git_status = {
+        ahead = "⇡$count";
+        diverged = "⇕⇡$ahead_count⇣$behind_count";
+        behind = "⇣$count";
+        style = "bold red";
+        format = "[$all_status$ahead_behind]($style)";
+      };
+      
+      # Temps d'exécution
+      cmd_duration = {
+        min_time = 500;
+        format = "took [$duration](bold yellow)";
+        show_milliseconds = false;
+      };
+      
+      # Pas d'heure (pour garder compact)
+      time.disabled = true;
+      
+      # Character (flèche)
       character = {
         success_symbol = "[➜](bold green)";
         error_symbol = "[➜](bold red)";
       };
-      # Afficher le répertoire
-      directory = {
-        truncation_length = 3;
-        truncate_to_repo = true;
-        style = "bold cyan";
-      };
-      
-      # Git
-      git_branch = {
-        symbol = " ";
-        style = "bold purple";
-      };
-      
-      git_status = {
-        style = "bold red";
-      };
-      
-      # Langages (affichés seulement dans les projets concernés)
-      nodejs.symbol = " ";
-      python.symbol = " ";
-      rust.symbol = " ";
-      
-      # Temps d'exécution des commandes
-      cmd_duration = {
-        min_time = 500;
-        format = "took [$duration](bold yellow)";
-      };
-      
-      # Heure
-      time = {
-        disabled = false;
-        format = "[$time]($style) ";
-        style = "bold white";
-      };
-
     };
   };
 
