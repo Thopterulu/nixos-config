@@ -111,6 +111,13 @@ keys = [
     Key([mod], "m", lazy.spawn("firefox")),
     Key(["mod1"], "Tab", lazy.layout.next(), desc="Next window"),
     Key(["mod1", "shift"], "Tab", lazy.layout.previous(), desc="Previous window"),
+    # IMPORTANT : Forcer le mode fenêtré temporaire
+    Key([mod, "mod1"], "f", lazy.window.toggle_fullscreen()),
+    
+    # Minimiser la fenêtre
+    Key([mod, "mod1"], "m", lazy.window.toggle_minimize()),
+
+
 
 ]
 
@@ -184,7 +191,7 @@ screens = [
         bottom=bar.Bar(
             [
                 widget.CurrentLayout(),
-                widget.GroupBox(),
+                widget.GroupBox(disable_drag=True,),
                 widget.Prompt(),
                 widget.WindowName(),
                 widget.Chord(
@@ -213,7 +220,7 @@ screens = [
         bottom=bar.Bar(
             [
                 widget.CurrentLayout(),
-                widget.GroupBox(),
+                widget.GroupBox(disable_drag=True,),
                 widget.Prompt(),
                 widget.WindowName(),
                 widget.Chord(
