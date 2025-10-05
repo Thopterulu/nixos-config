@@ -35,7 +35,7 @@ imports = [
 programs.zsh = {
     enable = true;
     enableCompletion = true;
-    enableAutosuggestions = true;
+    autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
     
     oh-my-zsh = {
@@ -59,8 +59,7 @@ programs.zsh = {
     };
     
     # Init scripts
-    initExtra = ''
-      # Complétion insensible à la casse
+    initContent = ''
       zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
     '';
   };
