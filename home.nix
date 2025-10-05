@@ -3,6 +3,9 @@
 {
  home.stateVersion = "25.05";
 
+  imports = [
+    nixvim.homeManagerModules.nixvim
+  ];
 
   home.packages = with pkgs; [
     ripgrep
