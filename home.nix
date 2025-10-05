@@ -151,8 +151,8 @@
           };
           graph_style = "unicode";
           signs = {
-            section = ["", ""];
-            item = ["", ""];
+            section = [ "" "" ];
+            item = [ "" "" ];
           };
         };
       };
