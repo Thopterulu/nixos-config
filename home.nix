@@ -69,13 +69,13 @@
       treesitter.enable = true;
       nvim-tree.enable = true;
       web-devicons.enable = true;
-      lsp = {
-        enable = true;
-        servers = {
-          nil_ls.enable = true; # Nix LSP
-          pyright.enable = true;  # Python
-        };
-      };
+     # lsp = {
+     #   enable = true;
+     #   servers = {
+     #     nil_ls.enable = true; # Nix LSP
+     #     pyright.enable = true;  # Python
+     #   };
+     # };
       
       cmp = {
         enable = true;
