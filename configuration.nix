@@ -5,6 +5,7 @@
 { config, lib, pkgs, ... }:
 
 {
+
   # allow unfree
   nixpkgs.config.allowUnfree = true; 
 
