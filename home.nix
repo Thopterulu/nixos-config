@@ -16,6 +16,8 @@
     google-drive-ocamlfuse
     claude-code
     just
+    dbeaver-bin
+    postgresql
   ];
 
   # Service systemd pour monter automatiquement
