@@ -15,6 +15,7 @@
     tldr
     google-drive-ocamlfuse
     claude-code
+    just
   ];
 
   # Service systemd pour monter automatiquement
