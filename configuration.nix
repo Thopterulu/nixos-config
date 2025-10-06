@@ -153,6 +153,7 @@
     gnumake
     pkg-config
     cryptomator
+    direnv
   ];
 
   fonts.packages = with pkgs; [
