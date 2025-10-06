@@ -33,21 +33,21 @@
 
   # Select internationalisation properties.
   i18n.defaultLocale = "fr_FR.UTF-8";
-   #console = {
-   #  font = "Lat2-Terminus16";
-   #  keyMap = "fr";
-   #  useXkbConfig = true; # use xkb.options in tty.
+  #console = {
+  #  font = "Lat2-Terminus16";
+  #  keyMap = "fr";
+  #  useXkbConfig = true; # use xkb.options in tty.
   # };
 
   # Enable the X11 windowing system.
   # services.xserver.enable = true;
   services.xserver = {
-   enable = true;
-   videoDrivers = [ "nvidia" ];
-   windowManager.qtile.enable = true;
-   xkb.layout = "fr";
-   xkb.options = "eurosign:e,caps:escape";
-   displayManager.sessionCommands = ''
+    enable = true;
+    videoDrivers = [ "nvidia" ];
+    windowManager.qtile.enable = true;
+    xkb.layout = "fr";
+    xkb.options = "eurosign:e,caps:escape";
+    displayManager.sessionCommands = ''
    xrandr --setprovideroutputsource modesetting NVIDIA-0 &
    sleep 1
    xrandr --output DP-2 --primary --mode 2560x1440 --rate 120 --pos 0x0 \
@@ -55,8 +55,8 @@
    xwallpaper --output DP-2 --zoom ~/wallpapers/streets.jpg \
              --output HDMI-1-1 --zoom ~/wallpapers/streets.jpg &
    xset r rate 200 35 &
-'';
- };
+    '';
+  };
 
   services.picom = {
     enable = true;
@@ -75,7 +75,7 @@
       intelBusId = "PCI:0:2:0";    # 00:02.0
     };
   };
-  
+
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
@@ -93,17 +93,17 @@
     alsa.support32Bit = true;
     pulse.enable = true;  # Émulation PulseAudio
     jack.enable = true;   # Optionnel
-    
+
     # Configuration spécifique
     wireplumber.enable = true;
 
 
   };
-  
+
   # Pour le gaming
   security.rtkit.enable = true;
   security.pam.services.betterlockscreen = {};
-# Enable touchpad support (enabled default in most desktopManager).
+  # Enable touchpad support (enabled default in most desktopManager).
   # services.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -121,51 +121,52 @@
   programs.zsh.enable = true;
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
- environment.systemPackages = with pkgs; [
-   vim
-   wget
-   neovim
-   alacritty
-   refind
-   btop
-   xwallpaper
-   pcmanfm
-   rofi
-   steam
-   discord
-   git
-   neofetch
-   xclip
-   keepassxc
-   google-drive-ocamlfuse
-   flameshot
-   dunst
-   ntfs3g
-   pciutils
-   pavucontrol       # GUI pour gérer l'audio (RECOMMANDÉ)
-   helvum            # Patchbay graphique PipeWire
-   qpwgraph          # Alternative à Helvum
-   easyeffects       # EQ et effets audio
-   pulseaudio   
-   # Monitoring
-   pwvucontrol       # Contrôle PipeWire modern
-   gcc
-   gnumake
-   pkg-config
-];
+  environment.systemPackages = with pkgs; [
+    vim
+    wget
+    neovim
+    alacritty
+    refind
+    btop
+    xwallpaper
+    pcmanfm
+    rofi
+    steam
+    discord
+    git
+    neofetch
+    xclip
+    keepassxc
+    google-drive-ocamlfuse
+    flameshot
+    dunst
+    ntfs3g
+    pciutils
+    pavucontrol       # GUI pour gérer l'audio (RECOMMANDÉ)
+    helvum            # Patchbay graphique PipeWire
+    qpwgraph          # Alternative à Helvum
+    easyeffects       # EQ et effets audio
+    pulseaudio   
+    # Monitoring
+    pwvucontrol       # Contrôle PipeWire modern
+    gcc
+    gnumake
+    pkg-config
+    cryptomator
+  ];
 
- fonts.packages = with pkgs; [
-   jetbrains-mono
-   noto-fonts-emoji
-];
- nix.gc = {
-  automatic = true;
-  dates = "weekly";
-  options = "--delete-older-than 14d";
-};
+  fonts.packages = with pkgs; [
+    jetbrains-mono
+    noto-fonts-emoji
+  ];
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 14d";
+  };
   nix.settings.auto-optimise-store = true;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-    system.stateVersion = "25.05"; # Did you read the comment?
+  system.stateVersion = "25.05"; # Did you read the comment?
 
 }
 
