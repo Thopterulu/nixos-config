@@ -14,6 +14,7 @@
     htop
     tldr
     google-drive-ocamlfuse
+    claude-code
   ];
 
   # Service systemd pour monter automatiquement
