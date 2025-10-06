@@ -8,21 +8,45 @@
 
   home.packages = with pkgs; [
     eza      # ls moderne
-      bat
-      ripgrep
-      fd
-      htop
-      tldr
+    bat
+    ripgrep
+    fd
+    htop
+    tldr
+    google-drive-ocamlfuse
   ];
 
+  # Service systemd pour monter automatiquement
+  systemd.user.services.google-drive = {
+    Unit = {
+      Description = "Google Drive mount";
+      After = [ "network-online.target" ];
+      Wants = [ "network-online.target" ];
+    };
 
-# Qtile config
+    Service = {
+      Type = "forking";
+      ExecStartPre = "${pkgs.coreutils}/bin/mkdir -p %h/GoogleDrive";
+      ExecStart = "${pkgs.google-drive-ocamlfuse}/bin/google-drive-ocamlfuse %h/GoogleDrive";
+      ExecStop = "${pkgs.fuse}/bin/fusermount -u %h/GoogleDrive";
+      Restart = "on-failure";
+      RestartSec = "10s";
+    };
+
+    Install = {
+      WantedBy = [ "default.target" ];
+    };
+  };
+
+
+
+  # Qtile config
   home.file = {
-# qtile
+    # qtile
     ".config/qtile/config.py".source = ./dotfiles/qtile/config.py;
-# Alacritty config
+    # Alacritty config
     ".config/alacritty/alacritty.toml".source = ./dotfiles/alacritty/alacritty.toml;
-# Rofi config 
+    # Rofi config 
     ".config/rofi/config.rasi".source = ./dotfiles/rofi/config.rasi;
   };
 
@@ -58,19 +82,19 @@
       cd = "z";
     };
 
-# Init scripts
+    # Init scripts
     initContent = ''
       zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
-      '';
+    '';
   };
 
-# FZF - recherche floue (Ctrl+R pour historique)
+  # FZF - recherche floue (Ctrl+R pour historique)
   programs.fzf = {
     enable = true;
     enableZshIntegration = true;
   };
 
-# Zoxide - cd intelligent
+  # Zoxide - cd intelligent
   programs.zoxide = {
     enable = true;
     enableZshIntegration = true;
@@ -114,22 +138,22 @@
           highlight.enable = true;
           indent.enable = true;  # ← Important pour l'indentation
 
-# Auto-installation des parsers
-            ensure_installed = [
+          # Auto-installation des parsers
+          ensure_installed = [
             "bash"
-              "c"
-              "html"
-              "javascript"
-              "json"
-              "lua"
-              "markdown"
-              "nix"
-              "python"
-              "rust"
-              "typescript"
-              "vim"
-              "yaml"
-            ];
+            "c"
+            "html"
+            "javascript"
+            "json"
+            "lua"
+            "markdown"
+            "nix"
+            "python"
+            "rust"
+            "typescript"
+            "vim"
+            "yaml"
+          ];
         };
       };
 
@@ -138,7 +162,7 @@
         enable = true;
         servers = {
           nil_ls.enable = true; # Nix LSP
-            pyright.enable = true;  # Python
+          pyright.enable = true;  # Python
 
         };
       };
@@ -147,7 +171,7 @@
         settings = {
           integrations = {
             diffview = true;  # Intégration avec diffview
-              telescope = true;
+            telescope = true;
           };
           graph_style = "unicode";
           signs = {
@@ -174,9 +198,9 @@
             untracked = { text = "┆"; };
           };
           current_line_blame = true;  # Affiche le blame sur la ligne actuelle
-            current_line_blame_opts = {
-              delay = 300;
-            };
+          current_line_blame_opts = {
+            delay = 300;
+          };
         };
       }; 
       cmp = {
