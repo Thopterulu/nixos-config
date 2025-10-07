@@ -130,7 +130,12 @@
 
     plugins = {
       lualine.enable = true;
-      nvim-tree.enable = true;
+      nvim-tree = {
+        enable = true;
+        openOnSetup = true;
+        view.width = 30;
+        filters.dotfiles = false;
+      };
       web-devicons.enable = true;
       diffview.enable = true;
 
