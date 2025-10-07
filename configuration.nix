@@ -153,12 +153,14 @@
     pkg-config
     cryptomator
     direnv
+    zip
     unzip
   ];
 
   fonts.packages = with pkgs; [
     jetbrains-mono
     noto-fonts-emoji
+    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
   ];
   nix.gc = {
     automatic = true;
