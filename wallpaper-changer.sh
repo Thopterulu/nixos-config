@@ -5,7 +5,7 @@ WALLPAPER_DIR="$HOME/backgrounds"
 while true; do
     if [ -d "$WALLPAPER_DIR" ] && [ "$(ls -A "$WALLPAPER_DIR")" ]; then
         # Get random wallpaper
-        WALLPAPER=$(find "$WALLPAPER_DIR" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.bmp" \) | shuf -n 1)
+        WALLPAPER=$(find "$WALLPAPER_DIR" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.bmp" -o -iname "*.webp" \) | shuf -n 1)
         
         if [ -n "$WALLPAPER" ]; then
             xwallpaper --output DP-2 --zoom "$WALLPAPER" \
