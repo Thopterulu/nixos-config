@@ -160,7 +160,7 @@
   fonts.packages = with pkgs; [
     jetbrains-mono
     noto-fonts-emoji
-    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+    nerd-fonts.jetbrains-mono
   ];
   nix.gc = {
     automatic = true;
