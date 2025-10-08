@@ -207,7 +207,6 @@ screens = [
                 widget.TextBox("&lt;M-r&gt;", foreground="#d75f5f"),
                 # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
                 # widget.StatusNotifier(),
-                widget.Systray(),
                 widget.Clock(format="%Y-%m-%d %a %H:%M %p"),
             ],
             24,
