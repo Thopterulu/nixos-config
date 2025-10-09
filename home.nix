@@ -18,6 +18,7 @@
     just
     dbeaver-bin
     postgresql
+    pre-commit
   ];
 
   # Service systemd pour monter automatiquement
