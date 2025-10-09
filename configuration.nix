@@ -155,6 +155,7 @@
     direnv
     zip
     unzip
+    homebank
   ];
 
   fonts.packages = with pkgs; [
