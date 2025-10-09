@@ -19,6 +19,9 @@
     dbeaver-bin
     postgresql
     pre-commit
+    docker
+    docker-compose
+    uv
   ];
 
   # Service systemd pour monter automatiquement

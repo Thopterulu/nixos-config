@@ -109,7 +109,7 @@
   users.users.thopter = {
     shell = pkgs.zsh;
     isNormalUser = true;
-    extraGroups = [ "wheel" "audio" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "audio" "docker" ]; # Enable 'sudo' for the user.
     packages = with pkgs; [
       tree
     ];
@@ -118,6 +118,9 @@
   programs.firefox.enable = true;
   programs.fuse.userAllowOther = true;
   programs.zsh.enable = true;
+
+  # Enable Docker
+  virtualisation.docker.enable = true;
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
   environment.systemPackages = with pkgs; [
