@@ -156,6 +156,7 @@
     zip
     unzip
     homebank
+    vscode
   ];
 
   fonts.packages = with pkgs; [
