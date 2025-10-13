@@ -81,14 +81,14 @@ keys = [
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
 
     Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
-    Key([mod], "e", lazy.spawn("pcmanfm")), 
+    Key([mod], "e", lazy.spawn("pcmanfm")),
     Key([mod], "d", lazy.spawn("rofi -show drun")),
     Key([mod], "m", lazy.spawn("firefox")),
     Key(["mod1"], "Tab", lazy.layout.next(), desc="Next window"),
     Key(["mod1", "shift"], "Tab", lazy.layout.previous(), desc="Previous window"),
     # IMPORTANT : Forcer le mode fenêtré temporaire
     Key([mod, "mod1"], "f", lazy.window.toggle_fullscreen()),
-    
+
     # Minimiser la fenêtre
     Key([mod, "mod1"], "m", lazy.window.toggle_minimize()),
 
@@ -179,7 +179,7 @@ screens = [
                 # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
                 # widget.StatusNotifier(),
                 widget.Systray(),
-                widget.Clock(format="%Y-%m-%d %a %H:%M %p"),
+                widget.Clock(format="%a %d/%m/%Y %H:%M %p"), #widget.Clock(format="%Y-%m-%d %a %H:%M %p"),
                 widget.QuickExit(),
             ],
             24,
@@ -207,11 +207,11 @@ screens = [
                 widget.TextBox("&lt;M-r&gt;", foreground="#d75f5f"),
                 # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
                 # widget.StatusNotifier(),
-                widget.Clock(format="%Y-%m-%d %a %H:%M %p"),
+                widget.Clock(format="%a %d/%m/%Y %H:%M %p"),
             ],
             24,
             # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
-            # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta       
+            # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
 
         ),
     ),

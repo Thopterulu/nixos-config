@@ -14,19 +14,36 @@
   };
 
   outputs = { self, nixpkgs, home-manager, nixvim, ... }: {
-    nixosConfigurations.thopter-nixos = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      modules = [
-        ./hardware/hardware-desktop.nix
-        ./configuration.nix
-        home-manager.nixosModules.home-manager
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.users.thopter = import ./home.nix;
-          home-manager.extraSpecialArgs = { inherit nixvim; };
-	}
-      ];
+    nixosConfigurations = {
+      thopter-nixos = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ./hardware/hardware-desktop.nix
+          ./configuration.nix
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.thopter = import ./home.nix;
+            home-manager.extraSpecialArgs = { inherit nixvim; };
+          }
+        ];
+      };
+
+      thopter-laptop = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ./hardware/hardware-laptop.nix
+          ./configuration-laptop.nix
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.thopter = import ./home.nix;
+            home-manager.extraSpecialArgs = { inherit nixvim; };
+          }
+        ];
+      };
     };
   };
 }
