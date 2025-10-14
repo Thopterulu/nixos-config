@@ -8,7 +8,7 @@
 
   # Override hostname for laptop
   networking.hostName = lib.mkForce "thopter-laptop";
-
+  networking.networkmanager.enable = true;
   # Disable NVIDIA completely for laptop
   services.xserver.videoDrivers = lib.mkForce [ ];
   hardware.nvidia = lib.mkForce { };
