@@ -33,7 +33,7 @@
       thopter-laptop = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          ./hardware/hardware-laptop.nix
+          ./hardware/laptop.nix
           ./configuration-laptop.nix
           home-manager.nixosModules.home-manager
           {
