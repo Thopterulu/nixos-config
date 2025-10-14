@@ -52,6 +52,15 @@
    sleep 1
    xrandr --output DP-2 --primary --mode 2560x1440 --rate 120 --pos 0x0 \
          --output HDMI-1-1 --mode 1920x1080 --rate 60 --pos 2560x0 &
+   
+   # Add 4:3 resolutions for Counter-Strike
+   xrandr --newmode "1440x1080_120.00" 296.70 1440 1544 1696 1952 1080 1083 1088 1135 -hsync +vsync &
+   xrandr --addmode DP-2 1440x1080_120.00 &
+   xrandr --newmode "1280x960_120.00" 233.45 1280 1376 1512 1744 960 963 967 1006 -hsync +vsync &
+   xrandr --addmode DP-2 1280x960_120.00 &
+   xrandr --newmode "1024x768_120.00" 150.00 1024 1096 1200 1376 768 771 775 803 -hsync +vsync &
+   xrandr --addmode DP-2 1024x768_120.00 &
+   
    ${pkgs.bash}/bin/bash /home/thopter/nixos-config/wallpaper-changer.sh &
    xset r rate 200 35 &
     '';
@@ -102,6 +111,14 @@
   # Pour le gaming
   security.rtkit.enable = true;
   security.pam.services.betterlockscreen = {};
+  
+  # Gaming optimizations
+  programs.gamemode.enable = true;
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true;
+    dedicatedServer.openFirewall = true;
+  };
   # Enable touchpad support (enabled default in most desktopManager).
   # services.libinput.enable = true;
 
@@ -139,7 +156,7 @@
     neofetch
     xclip
     keepassxc
-    google-drive-ocamlfuse
+    rclone
     flameshot
     dunst
     ntfs3g
@@ -160,6 +177,10 @@
     unzip
     homebank
     vscode
+    # Gaming optimizations
+    gamemode
+    mangohud
+    xrandr
   ];
 
   fonts.packages = with pkgs; [

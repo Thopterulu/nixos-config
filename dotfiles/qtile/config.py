@@ -240,6 +240,7 @@ floating_layout = layout.Floating(
         Match(wm_class="ssh-askpass"),  # ssh-askpass
         Match(title="branchdialog"),  # gitk
         Match(title="pinentry"),  # GPG key password entry
+        # Gaming rules - force certain games to not float
     ]
 )
 auto_fullscreen = True
@@ -248,7 +249,27 @@ reconfigure_screens = True
 
 # If things like steam games want to auto-minimize themselves when losing
 # focus, should we respect this or not?
-auto_minimize = True
+auto_minimize = False  # Disable for gaming
+
+# Gaming window rules
+@hook.subscribe.client_new
+def auto_fullscreen_games(window):
+    """Auto-fullscreen games and disable window decorations"""
+    game_classes = [
+        "steam_app_",  # Steam games
+        "cs2",
+        "csgo",
+        "dota2",
+        "hl2_linux",
+    ]
+    
+    wm_class = window.get_wm_class()
+    if wm_class:
+        for game_class in game_classes:
+            if any(game_class.lower() in cls.lower() for cls in wm_class):
+                window.fullscreen = True
+                window.floating = False
+                break
 
 # When using the Wayland backend, this can be used to configure input devices.
 wl_input_rules = None

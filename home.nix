@@ -13,7 +13,7 @@
     fd
     htop
     tldr
-    google-drive-ocamlfuse
+    rclone
     claude-code
     just
     dbeaver-bin
@@ -24,21 +24,22 @@
     uv
   ];
 
-  # Service systemd pour monter automatiquement
+  # Service systemd pour monter automatiquement Google Drive avec rclone
   systemd.user.services.google-drive = {
     Unit = {
-      Description = "Google Drive mount";
+      Description = "Google Drive mount via rclone";
       After = [ "network-online.target" ];
       Wants = [ "network-online.target" ];
     };
 
     Service = {
-      Type = "forking";
+      Type = "notify";
       ExecStartPre = "${pkgs.coreutils}/bin/mkdir -p %h/GoogleDrive";
-      ExecStart = "${pkgs.google-drive-ocamlfuse}/bin/google-drive-ocamlfuse %h/GoogleDrive";
+      ExecStart = "${pkgs.rclone}/bin/rclone mount gdrive: %h/GoogleDrive --vfs-cache-mode writes --daemon";
       ExecStop = "${pkgs.fuse}/bin/fusermount -u %h/GoogleDrive";
       Restart = "on-failure";
       RestartSec = "10s";
+      Environment = [ "PATH=${pkgs.fuse}/bin" ];
     };
 
     Install = {
