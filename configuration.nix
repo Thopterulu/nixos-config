@@ -66,7 +66,7 @@
   hardware.nvidia = {
     package = config.boot.kernelPackages.nvidiaPackages.stable;
     modesetting.enable = true;
-    open = true;
+    open = false;
     prime = {
       # Reverse PRIME : NVIDIA rend et envoie au GPU intégré
       sync.enable = true;
