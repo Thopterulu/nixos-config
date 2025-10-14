@@ -75,7 +75,7 @@
     };
 
     # Init scripts
-    initExtra = ''
+    initContent = ''
       zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 
       # Auto-mount Google Drive on shell startup
