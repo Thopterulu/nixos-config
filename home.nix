@@ -24,27 +24,10 @@
     uv
   ];
 
-  # Service systemd pour monter automatiquement Google Drive avec rclone
-  systemd.user.services.google-drive = {
-    Unit = {
-      Description = "Google Drive mount via rclone";
-      After = [ "network-online.target" ];
-      Wants = [ "network-online.target" ];
-    };
-
-    Service = {
-      Type = "notify";
-      ExecStartPre = "${pkgs.coreutils}/bin/mkdir -p %h/GoogleDrive";
-      ExecStart = "${pkgs.rclone}/bin/rclone mount gdrive: %h/GoogleDrive --vfs-cache-mode writes --config %h/.config/rclone/rclone.conf --cache-dir %h/.cache/rclone";
-      ExecStop = "${pkgs.fuse}/bin/fusermount -u %h/GoogleDrive";
-      Restart = "on-failure";
-      RestartSec = "10s";
-      Environment = [ "PATH=${pkgs.fuse}/bin" ];
-    };
-
-    Install = {
-      WantedBy = [ "default.target" ];
-    };
+  # Auto-mount Google Drive script
+  home.file.".local/bin/mount-gdrive" = {
+    source = ./scripts/mount-gdrive.sh;
+    executable = true;
   };
 
 
@@ -55,7 +38,7 @@
     ".config/qtile/config.py".source = ./dotfiles/qtile/config.py;
     # Alacritty config
     ".config/alacritty/alacritty.toml".source = ./dotfiles/alacritty/alacritty.toml;
-    # Rofi config 
+    # Rofi config
     ".config/rofi/config.rasi".source = ./dotfiles/rofi/config.rasi;
   };
 
@@ -74,10 +57,10 @@
     oh-my-zsh = {
       enable = true;
       theme = "agnoster";
-      plugins = [ 
-        "git" 
-        "sudo" 
-        "docker" 
+      plugins = [
+        "git"
+        "sudo"
+        "docker"
         "kubectl"
         "npm"
         "colored-man-pages"
@@ -92,8 +75,13 @@
     };
 
     # Init scripts
-    initContent = ''
+    initExtra = ''
       zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+
+      # Auto-mount Google Drive on shell startup
+      if [ ! -d "$HOME/GoogleDrive" ] || ! mountpoint -q "$HOME/GoogleDrive" 2>/dev/null; then
+        "$HOME/.local/bin/mount-gdrive" 2>/dev/null &
+      fi
     '';
   };
 
@@ -216,7 +204,7 @@
             delay = 300;
           };
         };
-      }; 
+      };
       cmp = {
         enable = true;
         autoEnableSources = true;

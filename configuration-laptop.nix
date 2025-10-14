@@ -15,7 +15,7 @@
 
   # Simple display setup - no multi-monitor xrandr commands
   services.xserver.displayManager.sessionCommands = lib.mkForce ''
-    ${pkgs.bash}/bin/bash /home/thopter/nixos-config/wallpaper-changer.sh &
+    ${pkgs.bash}/bin/bash /home/thopter/nixos-config/scripts/wallpaper-changer.sh &
     xset r rate 200 35 &
   '';
 
