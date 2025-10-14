@@ -180,7 +180,6 @@
     # Gaming optimizations
     gamemode
     mangohud
-    xrandr
   ];
 
   fonts.packages = with pkgs; [
