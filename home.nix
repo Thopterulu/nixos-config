@@ -33,12 +33,14 @@
     };
 
     Service = {
-      Type = "notify";
+      Type = "forking";
       ExecStartPre = "${pkgs.coreutils}/bin/mkdir -p %h/GoogleDrive";
       ExecStart = "${pkgs.rclone}/bin/rclone mount gdrive: %h/GoogleDrive --vfs-cache-mode writes --daemon";
+      ExecStartPost = "${pkgs.coreutils}/bin/sleep 2";
       ExecStop = "${pkgs.fuse}/bin/fusermount -u %h/GoogleDrive";
       Restart = "on-failure";
       RestartSec = "10s";
+      TimeoutStartSec = "30s";
       Environment = [ "PATH=${pkgs.fuse}/bin" ];
     };
 

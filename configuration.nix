@@ -114,10 +114,12 @@
   
   # Gaming optimizations
   programs.gamemode.enable = true;
+  programs.gamescope.enable = true;
   programs.steam = {
     enable = true;
     remotePlay.openFirewall = true;
     dedicatedServer.openFirewall = true;
+    gamescopeSession.enable = true;
   };
   # Enable touchpad support (enabled default in most desktopManager).
   # services.libinput.enable = true;
@@ -180,6 +182,7 @@
     # Gaming optimizations
     gamemode
     mangohud
+    gamescope
   ];
 
   fonts.packages = with pkgs; [
