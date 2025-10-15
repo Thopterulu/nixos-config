@@ -46,6 +46,12 @@
     enable = true;
     userName = "thopterulu";
     userEmail = "guillaume.kergueris@gmail.com";
+    extraConfig = {
+      pull = {
+        rebase = true;
+        ff = "only";
+      };
+    };
   };
 
   programs.zsh = {
