@@ -61,7 +61,8 @@
    xrandr --newmode "1024x768_120.00" 150.00 1024 1096 1200 1376 768 771 775 803 -hsync +vsync &
    xrandr --addmode DP-2 1024x768_120.00 &
 
-   ${pkgs.bash}/bin/bash /home/thopter/nixos-config/scripts/wallpaper-changer.sh &
+   # Mount Google Drive first, then start wallpaper changer
+   (sleep 2 && /home/thopter/.local/bin/mount-gdrive && sleep 3 && ${pkgs.bash}/bin/bash /home/thopter/nixos-config/scripts/wallpaper-changer.sh) &
    xset r rate 200 35 &
     '';
   };

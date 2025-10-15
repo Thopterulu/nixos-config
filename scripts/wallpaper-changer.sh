@@ -1,6 +1,6 @@
 #!/bin/bash
 
-WALLPAPER_DIR="$HOME/backgrounds"
+WALLPAPER_DIR="$HOME/GoogleDrive/backgrounds"
 
 while true; do
     if [ -d "$WALLPAPER_DIR" ] && [ "$(ls -A "$WALLPAPER_DIR")" ]; then
