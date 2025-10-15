@@ -226,6 +226,17 @@ def create_base_widgets():
                 **widget_defaults,
             )
         )
+    
+    # Add network widget
+    widgets.append(
+        widget.Wlan(
+            interface='auto',
+            format='📶 {essid} {percent:2.0%}',
+            disconnected_message='📶 Disconnected',
+            ethernet_message='🌐 Ethernet',
+            **widget_defaults,
+        )
+    )
 
     return widgets
 
