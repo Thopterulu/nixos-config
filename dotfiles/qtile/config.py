@@ -26,6 +26,31 @@ def has_battery():
     except:
         return False
 
+def get_network_info():
+    """Get network connection status by checking interfaces only"""
+    try:
+        # Check active interfaces
+        result = subprocess.run(['ip', 'link', 'show'], capture_output=True, text=True, timeout=2)
+        if result.returncode == 0:
+            lines = result.stdout.split('\n')
+            for line in lines:
+                if 'state UP' in line and ('enp' in line or 'eth' in line):
+                    return "🌐 Ethernet"
+                elif 'state UP' in line and ('wlp' in line or 'wlan' in line):
+                    # Try to get WiFi SSID
+                    try:
+                        wifi_result = subprocess.run(['iwgetid', '-r'], capture_output=True, text=True, timeout=1)
+                        if wifi_result.returncode == 0 and wifi_result.stdout.strip():
+                            ssid = wifi_result.stdout.strip()
+                            return f"📶 {ssid}"
+                        else:
+                            return "📶 WiFi"
+                    except:
+                        return "📶 WiFi"
+        return "❌ Disconnected"
+    except:
+        return "❌ Error"
+
 
 @hook.subscribe.screen_change
 def set_screens(event):
@@ -229,11 +254,9 @@ def create_base_widgets():
     
     # Add network widget
     widgets.append(
-        widget.Wlan(
-            interface='auto',
-            format='📶 {essid} {percent:2.0%}',
-            disconnected_message='📶 Disconnected',
-            ethernet_message='🌐 Ethernet',
+        widget.GenPollText(
+            func=get_network_info,
+            update_interval=5,
             **widget_defaults,
         )
     )
