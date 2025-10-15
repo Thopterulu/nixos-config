@@ -19,6 +19,13 @@ def get_music_info():
         pass
     return ""
 
+def has_battery():
+    """Check if system has a battery"""
+    try:
+        return os.path.exists('/sys/class/power_supply/BAT0') or os.path.exists('/sys/class/power_supply/BAT1')
+    except:
+        return False
+
 
 @hook.subscribe.screen_change
 def set_screens(event):
@@ -184,33 +191,69 @@ widget_defaults = dict(
 )
 extension_defaults = widget_defaults.copy()
 
+# Create base widgets (common to both screens)
+def create_base_widgets():
+    widgets = [
+        widget.CurrentLayout(),
+        widget.GroupBox(disable_drag=True,),
+        widget.Prompt(),
+        widget.WindowName(),
+        widget.Chord(
+            chords_colors={
+                "launch": ("#ff0000", "#ffffff"),
+            },
+            name_transform=lambda name: name.upper(),
+        ),
+        widget.GenPollText(
+            func=get_music_info,
+            update_interval=2,
+            mouse_callbacks={'Button1': lambda: subprocess.run(['playerctl', 'play-pause'])},
+            **widget_defaults,
+        ),
+    ]
+
+    # Add battery widget if battery exists
+    if has_battery():
+        widgets.append(
+            widget.Battery(
+                format='🔋 {percent:2.0%} {char}',
+                charge_char='⚡',
+                discharge_char='↓',
+                empty_char='❌',
+                full_char='✓',
+                low_percentage=0.2,
+                low_foreground='ff0000',
+                **widget_defaults,
+            )
+        )
+
+    return widgets
+
+# Primary screen widgets (with systray)
+def create_primary_widgets():
+    widgets = create_base_widgets()
+    widgets.extend([
+        widget.TextBox("&lt;M-r&gt;", foreground="#d75f5f"),
+        widget.Systray(),
+        widget.Clock(format="%a %d/%m/%Y %H:%M %p"),
+        widget.QuickExit(),
+    ])
+    return widgets
+
+# Secondary screen widgets (no systray)
+def create_secondary_widgets():
+    widgets = create_base_widgets()
+    widgets.extend([
+        widget.TextBox("&lt;M-r&gt;", foreground="#d75f5f"),
+        widget.Clock(format="%a %d/%m/%Y %H:%M %p"),
+        widget.QuickExit(),
+    ])
+    return widgets
+
 screens = [
     Screen(
         bottom=bar.Bar(
-            [
-                widget.CurrentLayout(),
-                widget.GroupBox(disable_drag=True,),
-                widget.Prompt(),
-                widget.WindowName(),
-                widget.Chord(
-                    chords_colors={
-                        "launch": ("#ff0000", "#ffffff"),
-                    },
-                    name_transform=lambda name: name.upper(),
-                ),
-                widget.GenPollText(
-                    func=get_music_info,
-                    update_interval=2,
-                    mouse_callbacks={'Button1': lambda: subprocess.run(['playerctl', 'play-pause'])},
-                    **widget_defaults,
-                ),
-                widget.TextBox("&lt;M-r&gt;", foreground="#d75f5f"),
-                # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
-                # widget.StatusNotifier(),
-                widget.Systray(),
-                widget.Clock(format="%a %d/%m/%Y %H:%M %p"), #widget.Clock(format="%Y-%m-%d %a %H:%M %p"),
-                widget.QuickExit(),
-            ],
+            create_primary_widgets(),
             24,
             # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
             # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
@@ -222,28 +265,7 @@ screens = [
     ),
    Screen(
         bottom=bar.Bar(
-            [
-                widget.CurrentLayout(),
-                widget.GroupBox(disable_drag=True,),
-                widget.Prompt(),
-                widget.WindowName(),
-                widget.Chord(
-                    chords_colors={
-                        "launch": ("#ff0000", "#ffffff"),
-                    },
-                    name_transform=lambda name: name.upper(),
-                ),
-                widget.GenPollText(
-                    func=get_music_info,
-                    update_interval=2,
-                    mouse_callbacks={'Button1': lambda: subprocess.run(['playerctl', 'play-pause'])},
-                    **widget_defaults,
-                ),
-                widget.TextBox("&lt;M-r&gt;", foreground="#d75f5f"),
-                # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
-                # widget.StatusNotifier(),
-                widget.Clock(format="%a %d/%m/%Y %H:%M %p"),
-            ],
+            create_secondary_widgets(),
             24,
             # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
             # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
@@ -297,7 +319,7 @@ def auto_fullscreen_games(window):
         "dota2",
         "hl2_linux",
     ]
-    
+
     wm_class = window.get_wm_class()
     if wm_class:
         for game_class in game_classes:
