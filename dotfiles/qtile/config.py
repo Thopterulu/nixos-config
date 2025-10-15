@@ -25,6 +25,15 @@ def set_screens(event):
     """Dynamically reconfigure screens when they change"""
     lazy.restart()
 
+@hook.subscribe.startup_once
+def autostart():
+    """Run scripts on Qtile startup"""
+    home = os.path.expanduser('~')
+    # Mount Google Drive first
+    subprocess.Popen([f"{home}/.local/bin/mount-gdrive"])
+    # Wait a bit, then start wallpaper changer
+    subprocess.Popen(['bash', '-c', f'sleep 5 && {home}/nixos-config/scripts/wallpaper-changer.sh'])
+
 @lazy.function
 def move_to_next_group(qtile):
     current_group = qtile.current_screen.group
