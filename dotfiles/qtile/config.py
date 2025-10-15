@@ -5,6 +5,20 @@ from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
 
+def get_music_info():
+    try:
+        status = subprocess.check_output(['playerctl', 'status'], stderr=subprocess.DEVNULL).decode().strip()
+        if status == 'Playing':
+            title = subprocess.check_output(['playerctl', 'metadata', '--format', '{{ artist }} - {{ title }}'], stderr=subprocess.DEVNULL).decode().strip()
+            if len(title) > 40:
+                title = title[:37] + "..."
+            return f"♪ {title}"
+        elif status == 'Paused':
+            return "⏸ Paused"
+    except:
+        pass
+    return ""
+
 
 @hook.subscribe.screen_change
 def set_screens(event):
@@ -175,12 +189,10 @@ screens = [
                     },
                     name_transform=lambda name: name.upper(),
                 ),
-                widget.Mpris2(
-                    name='playerctl',
-                    objname="org.mpris.MediaPlayer2.firefox",
-                    display_metadata=['xesam:title', 'xesam:artist'],
-                    scroll_chars=20,
-                    stop_pause_text='⏸',
+                widget.GenPollText(
+                    func=get_music_info,
+                    update_interval=2,
+                    mouse_callbacks={'Button1': lambda: subprocess.run(['playerctl', 'play-pause'])},
                     **widget_defaults,
                 ),
                 widget.TextBox("&lt;M-r&gt;", foreground="#d75f5f"),
@@ -212,12 +224,10 @@ screens = [
                     },
                     name_transform=lambda name: name.upper(),
                 ),
-                widget.Mpris2(
-                    name='playerctl',
-                    objname="org.mpris.MediaPlayer2.firefox",
-                    display_metadata=['xesam:title', 'xesam:artist'],
-                    scroll_chars=20,
-                    stop_pause_text='⏸',
+                widget.GenPollText(
+                    func=get_music_info,
+                    update_interval=2,
+                    mouse_callbacks={'Button1': lambda: subprocess.run(['playerctl', 'play-pause'])},
                     **widget_defaults,
                 ),
                 widget.TextBox("&lt;M-r&gt;", foreground="#d75f5f"),
