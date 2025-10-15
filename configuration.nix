@@ -183,6 +183,7 @@
     gamemode
     mangohud
     gamescope
+    playerctl
   ];
 
   fonts.packages = with pkgs; [

@@ -175,6 +175,14 @@ screens = [
                     },
                     name_transform=lambda name: name.upper(),
                 ),
+                widget.Mpris2(
+                    name='playerctl',
+                    objname="org.mpris.MediaPlayer2.firefox",
+                    display_metadata=['xesam:title', 'xesam:artist'],
+                    scroll_chars=20,
+                    stop_pause_text='⏸',
+                    **widget_defaults,
+                ),
                 widget.TextBox("&lt;M-r&gt;", foreground="#d75f5f"),
                 # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
                 # widget.StatusNotifier(),
@@ -203,6 +211,14 @@ screens = [
                         "launch": ("#ff0000", "#ffffff"),
                     },
                     name_transform=lambda name: name.upper(),
+                ),
+                widget.Mpris2(
+                    name='playerctl',
+                    objname="org.mpris.MediaPlayer2.firefox",
+                    display_metadata=['xesam:title', 'xesam:artist'],
+                    scroll_chars=20,
+                    stop_pause_text='⏸',
+                    **widget_defaults,
                 ),
                 widget.TextBox("&lt;M-r&gt;", foreground="#d75f5f"),
                 # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
