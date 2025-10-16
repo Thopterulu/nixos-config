@@ -150,6 +150,7 @@
           ensure_installed = [
             "bash"
             "c"
+            "go"
             "html"
             "javascript"
             "json"
@@ -171,7 +172,7 @@
         servers = {
           nil_ls.enable = true; # Nix LSP
           pyright.enable = true;  # Python
-
+          gopls.enable = true;  # golang
         };
       };
       neogit = {
