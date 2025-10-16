@@ -22,6 +22,8 @@
     docker
     docker-compose
     uv
+    obsidian
+    go
   ];
 
   # Auto-mount Google Drive script
