@@ -24,6 +24,7 @@
     uv
     obsidian
     go
+    mixxx
   ];
 
   # Auto-mount Google Drive script
