@@ -120,6 +120,13 @@
     dedicatedServer.openFirewall = true;
     gamescopeSession.enable = true;
   };
+
+  # Gaming performance tweaks (desktop only)
+  programs.corectrl.enable = true;
+  boot.kernelParams = [ 
+    "nvidia_drm.modeset=1"
+    "nvidia.NVreg_PreserveVideoMemoryAllocations=1"
+  ];
   # Enable touchpad support (enabled default in most desktopManager).
   # services.libinput.enable = true;
 
@@ -182,6 +189,7 @@
     gamemode
     mangohud
     gamescope
+    goverlay
     playerctl
   ];
 
