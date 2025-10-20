@@ -47,6 +47,16 @@
     ".config/rofi/config.rasi".source = ./dotfiles/rofi/config.rasi;
   };
 
+  home.file = {
+    "Music/.keep".text = "";
+    "Code/.keep".text = "";
+    "Documents/.keep".text = "";
+    "Downloads/.keep".text = "";
+    "Pictures/.keep".text = "";
+    "Videos/.keep".text = "";
+  };
+
+
   programs.git = {
     enable = true;
     userName = "thopterulu";
