@@ -26,6 +26,7 @@
     go
     mixxx
     scdl
+    ffmpeg
   ];
 
   # Auto-mount Google Drive script
