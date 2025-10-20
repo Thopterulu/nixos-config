@@ -151,6 +151,13 @@
         view.width = 30;
         filters.dotfiles = false;
       };
+      nvim-autopairs = {
+        enable = true;
+        settings = {
+          check_ts = true;  # treesitter
+          fast_warp = {}; # will fast wrap with alt + e
+        };
+      };
       web-devicons.enable = true;
       diffview.enable = true;
 
