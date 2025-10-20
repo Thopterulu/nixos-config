@@ -195,7 +195,8 @@ for i in groups:
 
 layouts = [
     layout.Columns(border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=4),
-    layout.Max(),
+    layout.Max(),  # Gaming-friendly layout
+    layout.Floating(),  # For games that need floating
     # Try more layouts by unleashing below layouts.
     # layout.Stack(num_stacks=2),
     # layout.Bsp(),
@@ -332,9 +333,14 @@ floating_layout = layout.Floating(
         Match(title="branchdialog"),  # gitk
         Match(title="pinentry"),  # GPG key password entry
         # Gaming rules - force certain games to not float
+        Match(wm_class="steam_app_"),  # Force Steam games to float for proper fullscreen
+        Match(wm_class="cs2"),
+        Match(wm_class="csgo"),
+        Match(title="Counter-Strike"),
     ]
 )
 auto_fullscreen = True
+respect_minimum_size = False
 focus_on_window_activation = "smart"
 reconfigure_screens = True
 
@@ -358,8 +364,11 @@ def auto_fullscreen_games(window):
     if wm_class:
         for game_class in game_classes:
             if any(game_class.lower() in cls.lower() for cls in wm_class):
+                # Set floating first, then fullscreen for proper scaling
+                window.floating = True
                 window.fullscreen = True
-                window.floating = False
+                # Disable tiling completely for games
+                window.togroup(qtile.current_screen.group.name)
                 break
 
 # When using the Wayland backend, this can be used to configure input devices.
