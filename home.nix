@@ -25,6 +25,7 @@
     obsidian
     go
     mixxx
+    scdl
   ];
 
   # Auto-mount Google Drive script
