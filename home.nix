@@ -145,7 +145,7 @@
 
     plugins = {
       lualine.enable = true;
-      supermaven-nvim.enable = true;
+      supermaven.enable = true;
       nvim-tree = {
         enable = true;
         openOnSetup = true;
