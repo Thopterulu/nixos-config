@@ -50,6 +50,7 @@
   home.file = {
     "Music/.keep".text = "";
     "Code/.keep".text = "";
+    "Notes/.keep".text = "";
     "Documents/.keep".text = "";
     "Downloads/.keep".text = "";
     "Pictures/.keep".text = "";
