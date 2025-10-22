@@ -28,7 +28,7 @@
     scdl
     ffmpeg
     rfc
-    onlyoffice
+    onlyoffice-bin
   ];
 
   # Auto-mount Google Drive script
