@@ -261,16 +261,13 @@ def create_base_widgets():
             **widget_defaults,
         )
     )
-    widgets.append(
-        widget.Bluetooth()
-    )
     return widgets
 
 # Primary screen widgets (with systray)
 def create_primary_widgets():
     widgets = create_base_widgets()
     widgets.extend([
-        widget.TextBox("&lt;M-r&gt;", foreground="#d75f5f"),
+        widget.Bluetooth(),
         widget.Systray(),
         widget.Clock(format="%a %d/%m/%Y %H:%M %p"),
         widget.QuickExit(),
