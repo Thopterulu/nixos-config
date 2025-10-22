@@ -170,22 +170,22 @@ groups = [Group(i) for i in "123456"]
 for i in groups:
     keys.extend(
         [
-           Key([mod], f"F{i.name}", lazy.group[i.name].toscreen()),
-           Key([mod, "shift"], f"F{i.name}", lazy.window.togroup(i.name, switch_group=True)),
-          # mod + group number = switch to group
-          #  Key(
-          #      [mod],
-          #      i.name,
-          #      lazy.group[i.name].toscreen(),
-          #      desc=f"Switch to group {i.name}",
-          #  ),
-          #  # mod + shift + group number = switch to & move focused window to group
-          #  Key(
-          #      [mod, "shift"],
-          #      i.name,
-          #      lazy.window.togroup(i.name, switch_group=True),
-          #      desc=f"Switch to & move focused window to group {i.name}",
-          #  ),
+            Key([mod], f"F{i.name}", lazy.group[i.name].toscreen()),
+            Key([mod, "shift"], f"F{i.name}", lazy.window.togroup(i.name, switch_group=True)),
+            # mod + group number = switch to group
+            #  Key(
+            #      [mod],
+            #      i.name,
+            #      lazy.group[i.name].toscreen(),
+            #      desc=f"Switch to group {i.name}",
+            #  ),
+            #  # mod + shift + group number = switch to & move focused window to group
+            #  Key(
+            #      [mod, "shift"],
+            #      i.name,
+            #      lazy.window.togroup(i.name, switch_group=True),
+            #      desc=f"Switch to & move focused window to group {i.name}",
+            #  ),
             # Or, use below if you prefer not to switch to that group.
             # # mod + shift + group number = move focused window to group
             # Key([mod, "shift"], i.name, lazy.window.togroup(i.name),
@@ -252,7 +252,7 @@ def create_base_widgets():
                 **widget_defaults,
             )
         )
-    
+
     # Add network widget
     widgets.append(
         widget.GenPollText(
@@ -261,7 +261,9 @@ def create_base_widgets():
             **widget_defaults,
         )
     )
-
+    widgets.append(
+        widget.Bluetooth()
+    )
     return widgets
 
 # Primary screen widgets (with systray)
@@ -298,7 +300,7 @@ screens = [
         # This variable is set to None (no cap) by default, but you can set it to 60 to indicate that you limit it to 60 events per second
         # x11_drag_polling_rate = 60,
     ),
-   Screen(
+    Screen(
         top=bar.Bar(
             create_secondary_widgets(),
             24,
