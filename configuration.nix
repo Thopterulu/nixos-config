@@ -129,9 +129,11 @@
 
   # Gaming performance tweaks (desktop only)
   programs.corectrl.enable = true;
+  powerManagement.cpuFreqGovernor = "performance";
   boot.kernelParams = [ 
     "nvidia_drm.modeset=1"
     "nvidia.NVreg_PreserveVideoMemoryAllocations=1"
+    "mitigations=off"
   ];
   # Enable touchpad support (enabled default in most desktopManager).
   # services.libinput.enable = true;
