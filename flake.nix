@@ -19,7 +19,7 @@
         system = "x86_64-linux";
         modules = [
           ./hardware/hardware-desktop.nix
-          ./configuration.nix
+          ./configs/configuration-desktop.nix
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
@@ -34,7 +34,7 @@
         system = "x86_64-linux";
         modules = [
           ./hardware/laptop.nix
-          ./configuration-laptop.nix
+          ./configs/configuration-laptop.nix
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;

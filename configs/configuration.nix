@@ -43,31 +43,11 @@
   # services.xserver.enable = true;
   services.xserver = {
     enable = true;
-    videoDrivers = [ "nvidia" ];
     windowManager.qtile.enable = true;
     xkb.layout = "fr";
     xkb.options = "eurosign:e,caps:escape";
     displayManager.sessionCommands = ''
-   xrandr --setprovideroutputsource modesetting NVIDIA-0 &
-   sleep 1
-   xrandr --output DP-2 --primary --mode 2560x1440 --rate 120 --pos 0x0 \
-         --output HDMI-1-1 --mode 1920x1080 --rate 60 --pos 2560x0 &
-   
-   # Fix NVIDIA color settings for better rendering
-   nvidia-settings --assign CurrentMetaMode="DP-2: 2560x1440_120 +0+0 { ForceCompositionPipeline = On, ForceFullCompositionPipeline = On }" &
-   nvidia-settings --assign [dpy:DP-2]/Dithering=0 &
-   nvidia-settings --assign [dpy:DP-2]/DitheringMode=0 &
-   nvidia-settings --assign [dpy:DP-2]/ColorRange=1 &
-
-   # Add 4:3 resolutions for Counter-Strike
-   xrandr --newmode "1440x1080_120.00" 296.70 1440 1544 1696 1952 1080 1083 1088 1135 -hsync +vsync &
-   xrandr --addmode DP-2 1440x1080_120.00 &
-   xrandr --newmode "1280x960_120.00" 233.45 1280 1376 1512 1744 960 963 967 1006 -hsync +vsync &
-   xrandr --addmode DP-2 1280x960_120.00 &
-   xrandr --newmode "1024x768_120.00" 150.00 1024 1096 1200 1376 768 771 775 803 -hsync +vsync &
-   xrandr --addmode DP-2 1024x768_120.00 &
-
-   xset r rate 200 35 &
+      xset r rate 200 35 &
     '';
   };
 
@@ -77,17 +57,6 @@
     fade = true;
   };
 
-  hardware.nvidia = {
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
-    modesetting.enable = true;
-    open = false;
-    prime = {
-      # Reverse PRIME : NVIDIA rend et envoie au GPU intégré
-      sync.enable = true;
-      nvidiaBusId = "PCI:1:0:0";   # 01:00.0
-      intelBusId = "PCI:0:2:0";    # 00:02.0
-    };
-  };
 
   hardware.graphics = {
     enable = true;
@@ -117,24 +86,6 @@
   security.rtkit.enable = true;
   security.pam.services.betterlockscreen = {};
 
-  # Gaming optimizations
-  programs.gamemode.enable = true;
-  programs.gamescope.enable = true;
-  programs.steam = {
-    enable = true;
-    remotePlay.openFirewall = true;
-    dedicatedServer.openFirewall = true;
-    gamescopeSession.enable = true;
-  };
-
-  # Gaming performance tweaks (desktop only)
-  programs.corectrl.enable = true;
-  powerManagement.cpuFreqGovernor = "performance";
-  boot.kernelParams = [ 
-    "nvidia_drm.modeset=1"
-    "nvidia.NVreg_PreserveVideoMemoryAllocations=1"
-    "mitigations=off"
-  ];
   # Enable touchpad support (enabled default in most desktopManager).
   # services.libinput.enable = true;
 
@@ -192,11 +143,6 @@
     unzip
     homebank
     vscode
-    # Gaming optimizations
-    gamemode
-    mangohud
-    gamescope
-    goverlay
     playerctl
   ];
 
