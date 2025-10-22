@@ -287,7 +287,7 @@ def create_secondary_widgets():
 
 screens = [
     Screen(
-        bottom=bar.Bar(
+        top=bar.Bar(
             create_primary_widgets(),
             24,
             # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
@@ -299,7 +299,7 @@ screens = [
         # x11_drag_polling_rate = 60,
     ),
    Screen(
-        bottom=bar.Bar(
+        top=bar.Bar(
             create_secondary_widgets(),
             24,
             # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
