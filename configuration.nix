@@ -149,7 +149,7 @@
   programs.firefox.enable = true;
   programs.fuse.userAllowOther = true;
   programs.zsh.enable = true;
-
+  programs.onlyoffice.enable = true;
   # Enable Docker
   virtualisation.docker.enable = true;
   # List packages installed in system profile.
