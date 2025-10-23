@@ -4,18 +4,23 @@
 {
   imports = [
     ./configuration.nix
+    ./conf-offload.nix
   ];
 
   # NVIDIA configuration (desktop only)
-  services.xserver.videoDrivers = [ "nvidia" ];
+  services.xserver.videoDrivers = [ "modesetting" "nvidia" ];
 
   hardware.nvidia = {
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
+    package = config.boot.kernelPackages.nvidiaPackages.production;
     modesetting.enable = true;
-    open = false;
+    open = true;
     prime = {
       # Reverse PRIME : NVIDIA rend et envoie au GPU intégré
-      sync.enable = true;
+      offload = {
+        enable = true;
+        enableOffloadCmd = true;
+      };
+
       nvidiaBusId = "PCI:1:0:0";   # 01:00.0
       intelBusId = "PCI:0:2:0";    # 00:02.0
     };
