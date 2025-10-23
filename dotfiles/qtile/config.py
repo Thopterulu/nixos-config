@@ -77,6 +77,19 @@ def autostart():
     rander_background(screens)
     #subprocess.Popen(['bash', '-c', f'{home}/nixos-config/scripts/wallpaper-changer.sh'])
 
+@hook.subscribe.startup_complete
+def startup_complete():
+    """Run scripts on Qtile startup"""
+    # Start background changer
+    thread_bg_changer.start()
+
+@hook.subscribe.shutdown
+def shutdown():
+    """Run scripts on Qtile startup"""
+    # Stop background changer
+    thread_bg_changer.join()
+
+
 @lazy.function
 def move_to_next_group(qtile):
     current_group = qtile.current_screen.group
@@ -397,9 +410,5 @@ wl_xcursor_size = 24
 # We choose LG3D to maximize irony: it is a 3D non-reparenting WM written in
 # java that happens to be on java's whitelist.
 wmname = "LG3D"
-
-
-# Start background changer
-thread = threading.Thread(target=refresh_wallpaper, args=(screens,))
-thread.start()
+thread_bg_changer = threading.Thread(target=refresh_wallpaper, args=(screens,))
 
