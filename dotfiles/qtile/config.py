@@ -5,7 +5,7 @@ from libqtile import bar, layout, qtile, widget, hook
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
-from .background import rander_background
+from background import rander_background
 
 
 def get_music_info():
