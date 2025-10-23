@@ -21,5 +21,5 @@ def rander_background(screens : list[Screen]):
         random_wallpaper = random.choice(wallpapers)
         wallpaper_path = os.path.join(BACKGROUND_DIR, random_wallpaper)
         for screen in screens:
-            screen.set_wallpaper(wallpaper_path)
+            screen.set_wallpaper(wallpaper_path, "stretch")
 

@@ -1,12 +1,18 @@
 import os
 import time
 import subprocess
+import threading
 from libqtile import bar, layout, qtile, widget, hook
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
 from background import rander_background
 
+
+def refresh_wallpaper(screens : list[Screen]):
+    while True:
+        time.sleep(5 * 60)
+        rander_background(screens)
 
 def get_music_info():
     try:
@@ -391,3 +397,9 @@ wl_xcursor_size = 24
 # We choose LG3D to maximize irony: it is a 3D non-reparenting WM written in
 # java that happens to be on java's whitelist.
 wmname = "LG3D"
+
+
+# Start background changer
+thread = threading.Thread(target=refresh_wallpaper, args=(screens,))
+thread.start()
+
