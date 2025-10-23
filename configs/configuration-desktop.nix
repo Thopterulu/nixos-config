@@ -13,6 +13,9 @@
     package = config.boot.kernelPackages.nvidiaPackages.production;
     modesetting.enable = true;
     open = true;
+    powerManagement.enable = true;
+    powerManagement.finegrained = false;  # Full power for gaming
+    forceFullCompositionPipeline = false; # Reduces input lag
     prime = {
       # PRIME sync: NVIDIA renders, Intel outputs to displays
       sync.enable = true;
@@ -38,8 +41,16 @@
   boot.kernelParams = [
     "nvidia_drm.modeset=1"
     "nvidia.NVreg_PreserveVideoMemoryAllocations=1"
+    "nvidia.NVreg_EnableGpuFirmware=0"  # Fixes random frame drops
     "mitigations=off"
   ];
+
+  # System optimizations for consistent performance
+  boot.kernel.sysctl = {
+    "vm.swappiness" = 1;           # Reduce swapping
+    "vm.vfs_cache_pressure" = 50;  # Reduce cache pressure
+    "kernel.sched_migration_cost_ns" = 5000000;  # Reduce scheduler overhead
+  };
 
   # Gaming optimizations
   programs.gamemode.enable = true;
@@ -57,5 +68,6 @@
     mangohud
     gamescope
     goverlay
+    gwe  # GreenWithEnvy - GPU overclocking tool
   ];
 }
