@@ -40,11 +40,10 @@
   # };
 
   # Enable the X11 windowing system.
-  # services.xserver.enable = true;
-  services.displayManager.sddm.enable = true;
   services.xserver = {
     enable = true;
     windowManager.qtile.enable = true;
+    displayManager.sddm.enable = true;
     xkb.layout = "fr";
     xkb.options = "eurosign:e,caps:escape";
     displayManager.sessionCommands = ''
