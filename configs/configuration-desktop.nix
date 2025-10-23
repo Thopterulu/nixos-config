@@ -8,7 +8,7 @@
   ];
 
   # NVIDIA configuration (desktop only)
-  services.xserver.videoDrivers = [ "modesetting" "nvidia" ];
+  services.xserver.videoDrivers = [ "nvidia" ];
 
   hardware.nvidia = {
     package = config.boot.kernelPackages.nvidiaPackages.production;
@@ -21,8 +21,8 @@
         enableOffloadCmd = true;
       };
 
-      nvidiaBusId = "PCI:1:0:0";   # 01:00.0
-      intelBusId = "PCI:0:2:0";    # 00:02.0
+      nvidiaBusId = "PCI:1@0:0:0";   # 01:00.0
+      intelBusId = "PCI:0@0:2:0";    # 00:02.0
     };
   };
 
