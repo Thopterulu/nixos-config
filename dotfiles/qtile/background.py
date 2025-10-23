@@ -3,7 +3,7 @@ import random
 from libqtile.config import Screen
 from pathlib import Path
 
-BACKGROUND_DIR = os.path.join(Path.home(), "/GoogleDrive/backgrounds")
+BACKGROUND_DIR = os.path.join(Path.home(), "GoogleDrive", "backgrounds")
 
 
 def get_wallpapers():

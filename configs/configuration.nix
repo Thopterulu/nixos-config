@@ -39,11 +39,12 @@
   #  useXkbConfig = true; # use xkb.options in tty.
   # };
 
+
+  services.dispayManager.sddm.enable = true;
   # Enable the X11 windowing system.
   services.xserver = {
     enable = true;
     windowManager.qtile.enable = true;
-    displayManager.sddm.enable = true;
     xkb.layout = "fr";
     xkb.options = "eurosign:e,caps:escape";
     displayManager.sessionCommands = ''
