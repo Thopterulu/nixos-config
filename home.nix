@@ -42,6 +42,7 @@
   home.file = {
     # qtile
     ".config/qtile/config.py".source = ./dotfiles/qtile/config.py;
+    ".config/qtile/background.py".source = ./dotfiles/qtile/background.py;
     # Alacritty config
     ".config/alacritty/alacritty.toml".source = ./dotfiles/alacritty/alacritty.toml;
     # Rofi config

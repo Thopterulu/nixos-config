@@ -1,9 +1,12 @@
 import os
+import time
 import subprocess
 from libqtile import bar, layout, qtile, widget, hook
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
+from .background import rander_background
+
 
 def get_music_info():
     try:
@@ -64,7 +67,9 @@ def autostart():
     # Mount Google Drive first
     subprocess.Popen([f"{home}/.local/bin/mount-gdrive"])
     # Wait a bit, then start wallpaper changer
-    subprocess.Popen(['bash', '-c', f'sleep 5 && {home}/nixos-config/scripts/wallpaper-changer.sh'])
+    time.sleep(5)
+    rander_background(screens)
+    #subprocess.Popen(['bash', '-c', f'{home}/nixos-config/scripts/wallpaper-changer.sh'])
 
 @lazy.function
 def move_to_next_group(qtile):
