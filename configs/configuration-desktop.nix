@@ -4,7 +4,6 @@
 {
   imports = [
     ./configuration.nix
-    ./conf-offload.nix
   ];
 
   # NVIDIA configuration (desktop only)
@@ -15,11 +14,8 @@
     modesetting.enable = true;
     open = true;
     prime = {
-      # Reverse PRIME : NVIDIA rend et envoie au GPU intégré
-      offload = {
-        enable = true;
-        enableOffloadCmd = true;
-      };
+      # PRIME sync: NVIDIA renders, Intel outputs to displays
+      sync.enable = true;
 
       nvidiaBusId = "PCI:1@0:0:0";   # 01:00.0
       intelBusId = "PCI:0@0:2:0";    # 00:02.0
@@ -28,7 +24,6 @@
 
   # Desktop-specific display configuration
   services.xserver.displayManager.sessionCommands = ''
-   xrandr --setprovideroutputsource NVIDIA-G0 modesetting &
    sleep 1
    xrandr --output DP-1-2 --primary --mode 2560x1440 --rate 120 --pos 0x0 \
          --output HDMI-1 --mode 1920x1080 --rate 60 --pos 2560x0 &
