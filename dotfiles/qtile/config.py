@@ -11,8 +11,9 @@ from background import rander_background
 
 def refresh_wallpaper(screens : list[Screen]):
     while True:
-        time.sleep(5 * 60)
+        time.sleep(5)
         rander_background(screens)
+        time.sleep(4 * 60)
 
 def get_music_info():
     try:
@@ -72,15 +73,6 @@ def autostart():
     home = os.path.expanduser('~')
     # Mount Google Drive first
     subprocess.Popen([f"{home}/.local/bin/mount-gdrive"])
-    # Wait a bit, then start wallpaper changer
-    time.sleep(5)
-    rander_background(screens)
-    #subprocess.Popen(['bash', '-c', f'{home}/nixos-config/scripts/wallpaper-changer.sh'])
-
-@hook.subscribe.startup_complete
-def startup_complete():
-    """Run scripts on Qtile startup"""
-    # Start background changer
     thread_bg_changer.start()
 
 @hook.subscribe.shutdown
