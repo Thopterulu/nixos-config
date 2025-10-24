@@ -321,18 +321,26 @@ def end_widgets():
                 padding_y = 1,
                 fontsize = 11
                 ),
+        widget.TextBox(
+                text='',
+                foreground = colors[2],
+                background = colors[0],
+                fontsize = 12,
+                padding = 1,
+                ),
         widget.Clock(
             format="%a %d/%m/%Y %H:%M %p",
             background = colors[0],
             foreground = colors[2],
             ),
-        widget.TextBox(default_text='',
-                             foreground = colors[2],
-                             background = colors[0],
-                             fontsize = 20,
-                             padding = 1,
-                           mouse_callbacks = {'Button1': shutdown_now, 'Button3': reboot_now},
-                           ),
+        widget.TextBox(
+            text='',
+            foreground = colors[2],
+            background = colors[0],
+            fontsize = 20,
+            padding = 1,
+            mouse_callbacks = {'Button1': shutdown_now, 'Button3': reboot_now},
+        ),
         widget.Spacer(
             length = 6,
             background = colors[0],
