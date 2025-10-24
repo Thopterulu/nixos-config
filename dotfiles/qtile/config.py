@@ -323,6 +323,12 @@ def end_widgets():
                 padding_y = 1,
                 fontsize = 16
                 ),
+        widget.OpenWeather(
+            location="Lyon",
+            format="{location_city}: {main_temp} °{units_temperature} {icon}",
+            background = colors[0],
+            foreground = colors[2],
+        ),
         widget.TextBox(
                 text='',
                 foreground = colors[2],
