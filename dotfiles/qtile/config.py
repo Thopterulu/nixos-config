@@ -307,7 +307,7 @@ def end_widgets():
                              padding = 1,),
             widget.Spacer(
             length = 6,
-            background = colors[0],
+            # background = colors[0],
             )]
 
 
@@ -331,22 +331,15 @@ screens = [
     Screen(
         top=bar.Bar(
             create_primary_widgets(),
-            24,
-            # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
-            # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
+            25,
+            margin = [0,0,0,0],
         ),
-        # You can uncomment this variable if you see that on X11 floating resize/moving is laggy
-        # By default we handle these events delayed to already improve performance, however your system might still be struggling
-        # This variable is set to None (no cap) by default, but you can set it to 60 to indicate that you limit it to 60 events per second
-        # x11_drag_polling_rate = 60,
     ),
     Screen(
         top=bar.Bar(
             create_secondary_widgets(),
-            24,
-            # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
-            # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
-
+            25,
+            margin = [0,0,0,0],
         ),
     ),
 ]
