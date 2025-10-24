@@ -209,10 +209,17 @@ for i in groups:
         ]
     )
 
+layout_theme = {"border_width": 1,
+                "margin": 6,
+                "border_focus": "89bdc5",
+                "border_normal": "d56d77"
+                }
+
+
 layouts = [
-    layout.Columns(border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=4),
-    layout.Max(),  # Gaming-friendly layout
-    layout.Floating(),  # For games that need floating
+    layout.Columns(**layout_theme),
+    layout.Max(**layout_theme),  # Gaming-friendly layout
+    layout.Floating(**layout_theme),  # For games that need floating
     # Try more layouts by unleashing below layouts.
     # layout.Stack(num_stacks=2),
     # layout.Bsp(),
@@ -279,6 +286,19 @@ def create_base_widgets():
     )
     return widgets
 
+colors = [["#2f3541", "#2f3541"],
+          ["#ffffff", "#ffffff"],
+          ["#d56d77", "#d56d77"],
+          ["#ffb480", "#ffb480"],
+          ["#fce43c", "#fce43c"],  
+          ["#42d6a4", "#42d6a4"],
+          ["#08cad1", "#08cad1"],
+          ["#59adf6", "#59adf6"],
+          ["#8abec6", "#8abec6"],
+          ["#ff5722", "#ff5722"],
+          ["#d323ac", "#d323ac"]]
+
+
 # Primary screen widgets (with systray)
 def create_primary_widgets():
     widgets = create_base_widgets()
@@ -286,7 +306,11 @@ def create_primary_widgets():
         widget.Bluetooth(),
         widget.Systray(),
         widget.Clock(format="%a %d/%m/%Y %H:%M %p"),
-        widget.QuickExit(),
+        widget.QuickExit(default_text='',
+                foreground = colors[2],
+                background = colors[0],
+                fontsize = 20,
+                padding = 1,),
     ])
     return widgets
 
