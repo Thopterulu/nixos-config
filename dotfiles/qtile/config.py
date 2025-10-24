@@ -312,7 +312,7 @@ def end_widgets():
                 text='',
                 foreground = colors[2],
                 background = colors[0],
-                fontsize = 22,
+                fontsize = 30,
                 padding = 0
                 ),
         widget.PulseVolume(
@@ -320,13 +320,13 @@ def end_widgets():
                 foreground = colors[2],
                 limit_max_volume = True,
                 padding_y = 1,
-                fontsize = 11
+                fontsize = 16
                 ),
         widget.TextBox(
                 text='',
                 foreground = colors[2],
                 background = colors[0],
-                fontsize = 12,
+                fontsize = 22,
                 padding = 1,
                 ),
         widget.Clock(
@@ -338,7 +338,7 @@ def end_widgets():
             text='',
             foreground = colors[2],
             background = colors[0],
-            fontsize = 20,
+            fontsize = 26,
             padding = 1,
             mouse_callbacks = {'Button1': shutdown_now, 'Button3': reboot_now},
         ),
