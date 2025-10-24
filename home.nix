@@ -148,6 +148,17 @@
     plugins = {
       lualine.enable = true;
       supermaven.enable = true;
+      ccc = {
+        enable = true;
+        settings = {
+          highlighter = {
+            auto_enable = true;
+            lsp = true;
+          };
+        };
+      };
+
+
       nvim-tree = {
         enable = true;
         openOnSetup = true;
