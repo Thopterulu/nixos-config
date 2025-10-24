@@ -313,7 +313,8 @@ def end_widgets():
                 foreground = colors[2],
                 background = colors[0],
                 fontsize = 30,
-                padding = 0
+                padding = 0,
+                padding_y = 0
                 ),
         widget.PulseVolume(
                 background = colors[0],
@@ -328,6 +329,7 @@ def end_widgets():
                 background = colors[0],
                 fontsize = 22,
                 padding = 1,
+                padding_y = 0,
                 ),
         widget.Clock(
             format="%a %d/%m/%Y %H:%M %p",
@@ -340,6 +342,7 @@ def end_widgets():
             background = colors[0],
             fontsize = 26,
             padding = 1,
+            padding_y = 0,
             mouse_callbacks = {'Button1': shutdown_now, 'Button3': reboot_now},
         ),
         widget.Spacer(
