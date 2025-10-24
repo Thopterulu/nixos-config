@@ -306,7 +306,7 @@ def end_widgets():
                              fontsize = 20,
                              padding = 1,),
             widget.Spacer(
-            length = 6,
+            length = 12,
             # background = colors[0],
             )]
 
