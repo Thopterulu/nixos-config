@@ -300,13 +300,13 @@ colors = [["#2f3541", "#2f3541"],
 
 def end_widgets():
     return [widget.Clock(format="%a %d/%m/%Y %H:%M %p"),
-            widget.QuickExit(default_text='',
+            widget.QuickExit(default_text=' ',
                              foreground = colors[2],
                              #background = colors[0],
                              fontsize = 20,
                              padding = 1,),
             widget.Spacer(
-            length = 12,
+            length = 6,
             # background = colors[0],
             )]
 
