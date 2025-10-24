@@ -153,7 +153,9 @@
   fonts.packages = with pkgs; [
     jetbrains-mono
     noto-fonts-emoji
+    noto-fonts-color-emoji
     nerd-fonts.jetbrains-mono
+    font-awesome
   ];
   nix.gc = {
     automatic = true;
