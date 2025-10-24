@@ -325,7 +325,7 @@ def end_widgets():
                 ),
         widget.OpenWeather(
             location="Lyon",
-            format="{location_city}: {main_temp} °{units_temperature} {icon}",
+            format="Lyon {icon} {main_temp} °{units_temperature}",
             background = colors[0],
             foreground = colors[2],
         ),
