@@ -298,30 +298,33 @@ colors = [["#2f3541", "#2f3541"],
           ["#ff5722", "#ff5722"],
           ["#d323ac", "#d323ac"]]
 
+def end_widgets():
+    return [widget.Clock(format="%a %d/%m/%Y %H:%M %p"),
+            widget.QuickExit(default_text='',
+                             foreground = colors[2],
+                             #background = colors[0],
+                             fontsize = 20,
+                             padding = 1,),
+            widget.Spacer(
+            length = 6,
+            background = colors[0],
+            )]
+
+
 
 # Primary screen widgets (with systray)
 def create_primary_widgets():
     widgets = create_base_widgets()
     widgets.extend([
         widget.Bluetooth(),
-        widget.Systray(),
-        widget.Clock(format="%a %d/%m/%Y %H:%M %p"),
-        widget.QuickExit(default_text='',
-                foreground = colors[2],
-                background = colors[0],
-                fontsize = 20,
-                padding = 1,),
-    ])
+        widget.Systray(),]+
+        end_widgets())
     return widgets
 
 # Secondary screen widgets (no systray)
 def create_secondary_widgets():
     widgets = create_base_widgets()
-    widgets.extend([
-        widget.TextBox("&lt;M-r&gt;", foreground="#d75f5f"),
-        widget.Clock(format="%a %d/%m/%Y %H:%M %p"),
-        widget.QuickExit(),
-    ])
+    widgets.extend(end_widgets())
     return widgets
 
 screens = [
