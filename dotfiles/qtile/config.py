@@ -242,8 +242,9 @@ layouts = [
 
 widget_defaults = dict(
     font="JetBrainsMono Nerd Font",
-    fontsize=22,
+    fontsize=14,
     padding=3,
+    padding_y=4
 )
 extension_defaults = widget_defaults.copy()
 
