@@ -307,24 +307,35 @@ colors = [["#2f3541", "#2f3541"],
 
 def end_widgets():
     return [
+        widget.TextBox(
+                text='',
+                foreground = colors[2],
+                background = colors[0],
+                fontsize = 22,
+                padding = 0
+                ),
         widget.PulseVolume(
-                # background = colors[0],
+                background = colors[0],
                 foreground = colors[2],
                 limit_max_volume = True,
                 padding_y = 1,
                 fontsize = 11
                 ),
-        widget.Clock(format="%a %d/%m/%Y %H:%M %p"),
+        widget.Clock(
+            format="%a %d/%m/%Y %H:%M %p",
+            background = colors[0],
+            foreground = colors[2],
+            ),
         widget.TextBox(default_text='',
                              foreground = colors[2],
-                             #background = colors[0],
+                             background = colors[0],
                              fontsize = 20,
                              padding = 1,
                            mouse_callbacks = {'Button1': shutdown_now, 'Button3': reboot_now},
                            ),
         widget.Spacer(
             length = 6,
-            # background = colors[0],
+            background = colors[0],
             )
     ]
 
