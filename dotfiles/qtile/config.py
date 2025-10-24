@@ -8,6 +8,13 @@ from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
 from background import rander_background
 
+# Shutdown
+def shutdown_now():
+  qtile.cmd_spawn('shutdown now')
+# Reboot
+def reboot_now():
+  qtile.cmd_spawn('reboot')
+
 
 def refresh_wallpaper(screens : list[Screen]):
     while True:
@@ -299,16 +306,27 @@ colors = [["#2f3541", "#2f3541"],
           ["#d323ac", "#d323ac"]]
 
 def end_widgets():
-    return [widget.Clock(format="%a %d/%m/%Y %H:%M %p"),
-            widget.QuickExit(default_text=' ',
+    return [
+        widget.PulseVolume(
+                # background = colors[0],
+                foreground = colors[2],
+                limit_max_volume = True,
+                padding_y = 1,
+                fontsize = 11
+                ),
+        widget.Clock(format="%a %d/%m/%Y %H:%M %p"),
+        widget.TextBox(default_text='',
                              foreground = colors[2],
                              #background = colors[0],
                              fontsize = 20,
-                             padding = 1,),
-            widget.Spacer(
+                             padding = 1,
+                           mouse_callbacks = {'Button1': shutdown_now, 'Button3': reboot_now},
+                           ),
+        widget.Spacer(
             length = 6,
             # background = colors[0],
-            )]
+            )
+    ]
 
 
 
