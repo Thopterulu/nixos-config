@@ -298,7 +298,7 @@ colors = [["#2f3541", "#2f3541"],
           ["#ffffff", "#ffffff"],
           ["#d56d77", "#d56d77"],
           ["#ffb480", "#ffb480"],
-          ["#fce43c", "#fce43c"],  
+          ["#fce43c", "#fce43c"],
           ["#42d6a4", "#42d6a4"],
           ["#08cad1", "#08cad1"],
           ["#59adf6", "#59adf6"],
@@ -308,6 +308,12 @@ colors = [["#2f3541", "#2f3541"],
 
 def end_widgets():
     return [
+        widget.TextBox(
+            text='(',
+            foreground = colors[2],
+            background = colors[0],
+            fontsize = 30,
+        ),
         widget.TextBox(
                 text='',
                 foreground = colors[2],
