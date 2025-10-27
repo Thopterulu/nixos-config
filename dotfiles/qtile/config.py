@@ -4,6 +4,7 @@ import os
 import time
 import subprocess
 import threading
+from dotfiles.qtile import background
 from libqtile import bar, layout, qtile, hook
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
@@ -39,6 +40,7 @@ CYAN = "#00a6b2"
 LIGHT_GREEN = "#42d6a4"
 SOME_RED = "#d56d77"
 YOINK_BLUE = "#59adf6"
+WEIRD_BLUE = "#294F6D"
 
 
 def parse_notification(message: str) -> str:
@@ -341,12 +343,18 @@ def create_base_widgets():
             },
             **widget_defaults,
         ),
+        TextBox(
+            text="󱎕",
+            foreground=WEIRD_BLUE,
+            background=BLACK,
+            fontsize=35,
+            padding=-3,
+        ),
     ]
 
     # Add battery widget if battery exists
-    if os.path.isdir("/sys/module/battery"):
-        widgets.insert(
-            -1,
+    if has_battery():
+        widgets.append(
             Battery(
                 format="🔋 {percent:2.0%} {char}",
                 charge_char="⚡",
@@ -356,6 +364,7 @@ def create_base_widgets():
                 low_percentage=0.2,
                 low_foreground="ff0000",
                 **widget_defaults,
+                background=WEIRD_BLUE,
             ),
         )
 
@@ -365,6 +374,7 @@ def create_base_widgets():
             func=get_network_info,
             update_interval=5,
             **widget_defaults,
+            background=WEIRD_BLUE,
         )
     )
     return widgets
@@ -455,9 +465,13 @@ def create_primary_widgets():
     widgets = create_base_widgets()
     widgets.extend(
         [
-            Notify(fmt=" 🔥 {} ", parse_text=parse_notification),
-            Bluetooth(),
-            Systray(),
+            Notify(fmt=" 🔥 {} ", background=WEIRD_BLUE, parse_text=parse_notification),
+            Bluetooth(
+                background=WEIRD_BLUE,
+            ),
+            Systray(
+                background=WEIRD_BLUE,
+            ),
         ]
         + end_widgets()
     )
