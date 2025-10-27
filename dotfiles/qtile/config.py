@@ -405,6 +405,11 @@ def end_widgets():  # type: ignore
             format="Lyon {icon} {main_temp:.0f}°{units_temperature}",
             background=CYAN,
             foreground=ORANGE,
+            mouse_callbacks={
+                "Button1": qtile.spawn(
+                    "firefox https://meteofrance.com/previsions-meteo-france/lyon/69000"
+                )
+            },
         ),
         TextBox(
             text="󱎕",
