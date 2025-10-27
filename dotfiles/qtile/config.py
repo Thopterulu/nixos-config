@@ -4,7 +4,6 @@ import os
 import time
 import subprocess
 import threading
-from dotfiles.qtile import background
 from libqtile import bar, layout, qtile, hook
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
