@@ -314,7 +314,7 @@ def end_widgets():
             foreground = LIGHT_GREEN,
             background = BLACK,
             fontsize = 45,
-            padding = -5,
+            padding = -3,
         ),
         widget.TextBox(
             text='',
@@ -334,7 +334,7 @@ def end_widgets():
             foreground = CYAN,
             background = LIGHT_GREEN,
             fontsize = 45,
-            padding = -5,
+            padding = -3,
         ),
         widget.OpenWeather(
             location="Lyon",
@@ -347,7 +347,7 @@ def end_widgets():
             foreground = DARK_BLUE,
             background = CYAN,
             fontsize = 45,
-            padding = -5,
+            padding = -3,
         ),
         widget.TextBox(
                 text='',
