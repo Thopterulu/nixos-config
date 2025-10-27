@@ -384,7 +384,7 @@ def end_widgets():  # type: ignore
         TextBox(
             text="󱎕",
             foreground=LIGHT_GREEN,
-            background=BLACK,
+            background=WEIRD_BLUE,
             fontsize=35,
             padding=-3,
         ),
