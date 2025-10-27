@@ -1,62 +1,121 @@
+# type: ignore
+# ruff: noqa: E722
 import os
 import time
 import subprocess
 import threading
-from libqtile import bar, layout, qtile, widget, hook
+from libqtile import bar, layout, qtile, hook
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
 from background import rander_background
+from libqtile.widget import (
+    Battery,
+    CurrentLayout,
+    GroupBox,
+    Prompt,
+    WindowName,
+    Chord,
+    GenPollText,
+    TextBox,
+    PulseVolume,
+    OpenWeather,
+    Clock,
+    Spacer,
+    Systray,
+    Notify,
+)
+from qtile_extras.widget import Bluetooth
+
+
+BLACK = "#000000"
+GREY = "#222222"
+DARK_GREY = "#111111"
+BLUE = "#007fdf"
+DARK_BLUE = "#002a4a"
+ORANGE = "#dd6600"
+DARK_ORANGE = "#371900"
+CYAN = "#00a6b2"
+LIGHT_GREEN = "#42d6a4"
+SOME_RED = "#d56d77"
+YOINK_BLUE = "#59adf6"
+
+
+def parse_notification(message: str) -> str:
+    return message.replace("\n", "⏎")
+
 
 # Shutdown
-def shutdown_now():
-  qtile.cmd_spawn('shutdown now')
+def shutdown_now() -> None:
+    qtile.cmd_spawn("shutdown now")  # type: ignore
+
+
 # Reboot
-def reboot_now():
-  qtile.cmd_spawn('reboot')
+def reboot_now() -> None:
+    qtile.cmd_spawn("reboot")  # type: ignore
 
 
-def refresh_wallpaper(screens : list[Screen]):
+def refresh_wallpaper(screens: list[Screen]):
     while True:
         time.sleep(5)
         rander_background(screens)
         time.sleep(4 * 60)
 
-def get_music_info():
+
+def get_music_info() -> str:
     try:
-        status = subprocess.check_output(['playerctl', 'status'], stderr=subprocess.DEVNULL).decode().strip()
-        if status == 'Playing':
-            title = subprocess.check_output(['playerctl', 'metadata', '--format', '{{ artist }} - {{ title }}'], stderr=subprocess.DEVNULL).decode().strip()
+        status = (
+            subprocess.check_output(["playerctl", "status"], stderr=subprocess.DEVNULL)
+            .decode()
+            .strip()
+        )
+        if status == "Playing":
+            title = (
+                subprocess.check_output(
+                    ["playerctl", "metadata", "--format", "{{ artist }} - {{ title }}"],
+                    stderr=subprocess.DEVNULL,
+                )
+                .decode()
+                .strip()
+            )
             if len(title) > 40:
                 title = title[:37] + "..."
             return f"♪ {title}"
-        elif status == 'Paused':
+        elif status == "Paused":
             return "⏸ Paused"
     except:
         pass
     return ""
 
-def has_battery():
+
+def has_battery() -> bool:
     """Check if system has a battery"""
     try:
-        return os.path.exists('/sys/class/power_supply/BAT0') or os.path.exists('/sys/class/power_supply/BAT1')
+        return os.path.exists("/sys/class/power_supply/BAT0") or os.path.exists(
+            "/sys/class/power_supply/BAT1"
+        )
     except:
         return False
 
-def get_network_info():
+
+def get_network_info() -> str:
     """Get network connection status by checking interfaces only"""
     try:
         # Check active interfaces
-        result = subprocess.run(['ip', 'link', 'show'], capture_output=True, text=True, timeout=2)
+        result = subprocess.run(
+            ["ip", "link", "show"], capture_output=True, text=True, timeout=2
+        )
         if result.returncode == 0:
-            lines = result.stdout.split('\n')
+            lines = result.stdout.split("\n")
             for line in lines:
-                if 'state UP' in line and ('enp' in line or 'eth' in line):
+                if "state UP" in line and ("enp" in line or "eth" in line):
                     return "🌐 Ethernet"
-                elif 'state UP' in line and ('wlp' in line or 'wlan' in line):
+                elif "state UP" in line and ("wlp" in line or "wlan" in line):
                     # Try to get WiFi SSID
                     try:
-                        wifi_result = subprocess.run(['iwgetid', '-r'], capture_output=True, text=True, timeout=1)
+                        wifi_result = subprocess.run(
+                            ["iwgetid", "-r"], capture_output=True, text=True, timeout=1
+                        )
                         if wifi_result.returncode == 0 and wifi_result.stdout.strip():
                             ssid = wifi_result.stdout.strip()
                             return f"📶 {ssid}"
@@ -70,70 +129,78 @@ def get_network_info():
 
 
 @hook.subscribe.screen_change
-def set_screens(event):
+def set_screens(event) -> None:
     """Dynamically reconfigure screens when they change"""
     lazy.restart()
 
+
 @hook.subscribe.startup_once
-def autostart():
+def autostart() -> None:
     """Run scripts on Qtile startup"""
-    home = os.path.expanduser('~')
+    home = os.path.expanduser("~")
     # Mount Google Drive first
     subprocess.Popen([f"{home}/.local/bin/mount-gdrive"])
     thread_bg_changer.start()
 
+
 @hook.subscribe.shutdown
-def shutdown():
+def shutdown() -> None:
     """Run scripts on Qtile startup"""
     # Stop background changer
     thread_bg_changer.join()
 
 
 @lazy.function
-def move_to_next_group(qtile):
+def move_to_next_group(qtile) -> None:
     current_group = qtile.current_screen.group
     group_names = [g.name for g in qtile.groups]
     current_index = group_names.index(current_group.name)
     next_index = (current_index + 1) % len(group_names)
     qtile.current_window.togroup(group_names[next_index], switch_group=True)
 
+
 @lazy.function
-def move_to_prev_group(qtile):
+def move_to_prev_group(qtile) -> None:
     current_group = qtile.current_screen.group
     group_names = [g.name for g in qtile.groups]
     current_index = group_names.index(current_group.name)
     prev_index = (current_index - 1) % len(group_names)
     qtile.current_window.togroup(group_names[prev_index], switch_group=True)
 
+
 mod = "mod4"
 terminal = guess_terminal()
 
 keys = [
-    # A list of available commands that can be bound to keys can be found
-    # at https://docs.qtile.org/en/latest/manual/config/lazy.html
-    # Switch between windows
     Key([mod], "h", lazy.layout.left(), desc="Move focus to left"),
     Key([mod], "l", lazy.layout.right(), desc="Move focus to right"),
     Key([mod], "j", lazy.layout.down(), desc="Move focus down"),
     Key([mod], "k", lazy.layout.up(), desc="Move focus up"),
     Key([mod], "space", lazy.layout.next(), desc="Move window focus to other window"),
-    # Move windows between left/right columns or move up/down in current stack.
-    # Moving out of range in Columns layout will create new column.
-    Key([mod, "shift"], "h", lazy.layout.shuffle_left(), desc="Move window to the left"),
-    Key([mod, "shift"], "l", lazy.layout.shuffle_right(), desc="Move window to the right"),
+    Key(
+        [mod, "shift"], "h", lazy.layout.shuffle_left(), desc="Move window to the left"
+    ),
+    Key(
+        [mod, "shift"],
+        "l",
+        lazy.layout.shuffle_right(),
+        desc="Move window to the right",
+    ),
     Key([mod, "shift"], "j", lazy.layout.shuffle_down(), desc="Move window down"),
     Key([mod, "shift"], "k", lazy.layout.shuffle_up(), desc="Move window up"),
     # Grow windows. If current window is on the edge of screen and direction
     # will be to screen edge - window would shrink.
     Key([mod, "control"], "h", lazy.layout.grow_left(), desc="Grow window to the left"),
-    Key([mod, "control"], "l", lazy.layout.grow_right(), desc="Grow window to the right"),
+    Key(
+        [mod, "control"], "l", lazy.layout.grow_right(), desc="Grow window to the right"
+    ),
     Key([mod, "control"], "j", lazy.layout.grow_down(), desc="Grow window down"),
     Key([mod, "control"], "k", lazy.layout.grow_up(), desc="Grow window up"),
     Key([mod], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
     # Envoyer fenêtre vers l'autre écran
     Key([mod, "mod1"], "h", lazy.window.toscreen(0), desc="Move window to screen 0"),
     Key([mod, "mod1"], "l", lazy.window.toscreen(1), desc="Move window to screen 1"),
-    #Key([mod, "shift"], "x", lazy.spawn("i3lock -c 000000"), desc="Lock screen"),
+    # Key([mod, "shift"], "x", lazy.spawn("i3lock -c 000000"), desc="Lock screen"),
     # Toggle between split and unsplit sides of stack.
     # Split = all windows displayed
     # Unsplit = 1 window displayed, like Max layout, but still with
@@ -154,10 +221,14 @@ keys = [
         lazy.window.toggle_fullscreen(),
         desc="Toggle fullscreen on the focused window",
     ),
-    Key([mod], "t", lazy.window.toggle_floating(), desc="Toggle floating on the focused window"),
+    Key(
+        [mod],
+        "t",
+        lazy.window.toggle_floating(),
+        desc="Toggle floating on the focused window",
+    ),
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
-
     Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
     Key([mod], "e", lazy.spawn("pcmanfm")),
     Key([mod], "d", lazy.spawn("rofi -show drun")),
@@ -166,12 +237,8 @@ keys = [
     Key(["mod1", "shift"], "Tab", lazy.layout.previous(), desc="Previous window"),
     # IMPORTANT : Forcer le mode fenêtré temporaire
     Key([mod, "mod1"], "f", lazy.window.toggle_fullscreen()),
-
     # Minimiser la fenêtre
     Key([mod, "mod1"], "m", lazy.window.toggle_minimize()),
-
-
-
 ]
 
 # Add key bindings to switch VTs in Wayland.
@@ -194,7 +261,11 @@ for i in groups:
     keys.extend(
         [
             Key([mod], f"F{i.name}", lazy.group[i.name].toscreen()),
-            Key([mod, "shift"], f"F{i.name}", lazy.window.togroup(i.name, switch_group=True)),
+            Key(
+                [mod, "shift"],
+                f"F{i.name}",
+                lazy.window.togroup(i.name, switch_group=True),
+            ),
             # mod + group number = switch to group
             #  Key(
             #      [mod],
@@ -216,11 +287,12 @@ for i in groups:
         ]
     )
 
-layout_theme = {"border_width": 1,
-                "margin": 6,
-                "border_focus": "89bdc5",
-                "border_normal": "d56d77"
-                }
+layout_theme = {
+    "border_width": 1,
+    "margin": 6,
+    "border_focus": "89bdc5",
+    "border_normal": "d56d77",
+}
 
 
 layouts = [
@@ -241,52 +313,55 @@ layouts = [
 ]
 
 widget_defaults = dict(
-    font="JetBrainsMono Nerd Font Mono",
-    fontsize=14,
-    padding=3,
-    padding_y=4
+    font="JetBrainsMono Nerd Font Mono", fontsize=14, padding=3, padding_y=4
 )
 extension_defaults = widget_defaults.copy()
+
 
 # Create base widgets (common to both screens)
 def create_base_widgets():
     widgets = [
-        widget.CurrentLayout(),
-        widget.GroupBox(disable_drag=True,),
-        widget.Prompt(),
-        widget.WindowName(),
-        widget.Chord(
+        CurrentLayout(),
+        GroupBox(
+            disable_drag=True,
+        ),
+        Prompt(),
+        WindowName(),
+        Chord(
             chords_colors={
                 "launch": ("#ff0000", "#ffffff"),
             },
             name_transform=lambda name: name.upper(),
         ),
-        widget.GenPollText(
+        GenPollText(
             func=get_music_info,
             update_interval=2,
-            mouse_callbacks={'Button1': lambda: subprocess.run(['playerctl', 'play-pause'])},
+            mouse_callbacks={
+                "Button1": lambda: subprocess.run(["playerctl", "play-pause"])
+            },
             **widget_defaults,
         ),
     ]
 
     # Add battery widget if battery exists
-    if has_battery():
-        widgets.append(
-            widget.Battery(
-                format='🔋 {percent:2.0%} {char}',
-                charge_char='⚡',
-                discharge_char='↓',
-                empty_char='❌',
-                full_char='✓',
+    if os.path.isdir("/sys/module/battery"):
+        widgets.insert(
+            -1,
+            Battery(
+                format="🔋 {percent:2.0%} {char}",
+                charge_char="⚡",
+                discharge_char="↓",
+                empty_char="❌",
+                full_char="✓",
                 low_percentage=0.2,
-                low_foreground='ff0000',
+                low_foreground="ff0000",
                 **widget_defaults,
-            )
+            ),
         )
 
     # Add network widget
     widgets.append(
-        widget.GenPollText(
+        GenPollText(
             func=get_network_info,
             update_interval=5,
             **widget_defaults,
@@ -294,99 +369,92 @@ def create_base_widgets():
     )
     return widgets
 
-BLACK = "#000000"
-GREY = "#222222"
-DARK_GREY = "#111111"
-BLUE = "#007fdf"
-DARK_BLUE = "#002a4a"
-ORANGE = "#dd6600"
-DARK_ORANGE = "#371900"
-CYAN = "#00a6b2"
-LIGHT_GREEN = "#42d6a4"
-SOME_RED = "#d56d77"
-YOINK_BLUE = "#59adf6"
 
-
-def end_widgets():
+def end_widgets():  # type: ignore
     return [
-        widget.TextBox(
-            text='󱎕',
-            foreground = LIGHT_GREEN,
-            background = BLACK,
-            fontsize = 35,
-            padding = -3,
+        TextBox(
+            text="󱎕",
+            foreground=LIGHT_GREEN,
+            background=BLACK,
+            fontsize=35,
+            padding=-3,
         ),
-        widget.TextBox(
-            text='',
-            foreground = ORANGE,
-            background = LIGHT_GREEN,
-            fontsize = 45,
+        TextBox(
+            text="",
+            foreground=ORANGE,
+            background=LIGHT_GREEN,
+            fontsize=45,
         ),
-        widget.PulseVolume(
-                background = LIGHT_GREEN,
-                foreground = ORANGE,
-                limit_max_volume = True,
-                padding_y = 1,
-                fontsize = 16
-                ),
-        widget.TextBox(
-            text='󱎕',
-            foreground = CYAN,
-            background = LIGHT_GREEN,
-            fontsize = 35,
-            padding = -3,
+        PulseVolume(
+            background=LIGHT_GREEN,
+            foreground=ORANGE,
+            limit_max_volume=True,
+            padding_y=1,
+            fontsize=16,
+            volume_app="pavucontrol",
         ),
-        widget.OpenWeather(
+        TextBox(
+            text="󱎕",
+            foreground=CYAN,
+            background=LIGHT_GREEN,
+            fontsize=35,
+            padding=-3,
+        ),
+        OpenWeather(
             location="Lyon",
             format="Lyon {icon} {main_temp:.0f}°{units_temperature}",
-            background = CYAN,
-            foreground = ORANGE,
+            background=CYAN,
+            foreground=ORANGE,
         ),
-        widget.TextBox(
-            text='󱎕',
-            foreground = DARK_BLUE,
-            background = CYAN,
-            fontsize = 35,
-            padding = -3,
+        TextBox(
+            text="󱎕",
+            foreground=DARK_BLUE,
+            background=CYAN,
+            fontsize=35,
+            padding=-3,
         ),
-        widget.TextBox(
-                text='',
-                foreground = ORANGE,
-                background = DARK_BLUE,
-                fontsize = 22,
-                padding = 1,
-                padding_y = 0,
-                ),
-        widget.Clock(
+        TextBox(
+            text="",
+            foreground=ORANGE,
+            background=DARK_BLUE,
+            fontsize=22,
+            padding=1,
+            padding_y=0,
+        ),
+        Clock(
             format="%a %d/%m/%Y %H:%M %p",
-            background = DARK_BLUE,
-            foreground = ORANGE,
-            ),
-        widget.TextBox(
-            text='',
-            foreground = ORANGE,
-            background = DARK_BLUE,
-            fontsize = 26,
-            padding = 1,
-            padding_y = 0,
-            mouse_callbacks = {'Button1': shutdown_now, 'Button3': reboot_now},
+            background=DARK_BLUE,
+            foreground=ORANGE,
         ),
-        widget.Spacer(
-            length = 6,
-            background = DARK_BLUE,
-            )
+        TextBox(
+            text="",
+            foreground=ORANGE,
+            background=DARK_BLUE,
+            fontsize=26,
+            padding=1,
+            padding_y=0,
+            mouse_callbacks={"Button1": shutdown_now, "Button3": reboot_now},
+        ),
+        Spacer(
+            length=6,
+            background=DARK_BLUE,
+        ),
     ]
-
 
 
 # Primary screen widgets (with systray)
 def create_primary_widgets():
     widgets = create_base_widgets()
-    widgets.extend([
-        widget.Bluetooth(),
-        widget.Systray(),]+
-        end_widgets())
+    widgets.extend(
+        [
+            Notify(fmt=" 🔥 {} ", parse_text=parse_notification),
+            Bluetooth(),
+            Systray(),
+        ]
+        + end_widgets()
+    )
     return widgets
+
 
 # Secondary screen widgets (no systray)
 def create_secondary_widgets():
@@ -394,27 +462,35 @@ def create_secondary_widgets():
     widgets.extend(end_widgets())
     return widgets
 
+
 screens = [
     Screen(
         top=bar.Bar(
             create_primary_widgets(),
             25,
-            margin = [0,0,0,0],
+            margin=[0, 0, 0, 0],
         ),
     ),
     Screen(
         top=bar.Bar(
             create_secondary_widgets(),
             25,
-            margin = [0,0,0,0],
+            margin=[0, 0, 0, 0],
         ),
     ),
 ]
 
 # Drag floating layouts.
 mouse = [
-    Drag([mod], "Button1", lazy.window.set_position_floating(), start=lazy.window.get_position()),
-    Drag([mod], "Button3", lazy.window.set_size_floating(), start=lazy.window.get_size()),
+    Drag(
+        [mod],
+        "Button1",
+        lazy.window.set_position_floating(),
+        start=lazy.window.get_position(),
+    ),
+    Drag(
+        [mod], "Button3", lazy.window.set_size_floating(), start=lazy.window.get_size()
+    ),
     Click([mod], "Button2", lazy.window.bring_to_front()),
 ]
 
@@ -435,7 +511,9 @@ floating_layout = layout.Floating(
         Match(title="branchdialog"),  # gitk
         Match(title="pinentry"),  # GPG key password entry
         # Gaming rules - force certain games to not float
-        Match(wm_class="steam_app_"),  # Force Steam games to float for proper fullscreen
+        Match(
+            wm_class="steam_app_"
+        ),  # Force Steam games to float for proper fullscreen
         Match(wm_class="cs2"),
         Match(wm_class="csgo"),
         Match(title="Counter-Strike"),
@@ -450,9 +528,10 @@ reconfigure_screens = True
 # focus, should we respect this or not?
 auto_minimize = False  # Disable for gaming
 
+
 # Gaming window rules
 @hook.subscribe.client_new
-def auto_fullscreen_games(window):
+def auto_fullscreen_games(window) -> None:
     """Auto-fullscreen games and disable window decorations"""
     game_classes = [
         "steam_app_",  # Steam games
@@ -473,6 +552,7 @@ def auto_fullscreen_games(window):
                 window.togroup(qtile.current_screen.group.name)
                 break
 
+
 # When using the Wayland backend, this can be used to configure input devices.
 wl_input_rules = None
 
@@ -490,4 +570,3 @@ wl_xcursor_size = 24
 # java that happens to be on java's whitelist.
 wmname = "LG3D"
 thread_bg_changer = threading.Thread(target=refresh_wallpaper, args=(screens,))
-

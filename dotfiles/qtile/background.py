@@ -14,7 +14,8 @@ def get_wallpapers():
     else:
         return []
 
-def rander_background(screens : list[Screen]):
+
+def rander_background(screens: list[Screen]) -> None:
     """Randomly change background"""
     wallpapers = get_wallpapers()
     if wallpapers:
@@ -22,4 +23,3 @@ def rander_background(screens : list[Screen]):
             random_wallpaper = random.choice(wallpapers)
             wallpaper_path = os.path.join(BACKGROUND_DIR, random_wallpaper)
             screen.set_wallpaper(wallpaper_path, "stretch")
-
