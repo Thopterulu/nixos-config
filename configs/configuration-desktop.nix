@@ -69,5 +69,6 @@
     gamescope
     goverlay
     gwe  # GreenWithEnvy - GPU overclocking tool
+    streamcontroller  # streamdeck controller
   ];
 }
