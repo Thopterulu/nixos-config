@@ -313,7 +313,7 @@ def end_widgets():
             text='󱎕',
             foreground = LIGHT_GREEN,
             background = BLACK,
-            fontsize = 45,
+            fontsize = 35,
             padding = -3,
         ),
         widget.TextBox(
@@ -333,7 +333,7 @@ def end_widgets():
             text='󱎕',
             foreground = CYAN,
             background = LIGHT_GREEN,
-            fontsize = 45,
+            fontsize = 35,
             padding = -3,
         ),
         widget.OpenWeather(
@@ -346,7 +346,7 @@ def end_widgets():
             text='󱎕',
             foreground = DARK_BLUE,
             background = CYAN,
-            fontsize = 45,
+            fontsize = 35,
             padding = -3,
         ),
         widget.TextBox(
