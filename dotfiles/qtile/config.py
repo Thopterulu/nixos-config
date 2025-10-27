@@ -406,8 +406,11 @@ def end_widgets():  # type: ignore
             background=CYAN,
             foreground=ORANGE,
             mouse_callbacks={
-                "Button1": qtile.spawn(
-                    "firefox https://meteofrance.com/previsions-meteo-france/lyon/69000"
+                "Button1": lambda: subprocess.run(
+                    [
+                        "xdg-open",
+                        "https://meteofrance.com/previsions-meteo-france/lyon/69000",
+                    ]
                 )
             },
         ),
