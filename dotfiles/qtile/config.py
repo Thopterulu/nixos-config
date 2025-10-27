@@ -24,8 +24,8 @@ from libqtile.widget import (
     Spacer,
     Systray,
     Notify,
+    Bluetooth,
 )
-from qtile_extras.widget import Bluetooth
 
 
 BLACK = "#000000"

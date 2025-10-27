@@ -148,7 +148,6 @@
     homebank
     vscode
     playerctl
-    python3Packages.qtile-extras
   ];
 
   fonts.packages = with pkgs; [
