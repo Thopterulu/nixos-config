@@ -294,6 +294,7 @@ def create_base_widgets():
     )
     return widgets
 
+BLACK = "#000000"
 GREY = "#222222"
 DARK_GREY = "#111111"
 BLUE = "#007fdf"
@@ -305,66 +306,47 @@ LIGHT_GREEN = "#42d6a4"
 SOME_RED = "#d56d77"
 YOINK_BLUE = "#59adf6"
 
-colors = [["#2f3541", "#2f3541"],
-          ["#ffffff", "#ffffff"],
-          ["#d56d77", "#d56d77"],
-          ["#ffb480", "#ffb480"],
-          ["#fce43c", "#fce43c"],
-          ["#42d6a4", "#42d6a4"],
-          ["#08cad1", "#08cad1"],
-          ["#59adf6", "#59adf6"],
-          ["#8abec6", "#8abec6"],
-          ["#ff5722", "#ff5722"],
-          ["#d323ac", "#d323ac"]]
 
 def end_widgets():
     return [
         widget.TextBox(
             text='󱎕',
-            foreground = ORANGE,
-            background = YOINK_BLUE,
+            foreground = LIGHT_GREEN,
+            background = BLACK,
             fontsize = 45,
             padding = -1,
         ),
         widget.TextBox(
                 text='',
                 foreground = ORANGE,
-                background = YOINK_BLUE,
+                background = LIGHT_GREEN,
             fontsize = 45,
             padding = -1,
         ),
-        widget.TextBox(
-                text='',
-                foreground = ORANGE,
-                background = YOINK_BLUE,
-                fontsize = 30,
-                padding = 0,
-                padding_y = 0
-                ),
         widget.PulseVolume(
-                background = YOINK_BLUE,
+                background = LIGHT_GREEN,
                 foreground = ORANGE,
                 limit_max_volume = True,
                 padding_y = 1,
                 fontsize = 16
                 ),
-         widget.TextBox(
+        widget.TextBox(
             text='󱎕',
-            foreground = ORANGE,
-            background = CYAN,
+            foreground = CYAN,
+            background = LIGHT_GREEN,
             fontsize = 45,
             padding = -1,
         ),
         widget.OpenWeather(
             location="Lyon",
-            format="Lyon {icon} {main_temp} °{units_temperature}",
+            format="Lyon {icon} {main_temp:.0f}°{units_temperature}",
             background = CYAN,
             foreground = ORANGE,
         ),
-         widget.TextBox(
+        widget.TextBox(
             text='󱎕',
-            foreground = ORANGE,
-            background = DARK_BLUE,
+            foreground = DARK_BLUE,
+            background = CYAN,
             fontsize = 45,
             padding = -1,
         ),
