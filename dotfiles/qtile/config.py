@@ -314,14 +314,14 @@ def end_widgets():
             foreground = LIGHT_GREEN,
             background = BLACK,
             fontsize = 45,
-            padding = -1,
+            padding = 0,
         ),
         widget.TextBox(
-                text='',
-                foreground = ORANGE,
-                background = LIGHT_GREEN,
+            text='',
+            foreground = ORANGE,
+            background = LIGHT_GREEN,
+            padding = -3,
             fontsize = 45,
-            padding = -1,
         ),
         widget.PulseVolume(
                 background = LIGHT_GREEN,
@@ -335,7 +335,7 @@ def end_widgets():
             foreground = CYAN,
             background = LIGHT_GREEN,
             fontsize = 45,
-            padding = -1,
+            padding = -3,
         ),
         widget.OpenWeather(
             location="Lyon",
@@ -348,7 +348,7 @@ def end_widgets():
             foreground = DARK_BLUE,
             background = CYAN,
             fontsize = 45,
-            padding = -1,
+            padding = -3,
         ),
         widget.TextBox(
                 text='',
