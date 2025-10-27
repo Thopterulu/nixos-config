@@ -294,6 +294,17 @@ def create_base_widgets():
     )
     return widgets
 
+GREY = "#222222"
+DARK_GREY = "#111111"
+BLUE = "#007fdf"
+DARK_BLUE = "#002a4a"
+ORANGE = "#dd6600"
+DARK_ORANGE = "#371900"
+CYAN = "#00a6b2"
+LIGHT_GREEN = "#42d6a4"
+SOME_RED = "#d56d77"
+YOINK_BLUE = "#59adf6"
+
 colors = [["#2f3541", "#2f3541"],
           ["#ffffff", "#ffffff"],
           ["#d56d77", "#d56d77"],
@@ -309,49 +320,71 @@ colors = [["#2f3541", "#2f3541"],
 def end_widgets():
     return [
         widget.TextBox(
-            text='(',
-            foreground = colors[2],
-            background = colors[0],
-            fontsize = 30,
+            text='󱎕',
+            foreground = ORANGE,
+            background = YOINK_BLUE,
+            fontsize = 45,
+            padding = -1,
         ),
         widget.TextBox(
                 text='',
-                foreground = colors[2],
-                background = colors[0],
+                foreground = ORANGE,
+                background = YOINK_BLUE,
+            fontsize = 45,
+            padding = -1,
+        ),
+        widget.TextBox(
+                text='',
+                foreground = ORANGE,
+                background = YOINK_BLUE,
                 fontsize = 30,
                 padding = 0,
                 padding_y = 0
                 ),
         widget.PulseVolume(
-                background = colors[0],
-                foreground = colors[2],
+                background = YOINK_BLUE,
+                foreground = ORANGE,
                 limit_max_volume = True,
                 padding_y = 1,
                 fontsize = 16
                 ),
+         widget.TextBox(
+            text='󱎕',
+            foreground = ORANGE,
+            background = CYAN,
+            fontsize = 45,
+            padding = -1,
+        ),
         widget.OpenWeather(
             location="Lyon",
             format="Lyon {icon} {main_temp} °{units_temperature}",
-            background = colors[0],
-            foreground = colors[2],
+            background = CYAN,
+            foreground = ORANGE,
+        ),
+         widget.TextBox(
+            text='󱎕',
+            foreground = ORANGE,
+            background = DARK_BLUE,
+            fontsize = 45,
+            padding = -1,
         ),
         widget.TextBox(
                 text='',
-                foreground = colors[2],
-                background = colors[0],
+                foreground = ORANGE,
+                background = DARK_BLUE,
                 fontsize = 22,
                 padding = 1,
                 padding_y = 0,
                 ),
         widget.Clock(
             format="%a %d/%m/%Y %H:%M %p",
-            background = colors[0],
-            foreground = colors[2],
+            background = DARK_BLUE,
+            foreground = ORANGE,
             ),
         widget.TextBox(
             text='',
-            foreground = colors[2],
-            background = colors[0],
+            foreground = ORANGE,
+            background = DARK_BLUE,
             fontsize = 26,
             padding = 1,
             padding_y = 0,
@@ -359,7 +392,7 @@ def end_widgets():
         ),
         widget.Spacer(
             length = 6,
-            background = colors[0],
+            background = DARK_BLUE,
             )
     ]
 
