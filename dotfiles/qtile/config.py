@@ -41,6 +41,15 @@ SOME_RED = "#d56d77"
 YOINK_BLUE = "#59adf6"
 WEIRD_BLUE = "#294F6D"
 
+### WALLPAPER ###
+
+def refresh_wallpaper(screens: list[Screen]):
+    while True:
+        time.sleep(5)
+        rander_background(screens)
+        time.sleep(4 * 60)
+
+
 thread_bg_changer = threading.Thread(target=refresh_wallpaper, args=(screens,))
 
 def parse_notification(message: str) -> str:
@@ -57,11 +66,6 @@ def reboot_now() -> None:
     qtile.cmd_spawn("reboot")  # type: ignore
 
 
-def refresh_wallpaper(screens: list[Screen]):
-    while True:
-        time.sleep(5)
-        rander_background(screens)
-        time.sleep(4 * 60)
 
 
 def get_music_info() -> str:
