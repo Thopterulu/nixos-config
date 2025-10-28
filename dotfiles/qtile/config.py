@@ -41,6 +41,7 @@ SOME_RED = "#d56d77"
 YOINK_BLUE = "#59adf6"
 WEIRD_BLUE = "#294F6D"
 
+thread_bg_changer = threading.Thread(target=refresh_wallpaper, args=(screens,))
 
 def parse_notification(message: str) -> str:
     return message.replace("\n", "⏎")
@@ -146,9 +147,10 @@ def autostart() -> None:
 
 @hook.subscribe.shutdown
 def shutdown() -> None:
-    """Run scripts on Qtile startup"""
-    # Stop background changer
-    thread_bg_changer.join()
+    """Run scripts on Qtile shutdown"""
+    # Stop background changer if it's running
+    if thread_bg_changer.is_alive():
+        thread_bg_changer.join()
 
 
 @lazy.function
@@ -590,4 +592,3 @@ wl_xcursor_size = 24
 # We choose LG3D to maximize irony: it is a 3D non-reparenting WM written in
 # java that happens to be on java's whitelist.
 wmname = "LG3D"
-thread_bg_changer = threading.Thread(target=refresh_wallpaper, args=(screens,))

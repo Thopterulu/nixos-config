@@ -92,7 +92,7 @@
   };
 
   # Ensure PulseAudio compatibility for applications
-  hardware.pulseaudio.enable = false;  # Explicitly disable to avoid conflicts
+  services.pulseaudio.enable = false;  # Explicitly disable to avoid conflicts
 
   # Pour le gaming
   security.rtkit.enable = true;
