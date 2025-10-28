@@ -23,6 +23,13 @@
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
 
+  # Enable WiFi firmware
+  hardware.enableRedistributableFirmware = true;
+
+  # Enable Bluetooth
+  hardware.bluetooth.enable = true;
+  services.blueman.enable = true;
+
   # Set your time zone.
   time.timeZone = "Europe/Paris";
 
@@ -82,9 +89,10 @@
 
     # Configuration spécifique
     wireplumber.enable = true;
-
-
   };
+
+  # Ensure PulseAudio compatibility for applications
+  hardware.pulseaudio.enable = false;  # Explicitly disable to avoid conflicts
 
   # Pour le gaming
   security.rtkit.enable = true;
