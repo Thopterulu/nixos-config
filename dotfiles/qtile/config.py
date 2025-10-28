@@ -50,7 +50,6 @@ def refresh_wallpaper(screens: list[Screen]):
         time.sleep(4 * 60)
 
 
-thread_bg_changer = threading.Thread(target=refresh_wallpaper, args=(screens,))
 
 def parse_notification(message: str) -> str:
     return message.replace("\n", "⏎")
@@ -140,21 +139,6 @@ def set_screens(event) -> None:
     lazy.restart()
 
 
-@hook.subscribe.startup_once
-def autostart() -> None:
-    """Run scripts on Qtile startup"""
-    home = os.path.expanduser("~")
-    # Mount Google Drive first
-    subprocess.Popen([f"{home}/.local/bin/mount-gdrive"])
-    thread_bg_changer.start()
-
-
-@hook.subscribe.shutdown
-def shutdown() -> None:
-    """Run scripts on Qtile shutdown"""
-    # Stop background changer if it's running
-    if thread_bg_changer.is_alive():
-        thread_bg_changer.join()
 
 
 @lazy.function
@@ -506,6 +490,25 @@ screens = [
         ),
     ),
 ]
+thread_bg_changer = threading.Thread(target=refresh_wallpaper, args=(screens,))
+
+
+@hook.subscribe.startup_once
+def autostart() -> None:
+    """Run scripts on Qtile startup"""
+    home = os.path.expanduser("~")
+    # Mount Google Drive first
+    subprocess.Popen([f"{home}/.local/bin/mount-gdrive"])
+    thread_bg_changer.start()
+
+
+@hook.subscribe.shutdown
+def shutdown() -> None:
+    """Run scripts on Qtile shutdown"""
+    # Stop background changer if it's running
+    if thread_bg_changer.is_alive():
+        thread_bg_changer.join()
+
 
 # Drag floating layouts.
 mouse = [
