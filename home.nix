@@ -143,6 +143,10 @@
         "privacy.clearOnShutdown.extensions-permissions" = false;
         "browser.chrome.site_icons" = true;
         "browser.chrome.favicons" = true;
+        "ui.systemUsesDarkTheme" = 1;
+        "devtools.theme" = "dark";
+        "browser.theme.dark-private-windows" = true;
+        "extensions.activeThemeID" = "firefox-compact-dark@mozilla.org";
       };
       bookmarks = {
         force = true;
@@ -152,27 +156,27 @@
           toolbar = true;
           bookmarks = [
             {
-              name = "SoundCloud";
+              name = "";
               url = "https://soundcloud.com/discover";
             }
             {
-              name = "HLTV";
+              name = "";
               url = "https://www.hltv.org/";
             }
             {
-              name = "Gmail";
+              name = "";
               url = "https://mail.google.com/mail/u/0/?pli=1#inbox";
             }
             {
-              name = "GitHub";
+              name = "";
               url = "https://github.com/";
             }
             {
-              name = "MyPeopleDoc";
+              name = "";
               url = "https://www.mypeopledoc.com/#/login";
             }
             {
-              name = "Macif Avantages";
+              name = "";
               url = "https://www.macifavantages.fr/?at_routeur=nemo&at_obj=promotionnel&at_date_campagne=2025-10-28&at_liste_id=a000126805&at_code_campagne=c000001782&at_univers=macif";
             }
             {
