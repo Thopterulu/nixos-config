@@ -137,6 +137,13 @@
           betterttv
         ];
       };
+      settings = {
+        "extensions.allowPrivateBrowsingByDefault" = true;
+        "extensions.autoDisableScopes" = 0;
+        "privacy.clearOnShutdown.extensions-permissions" = false;
+        "browser.chrome.site_icons" = true;
+        "browser.chrome.favicons" = true;
+      };
       bookmarks = {
         force = true;
         settings = [
