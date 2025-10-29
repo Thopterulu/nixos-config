@@ -23,11 +23,12 @@
           ./configs/configuration-desktop.nix
           home-manager.nixosModules.home-manager
           {
+            nixpkgs.overlays = [ nur.overlay ];
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.backupFileExtension = "backup";
             home-manager.users.thopter = import ./home.nix;
-            home-manager.extraSpecialArgs = { inherit nixvim nur; };
+            home-manager.extraSpecialArgs = { inherit nixvim; };
           }
         ];
       };
@@ -39,11 +40,12 @@
           ./configs/configuration-laptop.nix
           home-manager.nixosModules.home-manager
           {
+            nixpkgs.overlays = [ nur.overlay ];
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.backupFileExtension = "backup";
             home-manager.users.thopter = import ./home.nix;
-            home-manager.extraSpecialArgs = { inherit nixvim nur; };
+            home-manager.extraSpecialArgs = { inherit nixvim; };
           }
         ];
       };
