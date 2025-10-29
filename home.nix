@@ -169,6 +169,14 @@
             }
             {
               name = "";
+              url = "https://youtube.com/";
+            }
+            {
+              name = "";
+              url = "https://twitch.tv/";
+            }
+            {
+              name = "";
               url = "https://github.com/";
             }
             {
