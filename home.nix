@@ -1,4 +1,4 @@
-{ config, pkgs, nixvim, ... }:
+{ config, pkgs, nixvim, nur, ... }:
 
 {
   home.stateVersion = "25.05";
@@ -128,7 +128,16 @@
     profiles.default = {
       name = "default";
       isDefault = true;
-      bookmarks = [
+      extensions = with nur.repos.rycee.firefox-addons; [
+        ublock-origin
+        steamdb
+        return-youtube-dislikes
+        tree-style-tab
+        betterttv
+      ];
+      bookmarks = {
+        force = true;
+        settings = [
         {
           name = "Bookmarks Toolbar";
           toolbar = true;
@@ -227,7 +236,8 @@
             }
           ];
         }
-      ];
+        ];
+      };
     };
   };
 
