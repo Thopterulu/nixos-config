@@ -28,6 +28,7 @@
     scdl
     ffmpeg
     rfc
+    tor
   ];
 
   # Auto-mount Google Drive script
@@ -149,7 +150,7 @@
         "extensions.activeThemeID" = "firefox-compact-dark@mozilla.org";
       };
       bookmarks = {
-        force = false;
+        force = true;
         settings = [
         {
           name = "Bookmarks Toolbar";
