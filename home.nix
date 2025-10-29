@@ -28,7 +28,7 @@
     scdl
     ffmpeg
     rfc
-    nuclear
+    firefoxpwa
   ];
 
   # Auto-mount Google Drive script
