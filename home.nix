@@ -149,7 +149,7 @@
         "extensions.activeThemeID" = "firefox-compact-dark@mozilla.org";
       };
       bookmarks = {
-        force = true;
+        force = false;
         settings = [
         {
           name = "Bookmarks Toolbar";
