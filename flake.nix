@@ -23,7 +23,7 @@
           ./configs/configuration-desktop.nix
           home-manager.nixosModules.home-manager
           {
-            nixpkgs.overlays = [ nur.overlay ];
+            nixpkgs.overlays = [ nur.overlays.default ];
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.backupFileExtension = "backup";
@@ -40,7 +40,7 @@
           ./configs/configuration-laptop.nix
           home-manager.nixosModules.home-manager
           {
-            nixpkgs.overlays = [ nur.overlay ];
+            nixpkgs.overlays = [ nur.overlays.default ];
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.backupFileExtension = "backup";

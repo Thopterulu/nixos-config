@@ -131,7 +131,7 @@
       extensions = {
         packages = with pkgs.nur.repos.rycee.firefox-addons; [
           ublock-origin
-          steamdb
+          steam-database
           return-youtube-dislikes
           tree-style-tab
           betterttv
