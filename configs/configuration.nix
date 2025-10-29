@@ -111,7 +111,10 @@
     ];
   };
 
-  programs.firefox.enable = true;
+  programs.firefox = {
+    enable = true;
+    nativeMessagingHosts.packages = [ pkgs.firefoxpwa ];
+  };
   programs.fuse.userAllowOther = true;
   programs.zsh.enable = true;
   # Enable Docker
@@ -156,6 +159,7 @@
     homebank
     vscode
     playerctl
+    firefoxpwa
   ];
 
   fonts.packages = with pkgs; [

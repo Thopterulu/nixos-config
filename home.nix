@@ -28,7 +28,6 @@
     scdl
     ffmpeg
     rfc
-    firefoxpwa
   ];
 
   # Auto-mount Google Drive script
