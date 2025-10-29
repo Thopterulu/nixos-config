@@ -123,6 +123,114 @@
 
 
 
+  programs.firefox = {
+    enable = true;
+    profiles.default = {
+      name = "default";
+      isDefault = true;
+      bookmarks = [
+        {
+          name = "Bookmarks Toolbar";
+          toolbar = true;
+          bookmarks = [
+            {
+              name = "SoundCloud";
+              url = "https://soundcloud.com/discover";
+            }
+            {
+              name = "HLTV";
+              url = "https://www.hltv.org/";
+            }
+            {
+              name = "Gmail";
+              url = "https://mail.google.com/mail/u/0/?pli=1#inbox";
+            }
+            {
+              name = "GitHub";
+              url = "https://github.com/";
+            }
+            {
+              name = "MyPeopleDoc";
+              url = "https://www.mypeopledoc.com/#/login";
+            }
+            {
+              name = "Macif Avantages";
+              url = "https://www.macifavantages.fr/?at_routeur=nemo&at_obj=promotionnel&at_date_campagne=2025-10-28&at_liste_id=a000126805&at_code_campagne=c000001782&at_univers=macif";
+            }
+            {
+              name = "Nix";
+              bookmarks = [
+                {
+                  name = "NixOS Search - Packages";
+                  url = "https://search.nixos.org/packages?channel=unstable&";
+                }
+                {
+                  name = "Nvidia - NixOS Wiki";
+                  url = "https://nixos.wiki/wiki/Nvidia";
+                }
+                {
+                  name = "Nerd Fonts - Iconic font aggregator, glyphs/icons collection, & fonts patcher";
+                  url = "https://www.nerdfonts.com/cheat-sheet";
+                }
+              ];
+            }
+            {
+              name = "Find Job";
+              bookmarks = [
+                {
+                  name = "Welcome to the Jungle - Le guide de l'emploi";
+                  url = "https://www.welcometothejungle.com/fr";
+                }
+                {
+                  name = "Emplois | Indeed";
+                  url = "https://fr.indeed.com/";
+                }
+                {
+                  name = "HelloWork";
+                  url = "https://www.hellowork.com/";
+                }
+              ];
+            }
+            {
+              name = "Certs";
+              bookmarks = [
+                {
+                  name = "Open Source Training | Linux Foundation Training and Certification";
+                  url = "https://training.linuxfoundation.org/";
+                }
+                {
+                  name = "THRIVE-ONE ANNUAL e-Learning Subscription - The Linux Foundation";
+                  url = "https://trainingportal.linuxfoundation.org/bundles/thrive-one-annual-e-learning-subscription";
+                }
+                {
+                  name = "My Portal";
+                  url = "https://trainingportal.linuxfoundation.org/learn/dashboard";
+                }
+                {
+                  name = "CodeCrafters";
+                  url = "https://codecrafters.io/";
+                }
+              ];
+            }
+            {
+              name = "SaaS";
+              bookmarks = [
+                {
+                  name = "Les Gourmets | Trello";
+                  url = "https://trello.com/b/pt8yc2Ph/les-gourmets";
+                }
+                {
+                  name = "Grafana Logs Drilldown - Drilldown - Grafana";
+                  url = "https://thopter.grafana.net/";
+                }
+              ];
+            }
+          ];
+        }
+      ];
+    };
+  };
+
   programs.nixvim = {
     enable = true;
     defaultEditor = true;
