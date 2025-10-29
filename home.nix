@@ -28,6 +28,7 @@
     scdl
     ffmpeg
     rfc
+    nuclear
   ];
 
   # Auto-mount Google Drive script
