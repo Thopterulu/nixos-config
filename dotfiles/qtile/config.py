@@ -159,6 +159,15 @@ def move_to_prev_group(qtile) -> None:
     qtile.current_window.togroup(group_names[prev_index], switch_group=True)
 
 
+@lazy.function
+def toggle_column_max_layout(qtile) -> None:
+    current_layout = qtile.current_group.layout.name
+    if current_layout == "columns":
+        qtile.current_group.setlayout("max")
+    else:
+        qtile.current_group.setlayout("columns")
+
+
 mod = "mod4"
 terminal = guess_terminal()
 
@@ -522,6 +531,7 @@ mouse = [
         [mod], "Button3", lazy.window.set_size_floating(), start=lazy.window.get_size()
     ),
     Click([mod], "Button2", lazy.window.bring_to_front()),
+    Click([mod], "Button1", toggle_column_max_layout),
 ]
 
 dgroups_key_binder = None
