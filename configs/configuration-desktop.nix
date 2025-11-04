@@ -27,12 +27,11 @@
 
   # Desktop-specific display configuration
   services.xserver.displayManager.sessionCommands = ''
-   sleep 1
-   xrandr --output DP-2 --primary --mode 2560x1440 --rate 120 --pos 0x0 \
-         --output HDMI-1-1 --mode 1920x1080 --rate 60 --pos 2560x0 &
-
    xset r rate 200 35 &
   '';
+
+  # AutoRandr for reliable display management
+  services.autorandr.enable = true;
 
   # Gaming performance tweaks (desktop only)
   powerManagement.cpuFreqGovernor = "performance";

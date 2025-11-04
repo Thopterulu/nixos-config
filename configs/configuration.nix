@@ -157,6 +157,7 @@
     homebank
     vscode
     playerctl
+    autorandr         # Automatic display configuration
   ];
 
   fonts.packages = with pkgs; [
