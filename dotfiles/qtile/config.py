@@ -514,14 +514,9 @@ def autostart() -> None:
 @hook.subscribe.shutdown
 def shutdown() -> None:
     """Run scripts on Qtile shutdown"""
-    # Unmount Google Drive to prevent reboot hang
-    try:
-        subprocess.run(["umount", "/home/thopter/GoogleDrive"], timeout=5)
-    except:
-        pass
-    # Stop background changer if it's running
-    if thread_bg_changer and thread_bg_changer.is_alive():
-        thread_bg_changer.join()
+    # Daemon thread will auto-terminate when main process exits
+    # No need to join() - this was causing the 90s hang
+    pass
 
 
 
