@@ -158,7 +158,6 @@
     vscode
     playerctl
     autorandr         # Automatic display configuration
-    xkill
   ];
 
   fonts.packages = with pkgs; [
