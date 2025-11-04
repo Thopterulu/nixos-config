@@ -29,7 +29,6 @@
     ffmpeg
     rfc
     tor
-    xkill
   ];
 
   # Auto-mount Google Drive script
