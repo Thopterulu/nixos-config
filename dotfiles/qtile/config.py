@@ -514,15 +514,16 @@ def autostart() -> None:
 @hook.subscribe.shutdown
 def shutdown() -> None:
     """Run scripts on Qtile shutdown"""
+    # Unmount Google Drive to prevent reboot hang
+    try:
+        subprocess.run(["umount", "/home/thopter/GoogleDrive"], timeout=5)
+    except:
+        pass
     # Stop background changer if it's running
     if thread_bg_changer and thread_bg_changer.is_alive():
         thread_bg_changer.join()
 
-    # Unmount Google Drive to prevent reboot hang
-    try:
-        subprocess.run(["fusermount", "-u", "/home/thopter/GoogleDrive"], timeout=5)
-    except:
-        pass
+
 
 
 # Drag floating layouts.
