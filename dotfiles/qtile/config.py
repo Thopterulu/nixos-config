@@ -499,7 +499,7 @@ screens = [
         ),
     ),
 ]
-thread_bg_changer = threading.Thread(target=refresh_wallpaper, args=(screens,))
+thread_bg_changer = threading.Thread(target=refresh_wallpaper, args=(screens,), daemon=True)
 
 
 @hook.subscribe.startup_once
@@ -515,8 +515,14 @@ def autostart() -> None:
 def shutdown() -> None:
     """Run scripts on Qtile shutdown"""
     # Stop background changer if it's running
-    if thread_bg_changer.is_alive():
+    if thread_bg_changer and thread_bg_changer.is_alive():
         thread_bg_changer.join()
+
+    # Unmount Google Drive to prevent reboot hang
+    try:
+        subprocess.run(["fusermount", "-u", "/home/thopter/GoogleDrive"], timeout=5)
+    except:
+        pass
 
 
 # Drag floating layouts.

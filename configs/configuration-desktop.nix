@@ -28,6 +28,8 @@
   # Desktop-specific display configuration
   services.xserver.displayManager.sessionCommands = ''
    xset r rate 200 35 &
+   # Apply autorandr profile after X11 is ready
+   (sleep 2 && autorandr --change) &
   '';
 
   # AutoRandr for reliable display management
