@@ -31,7 +31,10 @@
   '';
 
   # AutoRandr for reliable display management
-  services.autorandr.enable = true;
+  services.autorandr = {
+    enable = true;
+    defaultTarget = "desktop";
+  };
 
   # Gaming performance tweaks (desktop only)
   powerManagement.cpuFreqGovernor = "performance";
