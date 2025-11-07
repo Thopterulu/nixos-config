@@ -5,6 +5,9 @@
 { config, lib, pkgs, ... }:
 
 {
+  imports = [
+    ../gaming-conf.nix
+  ];
 
   # allow unfree
   nixpkgs.config.allowUnfree = true;
