@@ -4,11 +4,14 @@
   # Gaming-specific firewall configuration
   networking.firewall = {
     enable = true;
-    extraCommands = ''
-      # Allow Total War Warhammer 3 for your user
-      iptables -A nixos-fw -p tcp --dport 27015:27030 -m owner --uid-owner thopter -j ACCEPT
-      iptables -A nixos-fw -p udp --dport 27000:27100 -m owner --uid-owner thopter -j ACCEPT
-      iptables -A nixos-fw -p udp --dport 3478:4380 -m owner --uid-owner thopter -j ACCEPT
-    '';
+    allowedTCPPorts = [ 27015 27016 27017 27018 27019 27020 27025 27030 ];
+    allowedUDPPorts = [ 27000 27001 27015 27031 27036 3478 4379 4380 ];
+    allowedUDPPortRanges = [
+      { from = 27000; to = 27100; }
+      { from = 3478; to = 4380; }
+    ];
+    allowedTCPPortRanges = [
+      { from = 27015; to = 27030; }
+    ];
   };
 }
