@@ -204,6 +204,10 @@
                   name = "Nerd Fonts - Iconic font aggregator, glyphs/icons collection, & fonts patcher";
                   url = "https://www.nerdfonts.com/cheat-sheet";
                 }
+                {
+                  name = "ProtonDB - Game Compatibility";
+                  url = "https://www.protondb.com/";
+                }
               ];
             }
             {
