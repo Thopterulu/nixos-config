@@ -42,9 +42,9 @@
     not-when-fullscreen = true;
     timers = [
       {
-        delay = 30;  # 4 minutes - turn screens off
-        command = "xset dpms force off";
-        canceller = "xset dpms force on";
+        delay = 30;  # 30 seconds - turn screens off  
+        command = "xrandr --listmonitors | grep -o '[^ ]*$' | xargs -I {} xrandr --output {} --brightness 0";
+        canceller = "xrandr --listmonitors | grep -o '[^ ]*$' | xargs -I {} xrandr --output {} --brightness 1";
       }
       {
         delay = 300;  # 5 minutes - lock screen
