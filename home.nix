@@ -228,6 +228,10 @@
                   name = "ProtonDB - Game Compatibility";
                   url = "https://www.protondb.com/";
                 }
+                {
+                  name = "MyNixOS";
+                  url = "https://mynixos.com/";
+                }
               ];
             }
             {
