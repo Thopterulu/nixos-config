@@ -200,7 +200,7 @@ keys = [
     # Envoyer fenêtre vers l'autre écran
     Key([mod, "mod1"], "h", lazy.window.toscreen(0), desc="Move window to screen 0"),
     Key([mod, "mod1"], "l", lazy.window.toscreen(1), desc="Move window to screen 1"),
-    Key([mod], "v", lazy.spawn("betterlockscreen -l"), desc="Lock screen"),
+    Key([mod], "v", lazy.spawn("i3lock -c 000000"), desc="Lock screen"),
     # Toggle between split and unsplit sides of stack.
     # Split = all windows displayed
     # Unsplit = 1 window displayed, like Max layout, but still with

@@ -31,12 +31,7 @@
     tor
     xorg.xkill
     protonup-qt    # Manage custom Proton versions
-    betterlockscreen  # Screen locker
-    i3lock-color     # Required for betterlockscreen
-    imagemagick      # Required for betterlockscreen
-    bc               # Required for betterlockscreen
-    xorg.xdpyinfo    # Required for betterlockscreen
-    feh              # Optional wallpaper functionality
+    i3lock           # Simple, reliable screen locker
   ];
 
   # Auto-mount Google Drive script
