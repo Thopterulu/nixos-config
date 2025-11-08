@@ -42,6 +42,11 @@
     not-when-fullscreen = true;
     timers = [
       {
+        delay = 30;  # 4 minutes - turn screens off
+        command = "xset dpms force off";
+        canceller = "xset dpms force on";
+      }
+      {
         delay = 300;  # 5 minutes - lock screen
         command = "i3lock-fancy";
       }
