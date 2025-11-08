@@ -42,9 +42,9 @@
     not-when-fullscreen = true;
     timers = [
       {
-        delay = 30;  # 30 seconds - turn screens off  
-        command = "xrandr --listmonitors | grep -o '[^ ]*$' | xargs -I {} xrandr --output {} --brightness 0";
-        canceller = "xrandr --listmonitors | grep -o '[^ ]*$' | xargs -I {} xrandr --output {} --brightness 1";
+        delay = 30;  # 30 seconds - turn screens off
+        command = "xrandr --listmonitors | tail -n +2 | awk '{print $NF}' | xargs -I {} xrandr --output {} --brightness 0";
+        canceller = "xrandr --listmonitors | tail -n +2 | awk '{print $NF}' | xargs -I {} xrandr --output {} --brightness 1";
       }
       {
         delay = 300;  # 5 minutes - lock screen
