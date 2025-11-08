@@ -100,12 +100,6 @@
   # Pour le gaming
   security.rtkit.enable = true;
 
-  # PAM configuration
-  security.pam.services.i3lock = {};
-  security.pam.loginLimits = [
-    { domain = "@users"; item = "rtprio"; type = "-"; value = 1; }
-  ];
-
   # Enable touchpad support (enabled default in most desktopManager).
   # services.libinput.enable = true;
 
@@ -120,8 +114,8 @@
   };
 
   programs.firefox.enable = true;
-
   programs.fuse.userAllowOther = true;
+  programs.i3lock.enable = true;
   programs.zsh.enable = true;
   # Enable Docker
   virtualisation.docker.enable = true;

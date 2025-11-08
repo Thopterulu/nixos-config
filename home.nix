@@ -31,7 +31,6 @@
     tor
     xorg.xkill
     protonup-qt    # Manage custom Proton versions
-    i3lock           # Simple, reliable screen locker
   ];
 
   # Auto-mount Google Drive script
