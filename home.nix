@@ -43,8 +43,8 @@
     timers = [
       {
         delay = 30;  # 30 seconds - turn screens off
-        command = "xrandr --listmonitors | tail -n +2 | awk '{print $NF}' | xargs -I {} xrandr --output {} --brightness 0";
-        canceller = "xrandr --listmonitors | tail -n +2 | awk '{print $NF}' | xargs -I {} xrandr --output {} --brightness 1";
+        command = "${pkgs.xorg.xrandr}/bin/xrandr --listmonitors | tail -n +2 | awk '{print $NF}' | xargs -I {} ${pkgs.xorg.xrandr}/bin/xrandr --output {} --brightness 0";
+        canceller = "${pkgs.xorg.xrandr}/bin/xrandr --listmonitors | tail -n +2 | awk '{print $NF}' | xargs -I {} ${pkgs.xorg.xrandr}/bin/xrandr --output {} --brightness 1";
       }
       {
         delay = 300;  # 5 minutes - lock screen
