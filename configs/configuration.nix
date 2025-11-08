@@ -161,6 +161,7 @@
     vscode
     playerctl
     autorandr         # Automatic display configuration
+    betterlockscreen  # Screen locker
   ];
 
   fonts.packages = with pkgs; [
