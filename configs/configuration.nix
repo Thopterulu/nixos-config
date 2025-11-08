@@ -99,11 +99,7 @@
 
   # Pour le gaming
   security.rtkit.enable = true;
-  security.pam.services.i3lock = {
-    text = ''
-      auth include login
-    '';
-  };
+  security.pam.services.i3lock = {};
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.libinput.enable = true;
