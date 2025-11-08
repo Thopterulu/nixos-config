@@ -42,7 +42,7 @@
     not-when-fullscreen = true;
     timers = [
       {
-        delay = 30;  # 30 seconds - turn screens off
+        delay = 330;  # 330 seconds - turn screens off
         command = "${pkgs.xorg.xrandr}/bin/xrandr --listmonitors | tail -n +2 | awk '{print $NF}' | xargs -I {} ${pkgs.xorg.xrandr}/bin/xrandr --output {} --brightness 0";
         canceller = "${pkgs.xorg.xrandr}/bin/xrandr --listmonitors | tail -n +2 | awk '{print $NF}' | xargs -I {} ${pkgs.xorg.xrandr}/bin/xrandr --output {} --brightness 1";
       }
