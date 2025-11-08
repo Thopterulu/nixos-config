@@ -31,6 +31,12 @@
     tor
     xorg.xkill
     protonup-qt    # Manage custom Proton versions
+    betterlockscreen  # Screen locker
+    i3lock-color     # Required for betterlockscreen
+    imagemagick      # Required for betterlockscreen
+    bc               # Required for betterlockscreen
+    xorg.xdpyinfo    # Required for betterlockscreen
+    feh              # Optional wallpaper functionality
   ];
 
   # Auto-mount Google Drive script
@@ -50,6 +56,8 @@
     ".config/alacritty/alacritty.toml".source = ./dotfiles/alacritty/alacritty.toml;
     # Rofi config
     ".config/rofi/config.rasi".source = ./dotfiles/rofi/config.rasi;
+    # Betterlockscreen config
+    ".config/betterlockscreen/betterlockscreenrc".source = ./dotfiles/betterlockscreen/betterlockscreenrc;
   };
 
   home.file = {
