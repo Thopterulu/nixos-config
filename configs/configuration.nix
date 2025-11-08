@@ -99,7 +99,11 @@
 
   # Pour le gaming
   security.rtkit.enable = true;
-  security.pam.services.betterlockscreen = {};
+  security.pam.services.betterlockscreen = {
+    text = ''
+      auth include login
+    '';
+  };
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.libinput.enable = true;
