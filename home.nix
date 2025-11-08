@@ -34,6 +34,24 @@
     i3lock-fancy   # Uses current screen as blurred background
   ];
 
+  # Auto-lock screen with xidlehook
+  services.xidlehook = {
+    enable = true;
+    detect-sleep = true;
+    not-when-audio = true;
+    not-when-fullscreen = true;
+    timers = [
+      {
+        delay = 300;  # 5 minutes - lock screen
+        command = "i3lock-fancy";
+      }
+      {
+        delay = 900;  # 15 minutes - suspend system
+        command = "systemctl suspend";
+      }
+    ];
+  };
+
   # Auto-mount Google Drive script
   home.file.".local/bin/mount-gdrive" = {
     source = ./scripts/mount-gdrive.sh;
