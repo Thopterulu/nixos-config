@@ -30,6 +30,7 @@
     rfc
     tor
     xorg.xkill
+    protonup-qt    # Manage custom Proton versions
   ];
 
   # Auto-mount Google Drive script
