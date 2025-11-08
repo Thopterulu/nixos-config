@@ -31,6 +31,7 @@
     tor
     xorg.xkill
     protonup-qt    # Manage custom Proton versions
+    i3lock-fancy   # Uses current screen as blurred background
   ];
 
   # Auto-mount Google Drive script
@@ -50,8 +51,6 @@
     ".config/alacritty/alacritty.toml".source = ./dotfiles/alacritty/alacritty.toml;
     # Rofi config
     ".config/rofi/config.rasi".source = ./dotfiles/rofi/config.rasi;
-    # Betterlockscreen config
-    ".config/betterlockscreen/betterlockscreenrc".source = ./dotfiles/betterlockscreen/betterlockscreenrc;
   };
 
   home.file = {
