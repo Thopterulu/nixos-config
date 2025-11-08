@@ -99,7 +99,7 @@
 
   # Pour le gaming
   security.rtkit.enable = true;
-  security.pam.services.betterlockscreen = {
+  security.pam.services.i3lock = {
     text = ''
       auth include login
     '';
