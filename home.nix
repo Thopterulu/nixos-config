@@ -208,6 +208,10 @@
             }
             {
               name = "";
+              url = "https://claude.ai/";
+            }
+            {
+              name = "";
               url = "https://www.mypeopledoc.com/#/login";
             }
             {
@@ -260,20 +264,12 @@
               name = "Certs";
               bookmarks = [
                 {
-                  name = "Open Source Training | Linux Foundation Training and Certification";
-                  url = "https://training.linuxfoundation.org/";
-                }
-                {
                   name = "THRIVE-ONE ANNUAL e-Learning Subscription - The Linux Foundation";
                   url = "https://trainingportal.linuxfoundation.org/bundles/thrive-one-annual-e-learning-subscription";
                 }
                 {
                   name = "My Portal";
                   url = "https://trainingportal.linuxfoundation.org/learn/dashboard";
-                }
-                {
-                  name = "CodeCrafters";
-                  url = "https://codecrafters.io/";
                 }
               ];
             }
@@ -287,6 +283,96 @@
                 {
                   name = "Grafana Logs Drilldown - Drilldown - Grafana";
                   url = "https://thopter.grafana.net/";
+                }
+              ];
+            }
+            {
+              name = "Messages";
+              bookmarks = [
+                {
+                  name = "WhatsApp Web";
+                  url = "https://web.whatsapp.com/";
+                }
+                {
+                  name = "Messenger";
+                  url = "https://www.messenger.com/?locale=fr_FR";
+                }
+              ];
+            }
+            {
+              name = "Books";
+              bookmarks = [
+                {
+                  name = "No Starch Press";
+                  url = "https://nostarch.com/";
+                }
+              ];
+            }
+            {
+              name = "Socials";
+              bookmarks = [
+                {
+                  name = "LinkedIn";
+                  url = "https://www.linkedin.com/";
+                }
+                {
+                  name = "X (Twitter)";
+                  url = "https://x.com/";
+                }
+                {
+                  name = "Reddit";
+                  url = "https://www.reddit.com/";
+                }
+                {
+                  name = "Instagram";
+                  url = "https://www.instagram.com/";
+                }
+              ];
+            }
+            {
+              name = "Entertainment";
+              bookmarks = [
+                {
+                  name = "Prime Video";
+                  url = "https://www.primevideo.com/";
+                }
+              ];
+            }
+            {
+              name = "Shopping";
+              bookmarks = [
+                {
+                  name = "Amazon";
+                  url = "https://www.amazon.fr/";
+                }
+                {
+                  name = "Humble Bundle";
+                  url = "https://www.humblebundle.com/";
+                }
+                {
+                  name = "Fanatical";
+                  url = "https://www.fanatical.com/fr/";
+                }
+              ];
+            }
+            {
+              name = "Learning";
+              bookmarks = [
+                {
+                  name = "Linux Foundation Training and Certification";
+                  url = "https://training.linuxfoundation.org/";
+                }
+                {
+                  name = "Udemy";
+                  url = "https://www.udemy.com/";
+                }
+                {
+                  name = "KodeKloud";
+                  url = "https://kodekloud.com/";
+                }
+                {
+                  name = "CodeCrafters";
+                  url = "https://codecrafters.io/";
                 }
               ];
             }
