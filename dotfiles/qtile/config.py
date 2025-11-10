@@ -302,7 +302,7 @@ layout_theme = {
 
 
 layouts = [
-    layout.MonadTall(**layout_theme, auto_maximize=True, ratio=0.65),
+    layout.MonadTall(**layout_theme, auto_maximize=True, ratio=0.55),
     layout.Max(**layout_theme),  # Gaming-friendly layout
     # layout.Floating(**layout_theme),  # For games that need floating
     # Try more layouts by unleashing below layouts.
