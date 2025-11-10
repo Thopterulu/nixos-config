@@ -296,14 +296,14 @@ layout_theme = {
 
 
 layouts = [
-    layout.Columns(**layout_theme),
+    layout.MonadTall(**layout_theme),
     layout.Max(**layout_theme),  # Gaming-friendly layout
     layout.Floating(**layout_theme),  # For games that need floating
     # Try more layouts by unleashing below layouts.
     # layout.Stack(num_stacks=2),
     # layout.Bsp(),
     # layout.Matrix(),
-    # layout.MonadTall(),
+    # layout.Columns(**layout_theme),
     # layout.MonadWide(),
     # layout.RatioTile(),
     # layout.Tile(),
