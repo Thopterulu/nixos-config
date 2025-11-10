@@ -271,6 +271,10 @@
                   name = "My Portal";
                   url = "https://trainingportal.linuxfoundation.org/learn/dashboard";
                 }
+                {
+                  name = "Datadog Learning";
+                  url = "https://learn.datadoghq.com/";
+                }
               ];
             }
             {
@@ -373,6 +377,10 @@
                 {
                   name = "CodeCrafters";
                   url = "https://codecrafters.io/";
+                }
+                {
+                  name = "Datadog Learning";
+                  url = "https://learn.datadoghq.com/";
                 }
               ];
             }

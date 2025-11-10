@@ -65,6 +65,9 @@
     dedicatedServer.openFirewall = true;
     gamescopeSession.enable = true;
   };
+  networking.extraHosts = ''
+    192.168.49.2 dashboard.com
+  '';
 
   # Gaming packages
   environment.systemPackages = with pkgs; [
