@@ -199,7 +199,7 @@ keys = [
     Key([mod], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
     # MonadTall specific keybindings
     Key([mod], "i", lazy.layout.grow(), desc="Grow main window"),
-    Key([mod], "m", lazy.layout.shrink(), desc="Shrink main window"),
+    Key([mod], "u", lazy.layout.shrink(), desc="Shrink main window"),
     Key([mod], "o", lazy.layout.maximize(), desc="Maximize current window"),
     Key([mod, "shift"], "s", lazy.layout.toggle_auto_maximize(), desc="Toggle auto maximize"),
     Key([mod, "shift"], "space", lazy.layout.flip(), desc="Flip layout"),
