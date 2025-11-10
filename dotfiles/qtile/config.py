@@ -197,6 +197,12 @@ keys = [
     Key([mod, "control"], "j", lazy.layout.grow_down(), desc="Grow window down"),
     Key([mod, "control"], "k", lazy.layout.grow_up(), desc="Grow window up"),
     Key([mod], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
+    # MonadTall specific keybindings
+    Key([mod], "i", lazy.layout.grow(), desc="Grow main window"),
+    Key([mod], "m", lazy.layout.shrink(), desc="Shrink main window"),
+    Key([mod], "o", lazy.layout.maximize(), desc="Maximize current window"),
+    Key([mod, "shift"], "s", lazy.layout.toggle_auto_maximize(), desc="Toggle auto maximize"),
+    Key([mod, "shift"], "space", lazy.layout.flip(), desc="Flip layout"),
     # Envoyer fenêtre vers l'autre écran
     Key([mod, "mod1"], "h", lazy.window.toscreen(0), desc="Move window to screen 0"),
     Key([mod, "mod1"], "l", lazy.window.toscreen(1), desc="Move window to screen 1"),
@@ -296,7 +302,7 @@ layout_theme = {
 
 
 layouts = [
-    layout.MonadTall(**layout_theme, auto_maximize=True),
+    layout.MonadTall(**layout_theme, auto_maximize=True, ratio=0.65),
     layout.Max(**layout_theme),  # Gaming-friendly layout
     # layout.Floating(**layout_theme),  # For games that need floating
     # Try more layouts by unleashing below layouts.
