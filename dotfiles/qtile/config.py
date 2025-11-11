@@ -349,7 +349,7 @@ def create_base_widgets():
             padding=5,
             background=SOME_RED,
             foreground="ffffff",
-            max_title_width=100,
+            max_title_width=150,
             txt_floating="🗗 ",
             txt_maximized="🗖 ",
             txt_minimized="🗕 ",
@@ -358,6 +358,7 @@ def create_base_widgets():
                 'Button1': lambda: qtile.current_window.bring_to_front(),
             },
         ),
+        Spacer(length=10, background=SOME_RED),
         TextBox(
             text="󱎕",
             foreground=CYAN,
@@ -373,7 +374,7 @@ def create_base_widgets():
             background=CYAN,
         ),
         GenPollText(
-            func=get_music_info,
+            func=lambda: get_music_info()[:30] + "..." if len(get_music_info()) > 30 else get_music_info(),
             update_interval=2,
             mouse_callbacks={
                 "Button1": lambda: subprocess.run(["playerctl", "play-pause"])
