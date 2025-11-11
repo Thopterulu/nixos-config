@@ -331,8 +331,6 @@ def create_base_widgets():
         GroupBox(
             disable_drag=True,
         ),
-        Prompt(),
-        WindowName(),
         TextBox(
             text="󱎕",
             foreground=SOME_RED,
@@ -349,17 +347,15 @@ def create_base_widgets():
             padding=5,
             background=SOME_RED,
             foreground="ffffff",
-            max_title_width=150,
+            max_title_width=200,
             txt_floating="🗗 ",
             txt_maximized="🗖 ",
             txt_minimized="🗕 ",
             icon_size=16,
-            width=400,
             mouse_callbacks={
                 'Button1': lambda: qtile.current_window.bring_to_front(),
             },
         ),
-        Spacer(length=10, background=SOME_RED),
         TextBox(
             text="󱎕",
             foreground=CYAN,
@@ -367,6 +363,8 @@ def create_base_widgets():
             fontsize=35,
             padding=-3,
         ),
+        Prompt(),
+        WindowName(),
         Chord(
             chords_colors={
                 "launch": ("#ff0000", "#ffffff"),
