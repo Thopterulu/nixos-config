@@ -42,6 +42,7 @@ LIGHT_GREEN = "#42d6a4"
 SOME_RED = "#d56d77"
 YOINK_BLUE = "#59adf6"
 WEIRD_BLUE = "#294F6D"
+IDK= "#239eb1"
 
 ### WALLPAPER ###
 
@@ -328,7 +329,7 @@ extension_defaults = widget_defaults.copy()
 # Create base widgets (common to both screens)
 def create_base_widgets():
     widgets = [
-        CurrentLayout(),
+        CurrentLayout(background=IDK),
         GroupBox(
             disable_drag=True,
         ),
@@ -359,24 +360,8 @@ def create_base_widgets():
         ),
         TextBox(
             text="󱎕",
-            foreground=CYAN,
-            background=SOME_RED,
-            fontsize=35,
-            padding=-3,
-        ),
-        Prompt(),
-        WindowName(),
-        Chord(
-            chords_colors={
-                "launch": ("#ff0000", "#ffffff"),
-            },
-            name_transform=lambda name: name.upper(),
-            background=CYAN,
-        ),
-        TextBox(
-            text="󱎕",
             foreground=WEIRD_BLUE,
-            background=CYAN,
+            background=SOME_RED,
             fontsize=35,
             padding=-3,
         ),
@@ -426,6 +411,19 @@ def end_widgets():  # type: ignore
             background=LIGHT_GREEN,
             fontsize=45,
         ),
+        PulseVolume(
+            background=LIGHT_GREEN,
+            foreground=ORANGE,
+            limit_max_volume=True,
+            padding_y=1,
+            fontsize=16,
+            volume_app="pavucontrol",
+        ),
+        TextBox(
+            text=" | ",
+            background=LIGHT_GREEN,
+            foreground=ORANGE,
+        ),
         GenPollText(
             func=get_music_info,
             update_interval=2,
@@ -437,19 +435,6 @@ def end_widgets():  # type: ignore
             background=LIGHT_GREEN,
             foreground=ORANGE,
             **widget_defaults,
-        ),
-        TextBox(
-            text=" | ",
-            background=LIGHT_GREEN,
-            foreground=ORANGE,
-        ),
-        PulseVolume(
-            background=LIGHT_GREEN,
-            foreground=ORANGE,
-            limit_max_volume=True,
-            padding_y=1,
-            fontsize=16,
-            volume_app="pavucontrol",
         ),
         TextBox(
             text="󱎕",
