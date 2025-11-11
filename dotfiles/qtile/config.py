@@ -390,6 +390,7 @@ def create_base_widgets():
             fontsize=35,
             padding=-3,
         ),
+        Spacer(background=WEIRD_BLUE),
     ]
 
     # Add battery widget if battery exists
