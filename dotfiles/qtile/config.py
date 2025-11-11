@@ -20,6 +20,7 @@ from libqtile.widget import (
     GenPollText,
     TextBox,
     PulseVolume,
+    Mpris2,
     OpenWeather,
     Clock,
     Spacer,
@@ -372,17 +373,6 @@ def create_base_widgets():
             name_transform=lambda name: name.upper(),
             background=CYAN,
         ),
-        GenPollText(
-            func=lambda: get_music_info()[:30] + "..." if len(get_music_info()) > 30 else get_music_info(),
-            update_interval=2,
-            mouse_callbacks={
-                "Button1": lambda: subprocess.run(["playerctl", "play-pause"])
-            },
-            background=CYAN,
-            foreground=ORANGE,
-            width=250,
-            **widget_defaults,
-        ),
         TextBox(
             text="󱎕",
             foreground=WEIRD_BLUE,
@@ -390,7 +380,7 @@ def create_base_widgets():
             fontsize=35,
             padding=-3,
         ),
-        Spacer(background=WEIRD_BLUE),
+        # Spacer(background=WEIRD_BLUE),
     ]
 
     # Add battery widget if battery exists
@@ -435,6 +425,23 @@ def end_widgets():  # type: ignore
             foreground=ORANGE,
             background=LIGHT_GREEN,
             fontsize=45,
+        ),
+        GenPollText(
+            func=get_music_info,
+            update_interval=2,
+            mouse_callbacks={
+                "Button1": lambda: subprocess.run(["playerctl", "play-pause"]),
+                "Button3": lambda: subprocess.run(["playerctl", "next"]),
+                "Button2": lambda: subprocess.run(["playerctl", "previous"]),
+            },
+            background=LIGHT_GREEN,
+            foreground=ORANGE,
+            **widget_defaults,
+        ),
+        TextBox(
+            text=" | ",
+            background=LIGHT_GREEN,
+            foreground=ORANGE,
         ),
         PulseVolume(
             background=LIGHT_GREEN,
