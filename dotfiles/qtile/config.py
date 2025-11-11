@@ -15,6 +15,7 @@ from libqtile.widget import (
     GroupBox,
     Prompt,
     WindowName,
+    TaskList,
     Chord,
     GenPollText,
     TextBox,
@@ -240,7 +241,6 @@ keys = [
     Key([mod], "d", lazy.spawn("rofi -show drun")),
     Key([mod], "m", lazy.spawn("firefox")),
     Key(["mod1"], "Tab", lazy.spawn("rofi -show window"), desc="Window switcher like Alt+Tab"),
-    Key(["mod1", "shift"], "Tab", lazy.spawn("rofi -show window"), desc="Window switcher reverse"),
     # IMPORTANT : Forcer le mode fenêtré temporaire
     Key([mod, "mod1"], "f", lazy.window.toggle_fullscreen()),
     # Minimiser la fenêtre
@@ -333,6 +333,29 @@ def create_base_widgets():
         ),
         Prompt(),
         WindowName(),
+        TextBox(
+            text="󱎕",
+            foreground=SOME_RED,
+            background=BLACK,
+            fontsize=35,
+            padding=-3,
+        ),
+        TaskList(
+            highlight_method="block",
+            border=YOINK_BLUE,
+            unfocused_border=DARK_GREY,
+            rounded=True,
+            margin=2,
+            padding=5,
+            background=SOME_RED,
+        ),
+        TextBox(
+            text="󱎕",
+            foreground=WEIRD_BLUE,
+            background=SOME_RED,
+            fontsize=35,
+            padding=-3,
+        ),
         Chord(
             chords_colors={
                 "launch": ("#ff0000", "#ffffff"),
