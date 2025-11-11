@@ -417,7 +417,6 @@ def create_base_widgets():
             func=get_network_info,
             update_interval=5,
             **widget_defaults,
-            width=250,
             background=WEIRD_BLUE,
         )
     )
