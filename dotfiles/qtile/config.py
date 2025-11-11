@@ -343,15 +343,24 @@ def create_base_widgets():
         TaskList(
             highlight_method="block",
             border=YOINK_BLUE,
-            unfocused_border=DARK_GREY,
+            unfocused_border="333333",
             rounded=True,
             margin=2,
             padding=5,
             background=SOME_RED,
+            foreground="ffffff",
+            max_title_width=100,
+            txt_floating="🗗 ",
+            txt_maximized="🗖 ",
+            txt_minimized="🗕 ",
+            icon_size=16,
+            mouse_callbacks={
+                'Button1': lambda: qtile.current_window.bring_to_front(),
+            },
         ),
         TextBox(
             text="󱎕",
-            foreground=WEIRD_BLUE,
+            foreground=CYAN,
             background=SOME_RED,
             fontsize=35,
             padding=-3,
@@ -361,6 +370,7 @@ def create_base_widgets():
                 "launch": ("#ff0000", "#ffffff"),
             },
             name_transform=lambda name: name.upper(),
+            background=CYAN,
         ),
         GenPollText(
             func=get_music_info,
@@ -368,12 +378,14 @@ def create_base_widgets():
             mouse_callbacks={
                 "Button1": lambda: subprocess.run(["playerctl", "play-pause"])
             },
+            background=CYAN,
+            foreground=ORANGE,
             **widget_defaults,
         ),
         TextBox(
             text="󱎕",
             foreground=WEIRD_BLUE,
-            background=BLACK,
+            background=CYAN,
             fontsize=35,
             padding=-3,
         ),
