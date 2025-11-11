@@ -239,8 +239,8 @@ keys = [
     Key([mod], "e", lazy.spawn("pcmanfm")),
     Key([mod], "d", lazy.spawn("rofi -show drun")),
     Key([mod], "m", lazy.spawn("firefox")),
-    Key(["mod1"], "Tab", lazy.layout.next(), desc="Next window"),
-    Key(["mod1", "shift"], "Tab", lazy.layout.previous(), desc="Previous window"),
+    Key(["mod1"], "Tab", lazy.spawn("rofi -show window"), desc="Window switcher like Alt+Tab"),
+    Key(["mod1", "shift"], "Tab", lazy.spawn("rofi -show window"), desc="Window switcher reverse"),
     # IMPORTANT : Forcer le mode fenêtré temporaire
     Key([mod, "mod1"], "f", lazy.window.toggle_fullscreen()),
     # Minimiser la fenêtre
