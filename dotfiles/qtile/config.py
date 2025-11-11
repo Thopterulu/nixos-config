@@ -354,6 +354,7 @@ def create_base_widgets():
             txt_maximized="🗖 ",
             txt_minimized="🗕 ",
             icon_size=16,
+            width=400,
             mouse_callbacks={
                 'Button1': lambda: qtile.current_window.bring_to_front(),
             },
@@ -381,6 +382,7 @@ def create_base_widgets():
             },
             background=CYAN,
             foreground=ORANGE,
+            width=250,
             **widget_defaults,
         ),
         TextBox(
@@ -415,6 +417,7 @@ def create_base_widgets():
             func=get_network_info,
             update_interval=5,
             **widget_defaults,
+            width=250,
             background=WEIRD_BLUE,
         )
     )
