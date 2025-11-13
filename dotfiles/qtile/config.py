@@ -355,9 +355,8 @@ def create_base_widgets():
             txt_minimized="🗕 ",
             icon_size=16,
             mouse_callbacks={
-                'Button1': lambda: qtile.current_window.bring_to_front(),
+                'Button1': lazy.window.focus(),
             },
-            focus_on_hover=True,
         ),
         TextBox(
             text="󱎕",
