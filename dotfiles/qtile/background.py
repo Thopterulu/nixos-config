@@ -17,6 +17,8 @@ def get_wallpapers():
 
 def rander_background(screens: list[Screen]) -> None:
     """Randomly change background"""
+    if not os.path.exists(BACKGROUND_DIR):
+        return  # Skip if GoogleDrive not mounted yet
     wallpapers = get_wallpapers()
     if wallpapers:
         for screen in screens:
