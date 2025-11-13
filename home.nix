@@ -391,6 +391,19 @@
     };
   };
 
+  # Set Firefox as default for PDFs and images
+  xdg.mimeApps = {
+    enable = true;
+    defaultApplications = {
+      "application/pdf" = [ "firefox.desktop" ];
+      "image/jpeg" = [ "firefox.desktop" ];
+      "image/png" = [ "firefox.desktop" ];
+      "image/gif" = [ "firefox.desktop" ];
+      "image/webp" = [ "firefox.desktop" ];
+      "image/svg+xml" = [ "firefox.desktop" ];
+    };
+  };
+
   programs.nixvim = {
     enable = true;
     defaultEditor = true;
