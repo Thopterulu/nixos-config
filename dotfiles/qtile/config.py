@@ -357,6 +357,7 @@ def create_base_widgets():
             mouse_callbacks={
                 'Button1': lambda: qtile.current_window.bring_to_front(),
             },
+            focus_on_hover=True,
         ),
         TextBox(
             text="󱎕",
