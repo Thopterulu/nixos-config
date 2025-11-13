@@ -32,6 +32,7 @@
     xorg.xkill
     protonup-qt    # Manage custom Proton versions
     i3lock-fancy   # Uses current screen as blurred background
+    libreoffice
   ];
 
   # Auto-lock screen with xidlehook
@@ -401,6 +402,8 @@
       "image/gif" = [ "firefox.desktop" ];
       "image/webp" = [ "firefox.desktop" ];
       "image/svg+xml" = [ "firefox.desktop" ];
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document" = [ "libreoffice-writer.desktop" ];
+      "application/msword" = [ "libreoffice-writer.desktop" ];
     };
   };
 
