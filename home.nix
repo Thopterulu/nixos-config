@@ -358,6 +358,14 @@
                   name = "Fanatical";
                   url = "https://www.fanatical.com/fr/";
                 }
+                {
+                  name = "GG.deals";
+                  url = "https://gg.deals/games/pc/";
+                }
+                {
+                  name = "GoClecd";
+                  url = "https://www.goclecd.fr/";
+                }
               ];
             }
             {
