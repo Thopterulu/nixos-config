@@ -11,15 +11,15 @@ configuration {
   font: "Cascadia Code 10";
 
   drun {
-    display-name: "";
+    display-name: "";
   }
 
   run {
-    display-name: "";
+    display-name: "";
   }
 
   window {
-    display-name: "";
+    display-name: "";
   }
 
   timeout {
