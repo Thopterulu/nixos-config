@@ -21,9 +21,7 @@
   boot.kernelModules = [ "snd-usb-audio" ];
 
   # Enable unprivileged user namespaces for firejail
-  boot.kernel.sysctl = {
-    "kernel.unprivileged_userns_clone" = 1;
-  };
+  security.unprivilegedUsernsClone = true;
 
 
   networking.hostName = "thopter-nixos"; # Define your hostname.
