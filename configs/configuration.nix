@@ -117,6 +117,7 @@
   programs.fuse.userAllowOther = true;
   programs.i3lock.enable = true;
   programs.zsh.enable = true;
+  programs.firejail.enable = true;
   # Enable Docker
   virtualisation.docker.enable = true;
   # List packages installed in system profile.
