@@ -34,7 +34,6 @@
     i3lock-fancy   # Uses current screen as blurred background
     libreoffice
     itch
-    rofi-themes
   ];
 
   # Auto-lock screen with xidlehook
@@ -77,6 +76,7 @@
     ".config/alacritty/alacritty.toml".source = ./dotfiles/alacritty/alacritty.toml;
     # Rofi config
     ".config/rofi/config.rasi".source = ./dotfiles/rofi/config.rasi;
+    ".config/rofi/tokyo-night.rasi".source = ./dotfiles/rofi/tokyo-night.rasi;
   };
 
   home.file = {
