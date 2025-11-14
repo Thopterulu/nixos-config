@@ -160,6 +160,7 @@
     vscode
     playerctl
     autorandr         # Automatic display configuration
+    firejail          # Application sandboxing
   ];
 
   fonts.packages = with pkgs; [

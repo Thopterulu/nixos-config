@@ -5,7 +5,7 @@
 ### Basic Firejail Usage
 ```bash
 # Run itch.io client safely
-firejail itch
+firejail --private=~/game-sandbox itch
 
 # Run a game with no network access
 firejail --net=none ./game-executable

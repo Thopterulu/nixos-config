@@ -34,7 +34,6 @@
     i3lock-fancy   # Uses current screen as blurred background
     libreoffice
     itch
-    firejail
   ];
 
   # Auto-lock screen with xidlehook
