@@ -33,6 +33,8 @@
     protonup-qt    # Manage custom Proton versions
     i3lock-fancy   # Uses current screen as blurred background
     libreoffice
+    itch
+    firejail
   ];
 
   # Auto-lock screen with xidlehook
@@ -85,6 +87,7 @@
     "Downloads/.keep".text = "";
     "Pictures/.keep".text = "";
     "Videos/.keep".text = "";
+    "game-sandbox/.keep".text = "";
   };
 
 
