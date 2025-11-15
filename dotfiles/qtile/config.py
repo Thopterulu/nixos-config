@@ -501,6 +501,9 @@ def create_primary_widgets():
             Notify(fmt=" 🔥 {} ", background=WEIRD_BLUE, parse_text=parse_notification),
             Bluetooth(
                 background=WEIRD_BLUE,
+                mouse_callbacks={
+                    'Button1': lambda: qtile.cmd_spawn("blueman-manager"),
+                },
             ),
             Systray(
                 background=WEIRD_BLUE,
