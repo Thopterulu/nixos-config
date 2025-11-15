@@ -19,10 +19,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.supportedFilesystems = [ "ntfs" ];
   boot.kernelModules = [ "snd-usb-audio" ];
-  boot.kernelPackages = pkgs.linuxPackages_hardened;
 
-  # Enable unprivileged user namespaces for firejail (hardened kernel only)
-  security.unprivilegedUsernsClone = true;
 
 
   networking.hostName = "thopter-nixos"; # Define your hostname.
