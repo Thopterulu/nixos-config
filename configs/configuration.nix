@@ -119,6 +119,15 @@
   programs.i3lock.enable = true;
   programs.zsh.enable = true;
   programs.firejail.enable = true;
+
+  # Enable OpenSnitch application firewall
+  services.opensnitch.enable = true;
+
+  # Enable AppArmor security framework
+  security.apparmor = {
+    enable = true;
+    packages = [ pkgs.apparmor-profiles ];
+  };
   # Enable Docker
   virtualisation.docker.enable = true;
   # List packages installed in system profile.

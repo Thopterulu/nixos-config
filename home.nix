@@ -34,6 +34,8 @@
     i3lock-fancy   # Uses current screen as blurred background
     libreoffice
     itch
+    opensnitch-ui
+    bubblewrap
     insomnia
   ];
 
