@@ -546,7 +546,7 @@ def autostart() -> None:
     home = os.path.expanduser("~")
     # Mount Google Drive first
     subprocess.Popen([f"{home}/.local/bin/mount-gdrive"])
-    subprocess.Popen(["streamcontroller"])
+    subprocess.Popen(["streamcontroller", "-b"])
     thread_bg_changer.start()
 
 
