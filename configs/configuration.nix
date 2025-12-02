@@ -69,6 +69,11 @@
     fade = true;
   };
 
+  # Enable GTK at system level
+  programs.gtk = {
+    enable = true;
+  };
+
 
   hardware.graphics = {
     enable = true;
@@ -172,6 +177,10 @@
     playerctl
     autorandr         # Automatic display configuration
     firejail          # Application sandboxing
+    # GTK themes and icons for better file manager appearance
+    arc-theme
+    papirus-icon-theme
+    lxappearance      # GTK theme manager
   ];
 
   fonts.packages = with pkgs; [
