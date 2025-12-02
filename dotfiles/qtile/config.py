@@ -304,7 +304,7 @@ layout_theme = {
 
 
 layouts = [
-    layout.Zoomy(**layout_theme)#, auto_maximize=True, ratio=0.55),
+    layout.Zoomy(**layout_theme),#, auto_maximize=True, ratio=0.55),
     layout.Max(**layout_theme),
     #layout.Floating(**layout_theme),  # For games that need floating
     # Try more layouts by unleashing below layouts.
