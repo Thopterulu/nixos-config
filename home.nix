@@ -82,6 +82,25 @@
     # Rofi config
     ".config/rofi/config.rasi".source = ./dotfiles/rofi/config.rasi;
     ".config/rofi/tokyo-night.rasi".source = ./dotfiles/rofi/tokyo-night.rasi;
+    # PCManFM config
+    ".config/pcmanfm/default/pcmanfm.conf".source = ./dotfiles/pcmanfm/pcmanfm.conf;
+  };
+
+  # GTK theming for better PCManFM appearance
+  gtk = {
+    enable = true;
+    theme = {
+      name = "Arc-Dark";
+      package = pkgs.arc-theme;
+    };
+    iconTheme = {
+      name = "Papirus-Dark";
+      package = pkgs.papirus-icon-theme;
+    };
+    font = {
+      name = "JetBrains Mono";
+      size = 11;
+    };
   };
 
   home.file = {
