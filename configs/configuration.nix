@@ -177,7 +177,7 @@
     arc-theme
     papirus-icon-theme
     lxappearance      # GTK theme manager
-    tumbler           # Thumbnail generator for file previews
+    xfce.tumbler      # Thumbnail generator for file previews
     ffmpegthumbnailer # Video thumbnails
   ];
 
