@@ -90,8 +90,6 @@
     ".config/pcmanfm/default/pcmanfm.conf".source = ./dotfiles/pcmanfm/pcmanfm.conf;
   };
 
-  # Enable dconf for GTK settings
-  dconf.enable = true;
 
   # GTK theming for better PCManFM appearance
   gtk = {
