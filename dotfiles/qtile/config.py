@@ -263,7 +263,7 @@ for vt in range(1, 8):
     )
 
 
-groups = [Group(i) for i in "123456"]
+groups = [Group(i) for i in "1234"]
 
 for i in groups:
     keys.extend(
@@ -307,17 +307,7 @@ layouts = [
     layout.Zoomy(**layout_theme),#, auto_maximize=True, ratio=0.55),
     layout.Max(**layout_theme),
     #layout.Floating(**layout_theme),  # For games that need floating
-    # Try more layouts by unleashing below layouts.
-    layout.Stack(**layout_theme, num_stacks=2),
-    layout.Bsp(**layout_theme),
-    layout.Matrix(**layout_theme),
-    layout.Plasma(**layout_theme),
-    #layout.Columns(**layout_theme),
-    # layout.MonadWide(),
-    layout.RatioTile(**layout_theme),
-    layout.Tile(**layout_theme),
-    layout.TreeTab(**layout_theme),
-    layout.VerticalTile(**layout_theme),
+    #layout.TreeTab(**layout_theme),
 ]
 
 widget_defaults = dict(
