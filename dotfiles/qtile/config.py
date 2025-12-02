@@ -304,20 +304,20 @@ layout_theme = {
 
 
 layouts = [
-    layout.MonadTall(**layout_theme, auto_maximize=True, ratio=0.55),
-    layout.Max(**layout_theme),  # Gaming-friendly layout
-    # layout.Floating(**layout_theme),  # For games that need floating
+    layout.Zoomy(**layout_theme)#, auto_maximize=True, ratio=0.55),
+    layout.Max(**layout_theme),
+    #layout.Floating(**layout_theme),  # For games that need floating
     # Try more layouts by unleashing below layouts.
-    # layout.Stack(num_stacks=2),
-    # layout.Bsp(),
-    # layout.Matrix(),
-    # layout.Columns(**layout_theme),
+    layout.Stack(**layout_theme, num_stacks=2),
+    layout.Bsp(**layout_theme),
+    layout.Matrix(**layout_theme),
+    layout.Plasma(**layout_theme),
+    #layout.Columns(**layout_theme),
     # layout.MonadWide(),
-    # layout.RatioTile(),
-    # layout.Tile(),
-    # layout.TreeTab(),
-    # layout.VerticalTile(),
-    # layout.Zoomy(),
+    layout.RatioTile(**layout_theme),
+    layout.Tile(**layout_theme),
+    layout.TreeTab(**layout_theme),
+    layout.VerticalTile(**layout_theme),
 ]
 
 widget_defaults = dict(
