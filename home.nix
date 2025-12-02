@@ -39,10 +39,6 @@
     bubblewrap
     insomnia
     figma-linux
-    # GTK theme packages
-    arc-theme
-    papirus-icon-theme
-    lxappearance
   ];
 
   # Auto-lock screen with xidlehook
@@ -91,22 +87,6 @@
   };
 
 
-  # GTK theming for better PCManFM appearance
-  gtk = {
-    enable = true;
-    theme = {
-      name = "Arc-Dark";
-      package = pkgs.arc-theme;
-    };
-    iconTheme = {
-      name = "Papirus-Dark";
-      package = pkgs.papirus-icon-theme;
-    };
-    font = {
-      name = "JetBrains Mono";
-      size = 11;
-    };
-  };
 
   home.file = {
     "Music/.keep".text = "";
