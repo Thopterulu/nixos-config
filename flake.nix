@@ -26,7 +26,7 @@
             nixpkgs.overlays = [ nur.overlays.default ];
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.backupFileExtension = "backup";
+            home-manager.backupFileExtension = "hm-backup";
             home-manager.users.thopter = import ./home.nix;
             home-manager.extraSpecialArgs = { inherit nixvim; };
           }
@@ -43,7 +43,7 @@
             nixpkgs.overlays = [ nur.overlays.default ];
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.backupFileExtension = "backup";
+            home-manager.backupFileExtension = "hm-backup";
             home-manager.users.thopter = import ./home.nix;
             home-manager.extraSpecialArgs = { inherit nixvim; };
           }
