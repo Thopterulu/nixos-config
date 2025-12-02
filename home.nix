@@ -86,7 +86,8 @@
     ".config/pcmanfm/default/pcmanfm.conf".source = ./dotfiles/pcmanfm/pcmanfm.conf;
   };
 
-
+  # Enable GTK
+  gtk.enable = true;
 
   home.file = {
     "Music/.keep".text = "";

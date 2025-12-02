@@ -69,10 +69,6 @@
     fade = true;
   };
 
-  # Enable GTK at system level
-  programs.gtk = {
-    enable = true;
-  };
 
 
   hardware.graphics = {
