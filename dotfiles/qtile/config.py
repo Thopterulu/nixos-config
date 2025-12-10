@@ -68,6 +68,11 @@ def reboot_now() -> None:
     qtile.cmd_spawn("reboot")  # type: ignore
 
 
+# suspend
+def suspend_now() -> None:
+    qtile.cmd_spawn("systemctl suspend")  # type: ignore
+
+
 
 
 def get_music_info() -> str:
@@ -468,6 +473,15 @@ def end_widgets():  # type: ignore
             format="%a %d/%m/%Y %H:%M %p",
             background=DARK_BLUE,
             foreground=ORANGE,
+        ),
+        TextBox(
+            text="🌙",
+            foreground=ORANGE,
+            background=DARK_BLUE,
+            fontsize=20,
+            padding=3,
+            padding_y=0,
+            mouse_callbacks={"Button1": suspend_now},
         ),
         TextBox(
             text="",
