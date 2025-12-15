@@ -30,6 +30,7 @@
     ffmpeg
     rfc
     tor
+    tor-browser
     xorg.xkill
     protonup-qt    # Manage custom Proton versions
     i3lock-fancy   # Uses current screen as blurred background
