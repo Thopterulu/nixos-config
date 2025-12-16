@@ -47,6 +47,7 @@
     "nvidia.NVreg_PreserveVideoMemoryAllocations=1"
     "nvidia.NVreg_EnableGpuFirmware=0"  # Fixes random frame drops
     "mitigations=off"
+    "vsyscall=emulate"  # Fix for old Windows games crashing
   ];
 
   # System optimizations for consistent performance
