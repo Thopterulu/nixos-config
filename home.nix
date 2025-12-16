@@ -3,7 +3,7 @@
 {
   home.stateVersion = "25.11";
   imports = [
-    nixvim.homeManagerModules.nixvim
+    nixvim.homeModules.nixvim
     ./configs/firefox.nix
   ];
 
@@ -35,11 +35,11 @@
     protonup-qt    # Manage custom Proton versions
     i3lock-fancy   # Uses current screen as blurred background
     libreoffice
-    itch
     opensnitch-ui
     bubblewrap
     insomnia
     figma-linux
+    itch
   ];
 
   # Auto-lock screen with xidlehook
@@ -104,9 +104,11 @@
 
   programs.git = {
     enable = true;
-    userName = "thopterulu";
-    userEmail = "guillaume.kergueris@gmail.com";
-    extraConfig = {
+    settings = {
+      user = {
+        name = "thopterulu";
+        email = "guillaume.kergueris@gmail.com";
+      };
       pull = {
         rebase = true;
         ff = "only";
@@ -205,8 +207,10 @@
       nvim-tree = {
         enable = true;
         openOnSetup = true;
-        view.width = 30;
-        filters.dotfiles = false;
+        settings = {
+          view.width = 30;
+          filters.dotfiles = false;
+        };
       };
       nvim-autopairs = {
         enable = true;
