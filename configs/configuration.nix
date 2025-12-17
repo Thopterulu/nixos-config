@@ -121,6 +121,10 @@
   programs.zsh.enable = true;
   programs.firejail.enable = true;
 
+  # Controller support
+  hardware.xone.enable = true;  # Xbox One controller support
+  hardware.xpadneo.enable = true;  # Better Xbox controller Bluetooth support
+
   # Enable OpenSnitch application firewall
   services.opensnitch.enable = true;
 

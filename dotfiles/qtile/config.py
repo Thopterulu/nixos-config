@@ -73,6 +73,14 @@ def suspend_now() -> None:
     qtile.cmd_spawn("systemctl suspend")  # type: ignore
 
 
+# Switch to projector
+def switch_to_projector() -> None:
+    qtile.cmd_spawn("autorandr --load projector")  # type: ignore
+
+
+# Switch to desktop monitors
+def switch_to_desktop() -> None:
+    qtile.cmd_spawn("autorandr --load desktop")  # type: ignore
 
 
 def get_music_info() -> str:
@@ -228,6 +236,9 @@ keys = [
         desc="Toggle between split and unsplit sides of stack",
     ),
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
+    # Display switching
+    Key([mod], "p", lazy.function(lambda qtile: switch_to_projector()), desc="Switch to projector"),
+    Key([mod, "shift"], "p", lazy.function(lambda qtile: switch_to_desktop()), desc="Switch to desktop monitors"),
     # Toggle between different layouts as defined below
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
     Key([mod], "q", lazy.window.kill(), desc="Kill focused window"),
