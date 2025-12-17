@@ -116,7 +116,9 @@
   programs.i3lock.enable = true;
   programs.zsh.enable = true;
   programs.firejail.enable = true;
+  programs.dconf.enable = true;
 
+  services.dbus.enable = true;
   # Controller support
   # hardware.xone.enable = true;  # Xbox One controller USB support - disabled to avoid Bluetooth conflicts
 
