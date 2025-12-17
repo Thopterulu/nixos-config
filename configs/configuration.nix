@@ -118,7 +118,7 @@
   programs.firejail.enable = true;
 
   # Controller support
-  hardware.xone.enable = true;  # Xbox One controller support
+  # hardware.xone.enable = true;  # Xbox One controller USB support - disabled to avoid Bluetooth conflicts
 
   # Steam controller support
   hardware.steam-hardware.enable = true;
