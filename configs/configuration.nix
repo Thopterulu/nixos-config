@@ -109,7 +109,7 @@
   users.users.thopter = {
     shell = pkgs.zsh;
     isNormalUser = true;
-    extraGroups = [ "wheel" "audio" "docker" ]; # Enable 'sudo' for the user.
+    extraGroups = [ "wheel" "audio" "docker" "input" ]; # Enable 'sudo' for the user.
     packages = with pkgs; [
       tree
     ];
@@ -124,6 +124,9 @@
   # Controller support
   hardware.xone.enable = true;  # Xbox One controller support
   hardware.xpadneo.enable = true;  # Better Xbox controller Bluetooth support
+
+  # Steam controller support
+  hardware.steam-hardware.enable = true;
 
   # Enable OpenSnitch application firewall
   services.opensnitch.enable = true;
