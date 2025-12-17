@@ -35,7 +35,4 @@
   # Enable power management
   services.tlp.enable = true;
 
-  # Enable bluetooth
-  hardware.bluetooth.enable = true;
-  services.blueman.enable = true;
 }

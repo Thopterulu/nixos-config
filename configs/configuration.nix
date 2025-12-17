@@ -6,7 +6,7 @@
 
 {
   imports = [
-    ../gaming-conf.nix
+    ./bluetooth.nix
   ];
 
   # allow unfree
@@ -29,10 +29,6 @@
 
   # Enable WiFi firmware
   hardware.enableRedistributableFirmware = true;
-
-  # Enable Bluetooth
-  hardware.bluetooth.enable = true;
-  services.blueman.enable = true;
 
   # Set your time zone.
   time.timeZone = "Europe/Paris";
@@ -123,15 +119,9 @@
 
   # Controller support
   hardware.xone.enable = true;  # Xbox One controller support
-  hardware.xpadneo.enable = true;  # Better Xbox controller Bluetooth support
 
   # Steam controller support
   hardware.steam-hardware.enable = true;
-
-  # Fix joystick device group
-  services.udev.extraRules = ''
-    SUBSYSTEM=="input", KERNEL=="js[0-9]*", MODE="0666", GROUP:="input", TAG+="uaccess"
-  '';
 
   # Enable OpenSnitch application firewall
   services.opensnitch.enable = true;
