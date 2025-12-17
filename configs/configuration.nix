@@ -128,6 +128,11 @@
   # Steam controller support
   hardware.steam-hardware.enable = true;
 
+  # Fix joystick device group
+  services.udev.extraRules = ''
+    SUBSYSTEM=="input", KERNEL=="js[0-9]*", MODE="0660", GROUP="input"
+  '';
+
   # Enable OpenSnitch application firewall
   services.opensnitch.enable = true;
 
