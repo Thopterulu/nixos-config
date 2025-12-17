@@ -130,7 +130,7 @@
 
   # Fix joystick device group
   services.udev.extraRules = ''
-    SUBSYSTEM=="input", KERNEL=="js[0-9]*", MODE="0660", GROUP="input"
+    SUBSYSTEM=="input", KERNEL=="js[0-9]*", MODE="0666", GROUP:="input", TAG+="uaccess"
   '';
 
   # Enable OpenSnitch application firewall
