@@ -5,12 +5,6 @@
   # Enable Wayland support in SDDM
   services.displayManager.sddm.wayland.enable = true;
 
-  # Enable Qtile Wayland session
-  programs.qtile = {
-    enable = true;
-    backend = "wayland";
-  };
-
   # XWayland for running X11 apps on Wayland (Steam, games, etc)
   programs.xwayland.enable = true;
 
@@ -22,9 +16,9 @@
     NIXOS_OZONE_WL = "1";
   };
 
-  # Wayland-specific packages
+  # Wayland-specific packages including qtile wayland backend
   environment.systemPackages = with pkgs; [
-    wl-clipboard  # Wayland clipboard utilities
-    xwayland      # X11 compatibility layer
+    wl-clipboard      # Wayland clipboard utilities
+    xwayland          # X11 compatibility layer
   ];
 }
