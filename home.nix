@@ -1,9 +1,8 @@
-{ config, pkgs, nixvim, ... }:
+{ config, pkgs, ... }:
 
 {
   home.stateVersion = "25.11";
   imports = [
-    nixvim.homeModules.nixvim
     ./configs/firefox.nix
     ./configs/nixvim.nix
   ];
