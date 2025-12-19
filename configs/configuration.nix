@@ -7,6 +7,7 @@
 {
   imports = [
     ./bluetooth.nix
+    ./wayland.nix
   ];
 
   # allow unfree
@@ -48,6 +49,7 @@
 
 
   services.displayManager.sddm.enable = true;
+
   # Enable the X11 windowing system.
   services.xserver = {
     enable = true;
