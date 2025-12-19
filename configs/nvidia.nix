@@ -17,13 +17,16 @@
     # Performance settings
     forceFullCompositionPipeline = false;  # Reduces input lag
 
-    # PRIME configuration for hybrid graphics
-    # prime = {
-    #   # PRIME sync: NVIDIA renders, Intel outputs to displays
-    #   sync.enable = true;
-    #   nvidiaBusId = "PCI:1@0:0:0";   # 01:00.0
-    #   intelBusId = "PCI:0@0:2:0";    # 00:02.0
-    # };
+    # PRIME offload: Both GPUs drive their own displays independently
+    # Intel for secondary screen, NVIDIA for main screen + projector
+    prime = {
+      offload = {
+        enable = true;
+        enableOffloadCmd = true;
+      };
+      nvidiaBusId = "PCI:1@0:0:0";   # 01:00.0
+      intelBusId = "PCI:0@0:2:0";    # 00:02.0
+    };
   };
 
   # NVIDIA-specific kernel parameters
