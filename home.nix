@@ -88,6 +88,7 @@
     # Autorandr profiles
     ".config/autorandr/desktop/config".source = ./dotfiles/autorandr/desktop/config;
     ".config/autorandr/projector/config".source = ./dotfiles/autorandr/projector/config;
+    ".config/hypr/hyprland.conf".source = ./dotfiles/hypr/hyprland.conf;
   };
 
   # Enable GTK
