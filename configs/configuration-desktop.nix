@@ -10,9 +10,9 @@
   services.xserver.videoDrivers = [ "nvidia" ];
 
   hardware.nvidia = {
-    package = config.boot.kernelPackages.nvidiaPackages.production;
+    package = config.boot.kernelPackages.nvidiaPackages.legacy_535;
     modesetting.enable = true;
-    open = true;
+    open = false;  # Legacy 535 uses proprietary driver (535.274.02)
     powerManagement.enable = true;
     powerManagement.finegrained = false;  # Full power for gaming
     forceFullCompositionPipeline = false; # Reduces input lag
@@ -48,6 +48,10 @@
     "nvidia.NVreg_EnableGpuFirmware=0"  # Fixes random frame drops
     "mitigations=off"
     "vsyscall=emulate"  # Fix for old Windows games crashing
+    # Panic recovery to prevent complete freezes
+    "panic=10"  # Reboot 10 seconds after kernel panic
+    "oops=panic"  # Treat oops as panic to trigger reboot
+    "softlockup_panic=1"  # Panic on soft lockups
   ];
 
   # System optimizations for consistent performance
@@ -66,9 +70,6 @@
     dedicatedServer.openFirewall = true;
     gamescopeSession.enable = true;
   };
-  networking.extraHosts = ''
-    192.168.49.2 dashboard.com
-  '';
 
   # Gaming packages
   environment.systemPackages = with pkgs; [
