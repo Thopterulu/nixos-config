@@ -85,6 +85,9 @@
     ".config/rofi/tokyo-night.rasi".source = ./dotfiles/rofi/tokyo-night.rasi;
     # PCManFM config
     ".config/pcmanfm/default/pcmanfm.conf".source = ./dotfiles/pcmanfm/pcmanfm.conf;
+    # Autorandr profiles
+    ".config/autorandr/desktop/config".source = ./dotfiles/autorandr/desktop/config;
+    ".config/autorandr/projector/config".source = ./dotfiles/autorandr/projector/config;
   };
 
   # Enable GTK
