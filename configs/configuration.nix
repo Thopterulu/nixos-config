@@ -7,7 +7,7 @@
 {
   imports = [
     ./bluetooth.nix
-    ./wayland.nix
+    ./hyprland.nix
   ];
 
   # allow unfree
