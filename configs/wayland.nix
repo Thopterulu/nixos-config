@@ -8,6 +8,12 @@
   # XWayland for running X11 apps on Wayland (Steam, games, etc)
   programs.xwayland.enable = true;
 
+  # Hyprland compositor
+  programs.hyprland = {
+    enable = true;
+    xwayland.enable = true;
+  };
+
   # Wayland environment variables for better compatibility
   environment.sessionVariables = {
     # NVIDIA Wayland support - fix flickering and performance
@@ -26,9 +32,13 @@
     XKB_DEFAULT_OPTIONS = "eurosign:e,caps:escape";
   };
 
-  # Wayland-specific packages including qtile wayland backend
+  # Wayland-specific packages
   environment.systemPackages = with pkgs; [
     wl-clipboard      # Wayland clipboard utilities
     xwayland          # X11 compatibility layer
+    kitty             # Terminal for Hyprland
+    wofi              # App launcher for Wayland
+    dolphin           # KDE file manager
+    hyprlauncher      # Hyprland app launcher
   ];
 }
