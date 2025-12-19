@@ -1,29 +1,11 @@
-# Desktop-only configuration with NVIDIA and gaming optimizations
+# Desktop-only configuration with gaming optimizations
 { config, lib, pkgs, ... }:
 
 {
   imports = [
     ./configuration.nix
+    ./nvidia.nix
   ];
-
-  # NVIDIA configuration (desktop only)
-  services.xserver.videoDrivers = [ "nvidia" ];
-
-  hardware.nvidia = {
-    package = config.boot.kernelPackages.nvidiaPackages.legacy_535;
-    modesetting.enable = true;
-    open = false;  # Legacy 535 uses proprietary driver (535.274.02)
-    powerManagement.enable = true;
-    powerManagement.finegrained = false;  # Full power for gaming
-    forceFullCompositionPipeline = false; # Reduces input lag
-    prime = {
-      # PRIME sync: NVIDIA renders, Intel outputs to displays
-      sync.enable = true;
-
-      nvidiaBusId = "PCI:1@0:0:0";   # 01:00.0
-      intelBusId = "PCI:0@0:2:0";    # 00:02.0
-    };
-  };
 
   # Desktop-specific display configuration
   services.xserver.displayManager.sessionCommands = ''
@@ -42,16 +24,10 @@
   powerManagement.cpuFreqGovernor = "performance";
   programs.corectrl.enable = true;
 
+  # Gaming-specific kernel parameters
   boot.kernelParams = [
-    "nvidia_drm.modeset=1"
-    "nvidia.NVreg_PreserveVideoMemoryAllocations=1"
-    "nvidia.NVreg_EnableGpuFirmware=0"  # Fixes random frame drops
-    "mitigations=off"
-    "vsyscall=emulate"  # Fix for old Windows games crashing
-    # Panic recovery to prevent complete freezes
-    "panic=10"  # Reboot 10 seconds after kernel panic
-    "oops=panic"  # Treat oops as panic to trigger reboot
-    "softlockup_panic=1"  # Panic on soft lockups
+    "mitigations=off"       # Disable CPU vulnerability mitigations for performance
+    "vsyscall=emulate"      # Fix for old Windows games crashing
   ];
 
   # System optimizations for consistent performance
