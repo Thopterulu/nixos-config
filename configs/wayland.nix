@@ -39,6 +39,5 @@
     kitty                # Terminal for Hyprland
     wofi                 # App launcher for Wayland
     kdePackages.dolphin  # KDE file manager
-    rofi-wayland         # Rofi for Wayland
   ];
 }
