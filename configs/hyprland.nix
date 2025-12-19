@@ -13,10 +13,9 @@
     enable = true;
     xwayland.enable = true;
   };
-  wayland.windowManager.hyprland = {
-    enable = true;
-    settings = {};
-  };
+  # wayland.windowManager.hyprland = {
+  #   enable = true;
+  # };
 
   # Wayland environment variables for better compatibility
   environment.sessionVariables = {
