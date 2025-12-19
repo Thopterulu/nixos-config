@@ -34,11 +34,11 @@
 
   # Wayland-specific packages
   environment.systemPackages = with pkgs; [
-    wl-clipboard      # Wayland clipboard utilities
-    xwayland          # X11 compatibility layer
-    kitty             # Terminal for Hyprland
-    wofi              # App launcher for Wayland
-    dolphin           # KDE file manager
-    hyprlauncher      # Hyprland app launcher
+    wl-clipboard         # Wayland clipboard utilities
+    xwayland             # X11 compatibility layer
+    kitty                # Terminal for Hyprland
+    wofi                 # App launcher for Wayland
+    kdePackages.dolphin  # KDE file manager
+    rofi-wayland         # Rofi for Wayland
   ];
 }
