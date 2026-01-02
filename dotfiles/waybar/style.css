@@ -1,0 +1,150 @@
+* {
+  border: none;
+  border-radius: 0;
+  font-family: "JetBrainsMono Nerd Font", "Font Awesome 6 Free", monospace;
+  font-size: 13px;
+  min-height: 0;
+}
+
+window#waybar {
+  background-color: rgba(26, 27, 38, 0.9);
+  color: #cdd6f4;
+  transition-property: background-color;
+  transition-duration: 0.5s;
+}
+
+window#waybar.hidden {
+  opacity: 0.2;
+}
+
+/* Workspaces */
+#workspaces button {
+  padding: 0 8px;
+  background-color: transparent;
+  color: #89b4fa;
+  border-bottom: 3px solid transparent;
+}
+
+#workspaces button:hover {
+  background: rgba(137, 180, 250, 0.2);
+  border-bottom: 3px solid #89b4fa;
+}
+
+#workspaces button.active {
+  background-color: rgba(137, 180, 250, 0.3);
+  border-bottom: 3px solid #89b4fa;
+  color: #cdd6f4;
+}
+
+#workspaces button.urgent {
+  background-color: rgba(243, 139, 168, 0.3);
+  border-bottom: 3px solid #f38ba8;
+  color: #f38ba8;
+}
+
+/* Window title */
+#window {
+  padding: 0 10px;
+  color: #cdd6f4;
+  font-weight: bold;
+}
+
+/* Clock */
+#clock {
+  padding: 0 15px;
+  color: #f5e0dc;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+/* System modules */
+#cpu,
+#memory,
+#temperature,
+#battery,
+#network,
+#pulseaudio,
+#tray {
+  padding: 0 10px;
+  margin: 0 2px;
+}
+
+#cpu {
+  color: #89dceb;
+}
+
+#memory {
+  color: #cba6f7;
+}
+
+#temperature {
+  color: #f9e2af;
+}
+
+#temperature.critical {
+  color: #f38ba8;
+  animation: blink 1s linear infinite;
+}
+
+#battery {
+  color: #a6e3a1;
+}
+
+#battery.charging,
+#battery.plugged {
+  color: #a6e3a1;
+}
+
+#battery.warning:not(.charging) {
+  color: #f9e2af;
+}
+
+#battery.critical:not(.charging) {
+  color: #f38ba8;
+  animation: blink 1s linear infinite;
+}
+
+#network {
+  color: #89b4fa;
+}
+
+#network.disconnected {
+  color: #f38ba8;
+}
+
+#pulseaudio {
+  color: #fab387;
+}
+
+#pulseaudio.muted {
+  color: #585b70;
+}
+
+#tray {
+  padding: 0 10px;
+}
+
+#tray > .passive {
+  -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+  -gtk-icon-effect: highlight;
+  background-color: #f38ba8;
+}
+
+@keyframes blink {
+  to {
+    opacity: 0.5;
+  }
+}
+
+tooltip {
+  background: rgba(26, 27, 38, 0.95);
+  border: 1px solid #89b4fa;
+  border-radius: 8px;
+}
+
+tooltip label {
+  color: #cdd6f4;
+}

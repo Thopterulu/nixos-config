@@ -89,6 +89,9 @@
     ".config/autorandr/desktop/config".source = ./dotfiles/autorandr/desktop/config;
     ".config/autorandr/projector/config".source = ./dotfiles/autorandr/projector/config;
     ".config/hypr/hyprland.conf".source = ./dotfiles/hypr/hyprland.conf;
+    # Waybar config
+    #".config/waybar/config.jsonc".source = ./dotfiles/waybar/config.jsonc;
+    #".config/waybar/style.css".source = ./dotfiles/waybar/style.css;
   };
 
   # Enable GTK
