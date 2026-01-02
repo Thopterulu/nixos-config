@@ -65,21 +65,26 @@
     ];
   };
 
-  # Auto-mount Google Drive script
-  home.file.".local/bin/mount-gdrive" = {
-    source = ./scripts/mount-gdrive.sh;
-    executable = true;
-  };
-
-  # dotfiles config copy - copies entire dotfiles directory to .config
+  # All home.file configurations merged into one block
   home.file = {
-    ".config".source = ./dotfiles;
-  };
+    # Auto-mount Google Drive script
+    ".local/bin/mount-gdrive" = {
+      source = ./scripts/mount-gdrive.sh;
+      executable = true;
+    };
 
-  # Enable GTK
-  gtk.enable = true;
+    # dotfiles config - link each subdirectory individually
+    ".config/alacritty".source = ./dotfiles/alacritty;
+    ".config/autorandr".source = ./dotfiles/autorandr;
+    ".config/dunst".source = ./dotfiles/dunst;
+    ".config/flameshot".source = ./dotfiles/flameshot;
+    ".config/hypr".source = ./dotfiles/hypr;
+    ".config/pcmanfm".source = ./dotfiles/pcmanfm;
+    ".config/qtile".source = ./dotfiles/qtile;
+    ".config/rofi".source = ./dotfiles/rofi;
+    ".config/waybar".source = ./dotfiles/waybar;
 
-  home.file = {
+    # Directory structure
     "Music/.keep".text = "";
     "Code/.keep".text = "";
     "Notes/.keep".text = "";
@@ -90,6 +95,9 @@
     "Videos/.keep".text = "";
     "game-sandbox/.keep".text = "";
   };
+
+  # Enable GTK
+  gtk.enable = true;
 
 
   programs.git = {
