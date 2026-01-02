@@ -10,7 +10,7 @@ streamcontroller -b &
 dunst &
 
 # Discord on workspace 3
-hyprctl dispatch exec "[workspace 2 silent] discord" &
+hyprctl dispatch exec "[workspace 2] discord" &
 
 # Wait a moment for everything to initialize
 sleep 1

@@ -71,15 +71,7 @@
     executable = true;
   };
 
-
-
-  # Hyprland autostart script
-  home.file.".config/hypr/autostart.sh" = {
-    source = ./dotfiles/hypr/autostart.sh;
-    executable = true;
-  };
-
-  # dotfiles config copy
+  # dotfiles config copy - copies entire dotfiles directory to .config
   home.file = {
     ".config".source = ./dotfiles;
   };
