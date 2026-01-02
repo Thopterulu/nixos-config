@@ -96,9 +96,8 @@
     ".config/autorandr/projector/config".source = ./dotfiles/autorandr/projector/config;
     # Hyprland config
     ".config/hypr/hyprland.conf".source = ./dotfiles/hypr/hyprland.conf;
-    # Waybar config
-    ".config/waybar/config.jsonc".source = ./dotfiles/waybar/config.jsonc;
-    ".config/waybar/style.css".source = ./dotfiles/waybar/style.css;
+    # Waybar config - copies entire directory
+    ".config/waybar".source = ./dotfiles/waybar;
   };
 
   # Enable GTK
