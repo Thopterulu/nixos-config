@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Google Drive mount
-$HOME/.local/bin/mount-gdrive &
+#$HOME/.local/bin/mount-gdrive &
 
 # Stream Controller (Stream Deck software) in background
 streamcontroller -b &
