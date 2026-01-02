@@ -73,6 +73,12 @@
 
 
 
+  # Hyprland autostart script
+  home.file.".config/hypr/autostart.sh" = {
+    source = ./dotfiles/hypr/autostart.sh;
+    executable = true;
+  };
+
   # Qtile config
   home.file = {
     # qtile
@@ -88,10 +94,11 @@
     # Autorandr profiles
     ".config/autorandr/desktop/config".source = ./dotfiles/autorandr/desktop/config;
     ".config/autorandr/projector/config".source = ./dotfiles/autorandr/projector/config;
+    # Hyprland config
     ".config/hypr/hyprland.conf".source = ./dotfiles/hypr/hyprland.conf;
     # Waybar config
-    #".config/waybar/config.jsonc".source = ./dotfiles/waybar/config.jsonc;
-    #".config/waybar/style.css".source = ./dotfiles/waybar/style.css;
+    ".config/waybar/config.jsonc".source = ./dotfiles/waybar/config.jsonc;
+    ".config/waybar/style.css".source = ./dotfiles/waybar/style.css;
   };
 
   # Enable GTK
