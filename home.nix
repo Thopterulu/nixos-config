@@ -79,25 +79,9 @@
     executable = true;
   };
 
-  # Qtile config
+  # dotfiles config copy
   home.file = {
-    # qtile
-    ".config/qtile/config.py".source = ./dotfiles/qtile/config.py;
-    ".config/qtile/background.py".source = ./dotfiles/qtile/background.py;
-    # Alacritty config
-    ".config/alacritty/alacritty.toml".source = ./dotfiles/alacritty/alacritty.toml;
-    # Rofi config
-    ".config/rofi/config.rasi".source = ./dotfiles/rofi/config.rasi;
-    ".config/rofi/tokyo-night.rasi".source = ./dotfiles/rofi/tokyo-night.rasi;
-    # PCManFM config
-    ".config/pcmanfm/default/pcmanfm.conf".source = ./dotfiles/pcmanfm/pcmanfm.conf;
-    # Autorandr profiles
-    ".config/autorandr/desktop/config".source = ./dotfiles/autorandr/desktop/config;
-    ".config/autorandr/projector/config".source = ./dotfiles/autorandr/projector/config;
-    # Hyprland config
-    ".config/hypr/hyprland.conf".source = ./dotfiles/hypr/hyprland.conf;
-    # Waybar config - copies entire directory
-    ".config/waybar".source = ./dotfiles/waybar;
+    ".config".source = ./dotfiles;
   };
 
   # Enable GTK
@@ -110,6 +94,7 @@
     "Documents/.keep".text = "";
     "Downloads/.keep".text = "";
     "Pictures/.keep".text = "";
+    "Pictures/Screenshots/.keep".text = "";
     "Videos/.keep".text = "";
     "game-sandbox/.keep".text = "";
   };

@@ -43,5 +43,7 @@
     wofi                 # App launcher for Wayland
     kdePackages.dolphin  # KDE file manager
     waybar               # Status bar for Wayland
+    grim                 # Screenshot tool for Wayland
+    slurp                # Region selector for Wayland
   ];
 }
