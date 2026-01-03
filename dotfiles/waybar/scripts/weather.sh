@@ -1,17 +1,19 @@
 #!/usr/bin/env bash
 
+# Force English number formatting for printf
+export LC_NUMERIC=C
+
 # Configuration
 API_KEY="ed9e1f66545f2f25d7bb0655c4116045"
-CITY_ID="468902"
+CITY_ID="2996944"
 UNITS="metric"
-LANG="en"
+LANG="fr"
 
 # Function to check if API key is valid
 check_api_key() {
     local test_request=$(curl -s "api.openweathermap.org/data/2.5/weather?q=Lyon&appid=$API_KEY")
     if [[ $test_request == *"Invalid API key"* ]]; then
-        echo "󰖙 Invalid API key"
-
+        echo '{"text":"󰖙 Invalid API key", "tooltip":"API key error"}'
         exit 1
     fi
 }
@@ -79,19 +81,21 @@ if [ -n "$WEATHER_DATA" ]; then
     # Determine if it's day or night
     CURRENT_TIME=$(date +%s)
     IS_DAY="true"
-    if [ $CURRENT_TIME -lt $SUNRISE ] || [ $CURRENT_TIME -gt $SUNSET ]; then
+    if [ "$CURRENT_TIME" -lt "$SUNRISE" ] || [ "$CURRENT_TIME" -gt "$SUNSET" ]; then
         IS_DAY="false"
     fi
 
-    # Round temperatures
-    TEMP=$(printf "%.0f" $TEMP)
-    FEELS_LIKE=$(printf "%.0f" $FEELS_LIKE)
+    # Round temperatures (using LC_NUMERIC=C for proper decimal handling)
+    TEMP=$(printf "%.0f" "$TEMP")
+    FEELS_LIKE=$(printf "%.0f" "$FEELS_LIKE")
 
     # Get weather icon
     ICON=$(get_icon "$DESCRIPTION" "$IS_DAY" "$DETAILED_DESC")
 
-    # Format output
-    echo "$ICON $TEMP°C 󰤾 $FEELS_LIKE°C"
+    # Format output as JSON
+    cat <<EOF
+{"text":"$ICON $TEMP°C", "tooltip":"$DETAILED_DESC\nFeels like: $FEELS_LIKE°C"}
+EOF
 else
-    echo "󰖙 Weather unavailable"
+    echo '{"text":"󰖙 Weather unavailable", "tooltip":"Could not fetch weather data"}'
 fi
