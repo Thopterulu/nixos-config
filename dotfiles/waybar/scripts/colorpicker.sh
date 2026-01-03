@@ -26,17 +26,21 @@ limit=10
 [[ $# -eq 1 && $1 = "-j" ]] && {
   text="$(head -n 1 "$loc/colors")"
 
+  # Use default color if file is empty
+  if [ -z "$text" ]; then
+    text="#89b4fa"
+  fi
+
   mapfile -t allcolors < <(tail -n +2 "$loc/colors")
-  # allcolors=($(tail -n +2 "$loc/colors"))
   tooltip="<b>   COLORS</b>\n\n"
 
-  tooltip+="-> <b>$text</b>  <span color='$text'></span>  \n"
+  tooltip+="-> <b>$text</b>  <span color='$text'></span>  \n"
   for i in "${allcolors[@]}"; do
-    tooltip+="   <b>$i</b>  <span color='$i'></span>  \n"
+    [ -n "$i" ] && tooltip+="   <b>$i</b>  <span color='$i'></span>  \n"
   done
 
   cat <<EOF
-{ "text":"<span color='$text'></span>", "tooltip":"$tooltip"}  
+{ "text":"<span color='$text'></span>", "tooltip":"$tooltip"}
 EOF
 
   exit

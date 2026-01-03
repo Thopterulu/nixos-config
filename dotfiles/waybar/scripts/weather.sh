@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Configuration
 API_KEY="ed9e1f66545f2f25d7bb0655c4116045"
