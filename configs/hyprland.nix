@@ -47,5 +47,6 @@
     slurp                # Region selector for Wayland
     jq                   # JSON processor for waybar scripts
     hyprpicker           # Color picker for Wayland
+    hyprlock             # Screen locker for Hyprland
   ];
 }
