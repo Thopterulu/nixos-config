@@ -45,5 +45,7 @@
     waybar               # Status bar for Wayland
     grim                 # Screenshot tool for Wayland
     slurp                # Region selector for Wayland
+    jq                   # JSON processor for waybar scripts
+    hyprpicker           # Color picker for Wayland
   ];
 }
