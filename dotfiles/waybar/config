@@ -1,12 +1,13 @@
 {
-  "layer": "top", "position": "top",
-  "modules-left": ["custom/logo", "clock",  "custom/weather", "disk", "memory", "cpu", "temperature", "custom/powerDraw", "hyprland/window" ],
-  "modules-center": [  "hyprland/workspaces"],
-  "modules-right": ["tray",  "custom/clipboard", "backlight", "idle_inhibitor", "custom/colorpicker", "bluetooth", "pulseaudio", "network",  "battery" ],
-  "reload_style_on_change":true,
+  "layer": "top",
+  "position": "top",
+  "modules-left": ["custom/logo", "clock", "custom/weather", "disk", "memory", "cpu", "temperature", "custom/powerDraw", "hyprland/window"],
+  "modules-center": ["hyprland/workspaces"],
+  "modules-right": ["tray", "mpris", "custom/clipboard", "backlight", "idle_inhibitor", "custom/colorpicker", "bluetooth", "pulseaudio", "network", "battery", "custom/power"],
+  "reload_style_on_change": true,
 
   "custom/logo": {
-    "format": "",
+    "format": "",
     "tooltip": false
   },
 
@@ -27,26 +28,26 @@
        }
 },
 
-"idle_inhibitor":{
-  "format": "<span font='12'>{icon} </span>",
-  "format-icons": {
-    "activated":"󰈈",
-    "deactivated":"󰈉"
-  }
-},
+  "idle_inhibitor": {
+    "format": "<span font='12'>{icon} </span>",
+    "format-icons": {
+      "activated": "󰈈",
+      "deactivated": "󰈉"
+    }
+  },
 
-"custom/weather": {
-  "format": "{}",
-  "return-type": "json",
-  "exec": "~/.config/waybar/scripts/weather.sh",
-  "interval": 10,
-  "on-click": "firefox https://wttr.in"
-},
+  "custom/weather": {
+    "format": "{}",
+    "return-type": "json",
+    "exec": "~/.config/waybar/scripts/weather.sh",
+    "interval": 10,
+    "on-click": "firefox https://wttr.in"
+  },
 
 "custom/clipboard":{
   "format":"",
   "on-click": "cliphist list | rofi -dmenu | cliphist decode | wl-copy",
-  "interval":86400
+  "interval": 86400
 },
 
 
@@ -71,43 +72,44 @@
   "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
   "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
   "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%",
-  "on-click": "rofi-bluetooth",
+  "on-click": "blueman-manager"
  },
 
-"network": {
-      "format-wifi": " ",
-      "format-ethernet":" ",
-      "format-disconnected": "",
-      "tooltip-format": "{ipaddr}",
-      "tooltip-format-wifi": "{essid} ({signalStrength}%)  | {ipaddr}",
-      "tooltip-format-ethernet": "{ifname} 🖧 | {ipaddr}",
-      "on-click": "networkmanager_dmenu"
-    },
+  "network": {
+    "format-wifi": " ",
+    "format-ethernet": "󰈀 ",
+    "format-disconnected": "",
+    "tooltip-format": "{ipaddr}",
+    "tooltip-format-wifi": "{essid} ({signalStrength}%)  | {ipaddr}",
+    "tooltip-format-ethernet": "{ifname} 🖧 | {ipaddr}",
+    "on-click": "networkmanager_dmenu"
+  },
 
-"battery": {
-    "interval":1,
-        "states": {
-            "good": 95,
-            "warning": 30,
-            "critical": 20
-        },
-        "format": "{capacity}%  {icon} ",
-        "format-charging": "{capacity}% 󰂄 ",
-        "format-plugged": "{capacity}% 󰂄 ",
-        "format-alt": "{time} {icon}",
-            "format-icons": [
-          "󰁻",
-          "󰁼",
-          "󰁾",
-          "󰂀",
-          "󰂂",
-          "󰁹"
-        ],
+  "battery": {
+    "interval": 1,
+    "states": {
+      "good": 95,
+      "warning": 30,
+      "critical": 20
     },
-"backlight": {
-  "device": "intel_backlight",
-  "format": "<span font='12'>{icon}</span>",
-  "format-icons": [
+    "format": "{capacity}%  {icon} ",
+    "format-charging": "{capacity}% 󰂄 ",
+    "format-plugged": "{capacity}% 󰂄 ",
+    "format-alt": "{time} {icon}",
+    "format-icons": [
+      "󰁻",
+      "󰁼",
+      "󰁾",
+      "󰂀",
+      "󰂂",
+      "󰁹"
+    ]
+  },
+
+  "backlight": {
+    "device": "intel_backlight",
+    "format": "<span font='12'>{icon}</span>",
+    "format-icons": [
     "",
     "",
     "",
@@ -117,16 +119,16 @@
     "",
     "",
     "",
-    "",
-  ],
-  "on-scroll-down": "light -A 10",
-  "on-scroll-up": "light -U 10",
-  "smooth-scrolling-threshold": 1
+    ""
+    ],
+    "on-scroll-down": "light -A 10",
+    "on-scroll-up": "light -U 10",
+    "smooth-scrolling-threshold": 1
   },
 
- "disk": {
+  "disk": {
     "interval": 30,
-    "format": "  {percentage_used}%",
+    "format": "{percentage_used}%",
     "path": "/"
   },
 
@@ -140,71 +142,83 @@
   },
 
   "cpu": {
-      "interval": 1,
-      "format": " {usage}%",
-      "min-length": 6,
-      "max-length": 6,
-      "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"],
- },
+    "interval": 1,
+    "format": " {usage}%",
+    "min-length": 6,
+    "max-length": 6,
+    "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"]
+  },
 
-"memory": {
-  "format": " {percentage}%"
-},
+  "memory": {
+    "format": " {percentage}%"
+  },
 
- "hyprland/window": {
+  "hyprland/window": {
     "format": "( {class} )",
     "rewrite": {
-         "(.*) - Mozilla Firefox": "🌎 $1",
-         "(.*) - zsh": "> [$1]"
+      "(.*) - Mozilla Firefox": "🌎 $1",
+      "(.*) - zsh": "> [$1]"
     }
-},
-
-"temperature": {
-  "format": " {temperatureC}°C",
-  "format-critical": " {temperatureC}°C",
-  "interval": 1,
-  "critical-threshold": 80,
-  "on-click": "foot btop",
- },
-
-"pulseaudio": {
-  "format": "{volume}% {icon}",
-  "format-bluetooth":"󰂰",
-  "format-muted": "<span font='12'></span>",
-  "format-icons": {
-    "headphones": "",
-    "bluetooth": "󰥰",
-    "handsfree": "",
-    "headset": "󱡬",
-    "phone": "",
-    "portable": "",
-    "car": "",
-    "default": ["🕨","🕩","🕪"]
   },
-  "justify": "center",
-  "on-click": "amixer sset Master toggle",
-  "on-click-right": "pavucontrol",
-  "tooltip-format": "{icon}  {volume}%"
-},
 
-"jack": {
-    "format": "{} 󱎔",
-    "format-xrun": "{xruns} xruns",
-    "format-disconnected": "DSP off",
-    "realtime": true
-},
+  "temperature": {
+    "format": " {temperatureC}°C",
+    "format-critical": " {temperatureC}°C",
+    "interval": 1,
+    "critical-threshold": 80,
+    "on-click": "kitty btop"
+  },
 
-"tray": {
+  "pulseaudio": {
+    "format": "{volume}% {icon}",
+    "format-bluetooth": "󰂰",
+    "format-muted": "<span font='12'></span>",
+    "format-icons": {
+      "headphones": "",
+      "bluetooth": "󰥰",
+      "handsfree": "󱡏",
+      "headset": "󱡬",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": ["🕨", "🕩", "🕪"]
+    },
+    "justify": "center",
+    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+    "on-click-right": "pavucontrol",
+    "tooltip-format": "{icon}  {volume}%"
+  },
+
+  "mpris": {
+    "format": "{player_icon} {dynamic}",
+    "format-paused": "{status_icon} <i>{dynamic}</i>",
+    "player-icons": {
+      "default": "♪",
+      "mpv": "🎵",
+      "spotify": "",
+      "firefox": "🎧"
+    },
+    "status-icons": {
+      "paused": "⏸",
+      "playing": "▶"
+    },
+    "dynamic-order": ["artist", "title"],
+    "dynamic-len": 40,
+    "on-click": "playerctl play-pause",
+    "on-click-right": "playerctl next",
+    "on-click-middle": "playerctl previous"
+  },
+
+  "custom/power": {
+    "format": "⏻",
+    "tooltip": false,
+    "on-click": "~/.config/waybar/scripts/power-menu.sh"
+  },
+
+  "tray": {
     "icon-size": 14,
     "spacing": 10
-},
-
-"upower": {
-    "show-icon": false,
-    "hide-if-empty": true,
-    "tooltip": true,
-    "tooltip-spacing": 20
-},
+  },
 
   "custom/powerDraw": {
     "format": "{}",
@@ -212,6 +226,4 @@
     "exec": "~/.config/waybar/scripts/powerdraw.sh",
     "return-type": "json"
   }
-
 }
-
