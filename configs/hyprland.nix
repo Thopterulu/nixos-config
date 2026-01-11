@@ -1,9 +1,25 @@
 # Wayland configuration
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, inputs,... }:
 
 {
   # Enable Wayland support in SDDM
   services.displayManager.sddm.wayland.enable = true;
+  # services.hyprshell = {
+  #   enable = true;
+  #   settings = {
+  #     windows = {
+  #       scale = 8.0;
+  #       overview = {
+  #         launcher = {
+  #           max_items = 6;
+  #         };
+  #       };
+  #       switch = {
+  #         modifier = "alt";
+  #       };
+  #     };
+  #   };
+  # };
 
   # XWayland for running X11 apps on Wayland (Steam, games, etc)
   programs.xwayland.enable = true;
@@ -48,5 +64,6 @@
     jq                   # JSON processor for waybar scripts
     hyprpicker           # Color picker for Wayland
     hyprlock             # Screen locker for Hyprland
+    hyprshell            # Hyprland alt tab launcher
   ];
 }
