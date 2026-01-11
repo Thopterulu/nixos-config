@@ -64,6 +64,23 @@
       }
     ];
   };
+  services.hyprshell = {
+    enable = true;
+    settings = {
+      windows = {
+        scale = 8.0;
+        overview = {
+          launcher = {
+            max_items = 6;
+          };
+        };
+        switch = {
+          modifier = "alt";
+        };
+      };
+    };
+  };
+
 
   # All home.file configurations merged into one block
   home.file = {
