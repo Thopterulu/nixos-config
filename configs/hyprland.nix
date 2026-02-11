@@ -27,6 +27,10 @@
     __GL_GSYNC_ALLOWED = "1";
     __GL_VRR_ALLOWED = "1";
 
+    # NVIDIA explicit sync optimization (driver 555+)
+    __GL_SYNC_TO_VBLANK = "0";  # Let VRR/explicit sync handle it
+    __GL_YIELD = "USLEEP";  # Better CPU usage, fixes menu stuttering
+
     # Enable Wayland for Electron/Chrome apps
     NIXOS_OZONE_WL = "1";
 
