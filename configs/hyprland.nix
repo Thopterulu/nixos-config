@@ -52,6 +52,7 @@
     jq                   # JSON processor for waybar scripts
     hyprpicker           # Color picker for Wayland
     hyprlock             # Screen locker for Hyprland
+    swww                 # Wallpaper daemon with smooth transitions
     #hyprshell            # Hyprland alt tab launcher
   ];
 }

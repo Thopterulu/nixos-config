@@ -85,6 +85,7 @@
     "Pictures/.keep".text = "";
     "Pictures/Screenshots/.keep".text = "";
     "Videos/.keep".text = "";
+    "backgrounds/.keep".text = "";
     "game-sandbox/.keep".text = "";
   };
 
@@ -137,9 +138,9 @@
       zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 
       # Auto-mount Google Drive on shell startup
-      if [ ! -d "$HOME/GoogleDrive" ] || ! mountpoint -q "$HOME/GoogleDrive" 2>/dev/null; then
-        "$HOME/.local/bin/mount-gdrive" 2>/dev/null &
-      fi
+      #if [ ! -d "$HOME/GoogleDrive" ] || ! mountpoint -q "$HOME/GoogleDrive" 2>/dev/null; then
+      #  "$HOME/.local/bin/mount-gdrive" 2>/dev/null &
+      #fi
     '';
   };
 
