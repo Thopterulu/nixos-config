@@ -55,7 +55,7 @@
     enable = true;  # Still needed for XWayland and some apps
     xkb.layout = "fr";
     xkb.options = "eurosign:e,caps:escape";
-
+  };
 
   hardware.graphics = {
     enable = true;
