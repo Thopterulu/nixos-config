@@ -31,9 +31,8 @@
     rfc
     tor
     tor-browser
-    xorg.xkill
     protonup-qt    # Manage custom Proton versions
-    i3lock-fancy   # Uses current screen as blurred background
+    i3lock-fancy   # Screen lock (fallback for hyprlock)
     libreoffice
     opensnitch-ui
     bubblewrap
@@ -42,28 +41,6 @@
     itch
   ];
 
-  # Auto-lock screen with xidlehook
-  services.xidlehook = {
-    enable = true;
-    detect-sleep = true;
-    not-when-audio = true;
-    not-when-fullscreen = true;
-    timers = [
-      {
-        delay = 330;  # 330 seconds - turn screens off
-        command = "${pkgs.xorg.xrandr}/bin/xrandr --listmonitors | tail -n +2 | awk '{print $NF}' | xargs -I {} ${pkgs.xorg.xrandr}/bin/xrandr --output {} --brightness 0";
-        canceller = "${pkgs.xorg.xrandr}/bin/xrandr --listmonitors | tail -n +2 | awk '{print $NF}' | xargs -I {} ${pkgs.xorg.xrandr}/bin/xrandr --output {} --brightness 1";
-      }
-      {
-        delay = 300;  # 5 minutes - lock screen
-        command = "i3lock-fancy";
-      }
-      {
-        delay = 900;  # 15 minutes - suspend system
-        command = "systemctl suspend";
-      }
-    ];
-  };
   services.hyprshell = {
     enable = true;
     settings = {
@@ -92,12 +69,10 @@
 
     # dotfiles config - link each subdirectory individually
     ".config/alacritty".source = ./dotfiles/alacritty;
-    ".config/autorandr".source = ./dotfiles/autorandr;
     ".config/dunst".source = ./dotfiles/dunst;
     ".config/flameshot".source = ./dotfiles/flameshot;
     ".config/hypr".source = ./dotfiles/hypr;
     ".config/pcmanfm".source = ./dotfiles/pcmanfm;
-    ".config/qtile".source = ./dotfiles/qtile;
     ".config/rofi".source = ./dotfiles/rofi;
     ".config/waybar".source = ./dotfiles/waybar;
 

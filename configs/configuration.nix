@@ -50,23 +50,11 @@
 
   services.displayManager.sddm.enable = true;
 
-  # Enable the X11 windowing system.
+  # X11 support (kept minimal for XWayland compatibility)
   services.xserver = {
-    enable = true;
-    windowManager.qtile.enable = true;
+    enable = true;  # Still needed for XWayland and some apps
     xkb.layout = "fr";
     xkb.options = "eurosign:e,caps:escape";
-    displayManager.sessionCommands = ''
-      xset r rate 200 35 &
-    '';
-  };
-
-  services.picom = {
-    enable = true;
-    backend = "glx";
-    fade = true;
-  };
-
 
 
   hardware.graphics = {
@@ -177,7 +165,6 @@
     homebank
     vscode
     playerctl
-    autorandr         # Automatic display configuration
     firejail          # Application sandboxing
     # GTK themes and icons for better file manager appearance
     arc-theme
