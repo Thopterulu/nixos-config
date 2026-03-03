@@ -156,5 +156,41 @@
     enableZshIntegration = true;
   };
 
+  # MIME type associations (default applications)
+  xdg.mimeApps = {
+    enable = true;
+    defaultApplications = {
+      # Images → GIMP
+      "image/png" = "gimp.desktop";
+      "image/jpeg" = "gimp.desktop";
+      "image/jpg" = "gimp.desktop";
+      "image/gif" = "gimp.desktop";
+      "image/bmp" = "gimp.desktop";
+      "image/webp" = "gimp.desktop";
+      "image/tiff" = "gimp.desktop";
+
+      # Videos → VLC
+      "video/mp4" = "vlc.desktop";
+      "video/x-matroska" = "vlc.desktop";  # MKV
+      "video/webm" = "vlc.desktop";
+      "video/avi" = "vlc.desktop";
+      "video/x-msvideo" = "vlc.desktop";
+      "video/quicktime" = "vlc.desktop";  # MOV
+      "video/x-flv" = "vlc.desktop";
+      "video/mpeg" = "vlc.desktop";
+
+      # Audio → VLC
+      "audio/mpeg" = "vlc.desktop";  # MP3
+      "audio/mp4" = "vlc.desktop";   # M4A
+      "audio/flac" = "vlc.desktop";
+      "audio/x-wav" = "vlc.desktop";
+      "audio/ogg" = "vlc.desktop";
+      "audio/x-vorbis+ogg" = "vlc.desktop";
+      "audio/aac" = "vlc.desktop";
+
+      # PDFs → Firefox (you can change to another PDF reader)
+      "application/pdf" = "firefox.desktop";
+    };
+  };
 
 }

@@ -162,6 +162,12 @@
     direnv
     zip
     unzip
+    # Media applications
+    vlc                # Video/audio player
+    gimp               # Image editor
+    davinci-resolve
+    shotcut
+    kdenlive
     homebank
     vscode
     playerctl
@@ -172,7 +178,6 @@
     lxappearance      # GTK theme manager
     xfce.tumbler      # Thumbnail generator for file previews
     ffmpegthumbnailer # Video thumbnails
-    protonvpn-gui     # ProtonVPN client
   ];
 
   fonts.packages = with pkgs; [

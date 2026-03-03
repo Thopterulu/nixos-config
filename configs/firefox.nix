@@ -13,6 +13,7 @@
           return-youtube-dislikes
           tree-style-tab
           betterttv
+          sponsorblock
         ];
       };
       settings = {
