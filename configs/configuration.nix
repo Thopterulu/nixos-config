@@ -167,7 +167,7 @@
     gimp               # Image editor
     davinci-resolve
     shotcut
-    kdenlive
+    kdePackages.kdenlive
     homebank
     vscode
     playerctl
