@@ -89,8 +89,27 @@
     "game-sandbox/.keep".text = "";
   };
 
-  # Enable GTK
-  gtk.enable = true;
+  # Enable GTK with dark theme
+  gtk = {
+    enable = true;
+    theme = {
+      name = "Orchis-Dark";
+      package = pkgs.orchis-theme;
+      # Alternative: Qogir theme (uncomment to use)
+      # name = "Qogir-Dark";
+      # package = pkgs.qogir-theme;
+    };
+    iconTheme = {
+      name = "Adwaita";
+      package = pkgs.adwaita-icon-theme;
+    };
+    gtk3.extraConfig = {
+      gtk-application-prefer-dark-theme = 1;
+    };
+    gtk4.extraConfig = {
+      gtk-application-prefer-dark-theme = 1;
+    };
+  };
 
 
   programs.git = {
@@ -168,6 +187,7 @@
       "image/bmp" = "gimp.desktop";
       "image/webp" = "gimp.desktop";
       "image/tiff" = "gimp.desktop";
+      "image/svg+xml" = "gimp.desktop";
 
       # Videos → VLC
       "video/mp4" = "vlc.desktop";
@@ -188,8 +208,12 @@
       "audio/x-vorbis+ogg" = "vlc.desktop";
       "audio/aac" = "vlc.desktop";
 
-      # PDFs → Firefox (you can change to another PDF reader)
+      # PDFs → Firefox
       "application/pdf" = "firefox.desktop";
+
+      # Office documents → LibreOffice
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document" = "libreoffice-writer.desktop";
+      "application/msword" = "libreoffice-writer.desktop";
     };
   };
 
