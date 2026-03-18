@@ -39,6 +39,7 @@
     insomnia
     figma-linux
     itch
+    direnv
   ];
 
   services.hyprshell = {
