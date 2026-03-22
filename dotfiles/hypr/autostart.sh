@@ -9,6 +9,9 @@ streamcontroller -b &
 # Notification daemon
 dunst &
 
+# Idle daemon (auto-lock, screen dimming, DPMS)
+hypridle &
+
 # Discord on workspace 3
 hyprctl dispatch exec "[workspace 2] discord" &
 
