@@ -42,6 +42,7 @@
   # Wayland-specific packages
   environment.systemPackages = with pkgs; [
     wl-clipboard         # Wayland clipboard utilities
+    cliphist             # Clipboard manager for Wayland
     xwayland             # X11 compatibility layer
     kitty                # Terminal for Hyprland
     wofi                 # App launcher for Wayland

@@ -212,6 +212,13 @@
       # PDFs → Firefox
       "application/pdf" = "firefox.desktop";
 
+      # Web browser → Firefox
+      "text/html" = "firefox.desktop";
+      "x-scheme-handler/http" = "firefox.desktop";
+      "x-scheme-handler/https" = "firefox.desktop";
+      "x-scheme-handler/about" = "firefox.desktop";
+      "x-scheme-handler/unknown" = "firefox.desktop";
+
       # Office documents → LibreOffice
       "application/vnd.openxmlformats-officedocument.wordprocessingml.document" = "libreoffice-writer.desktop";
       "application/msword" = "libreoffice-writer.desktop";

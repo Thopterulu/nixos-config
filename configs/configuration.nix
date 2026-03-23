@@ -165,9 +165,10 @@
     # Media applications
     vlc                # Video/audio player
     gimp               # Image editor
-    davinci-resolve
-    shotcut
-    kdePackages.kdenlive
+    davinci-resolve    # Video editor
+    shotcut            # Video editor
+    kdePackages.kdenlive  # Video editor
+    godot              # 2D/3D game engine
     homebank
     vscode
     playerctl
