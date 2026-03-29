@@ -42,13 +42,15 @@
   # Wayland-specific packages
   environment.systemPackages = with pkgs; [
     wl-clipboard         # Wayland clipboard utilities
-    cliphist             # Clipboard manager for Wayland
+    copyq                # Clipboard manager with GUI and tray icon
     xwayland             # X11 compatibility layer
     kitty                # Terminal for Hyprland
     wofi                 # App launcher for Wayland
     waybar               # Status bar for Wayland
     grim                 # Screenshot tool for Wayland
     slurp                # Region selector for Wayland
+    grimblast            # Screenshot wrapper for Hyprland
+    swappy               # Screenshot annotation tool
     jq                   # JSON processor for waybar scripts
     hyprpicker           # Color picker for Wayland
     hyprlock             # Screen locker for Hyprland

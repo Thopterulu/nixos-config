@@ -3,7 +3,7 @@
   "position": "top",
   "modules-left": ["custom/logo", "clock", "custom/weather", "disk", "memory", "cpu", "temperature", "custom/powerDraw", "hyprland/window"],
   "modules-center": ["hyprland/workspaces"],
-  "modules-right": ["tray", "mpris", "custom/clipboard", "backlight", "idle_inhibitor", "custom/colorpicker", "bluetooth", "pulseaudio", "network", "battery", "custom/power"],
+  "modules-right": ["tray", "custom/mediaplayer", "custom/clipboard", "backlight", "idle_inhibitor", "custom/colorpicker", "bluetooth", "pulseaudio", "network", "battery", "custom/power"],
   "reload_style_on_change": true,
 
   "custom/logo": {
@@ -46,7 +46,8 @@
 
 "custom/clipboard":{
   "format":"",
-  "on-click": "cliphist list | rofi -dmenu | cliphist decode | wl-copy",
+  "on-click": "copyq toggle",
+  "tooltip": "Clipboard Manager",
   "interval": 86400
 },
 
@@ -208,6 +209,17 @@
     "on-click": "playerctl play-pause",
     "on-click-right": "playerctl next",
     "on-click-middle": "playerctl previous"
+  },
+
+  "custom/mediaplayer": {
+    "format": "{}",
+    "return-type": "json",
+    "exec": "~/.config/waybar/scripts/mediaplayer.sh",
+    "interval": 2,
+    "on-click": "playerctl play-pause",
+    "on-click-right": "playerctl next",
+    "on-click-middle": "playerctl previous",
+    "escape": true
   },
 
   "custom/power": {

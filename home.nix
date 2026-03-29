@@ -56,6 +56,9 @@
           modifier = "alt";
         };
       };
+      plugin = {
+        enable = false;  # Disable native plugin to avoid version mismatch warnings
+      };
     };
   };
 
@@ -75,6 +78,7 @@
     ".config/hypr".source = ./dotfiles/hypr;
     ".config/pcmanfm".source = ./dotfiles/pcmanfm;
     ".config/rofi".source = ./dotfiles/rofi;
+    ".config/swappy".source = ./dotfiles/swappy;
     ".config/waybar".source = ./dotfiles/waybar;
 
     # Directory structure

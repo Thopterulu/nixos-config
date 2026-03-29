@@ -12,8 +12,8 @@ dunst &
 # Idle daemon (auto-lock, screen dimming, DPMS)
 hypridle &
 
-# Clipboard manager (cliphist)
-wl-paste --watch cliphist store &
+# Clipboard manager (copyq with tray icon)
+copyq &
 
 # Discord on workspace 3
 hyprctl dispatch exec "[workspace 2] discord" &
