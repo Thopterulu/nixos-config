@@ -56,9 +56,6 @@
           modifier = "alt";
         };
       };
-      plugin = {
-        enable = false;  # Disable native plugin to avoid version mismatch warnings
-      };
     };
   };
 
