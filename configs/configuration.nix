@@ -8,6 +8,7 @@
   imports = [
     ./bluetooth.nix
     ./hyprland.nix
+    ./smartcard.nix
   ];
 
   # allow unfree
