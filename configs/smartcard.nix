@@ -25,6 +25,9 @@
     # Java runtime for Oura smart card plugin
     jre              # Java Runtime Environment
 
+    # PC/SC Lite library for Java smart card access
+    pcsclite         # Library needed by Java to access card readers
+
     # CCID driver is included by default with pcscd
   ];
 

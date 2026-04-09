@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Oura SmartCard Plugin
+Exec=/home/thopter/Code/oura/run.sh %u
+StartupNotify=false
+MimeType=x-scheme-handler/xscpsmartcard;x-scheme-handler/smartcard;
+NoDisplay=true

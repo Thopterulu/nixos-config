@@ -70,7 +70,7 @@
 
     # smart card protocol handler
     ".local/share/applications/xscp-smartcard.desktop" = {
-      source = ./Code/oura/xscp-smartcard.desktop;
+      source = ./files/xscp-smartcard.desktop;
     };
 
     # dotfiles config - link each subdirectory individually
