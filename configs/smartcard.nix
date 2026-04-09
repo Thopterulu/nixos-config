@@ -28,6 +28,8 @@
     # PC/SC Lite library for Java smart card access
     pcsclite         # Library needed by Java to access card readers
 
+    python3
+
     # CCID driver is included by default with pcscd
   ];
 
