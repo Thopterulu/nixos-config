@@ -68,6 +68,11 @@
       executable = true;
     };
 
+    # smart card protocol handler
+    ".local/share/applications/xscp-smartcard.desktop" = {
+      source = ./Code/oura/xscp-smartcard.desktop;
+    };
+
     # dotfiles config - link each subdirectory individually
     ".config/alacritty".source = ./dotfiles/alacritty;
     ".config/dunst".source = ./dotfiles/dunst;
@@ -223,6 +228,10 @@
       # Office documents → LibreOffice
       "application/vnd.openxmlformats-officedocument.wordprocessingml.document" = "libreoffice-writer.desktop";
       "application/msword" = "libreoffice-writer.desktop";
+
+      # smart card protocol handlers
+      "x-scheme-handler/xscpsmartcard" = "xscp-smartcard.desktop";
+      "x-scheme-handler/smartcard" = "xscp-smartcard.desktop";
     };
   };
 

@@ -22,6 +22,9 @@
     # GPG for smart card operations
     gnupg
 
+    # Java runtime for Oura smart card plugin
+    jre              # Java Runtime Environment
+
     # CCID driver is included by default with pcscd
   ];
 
