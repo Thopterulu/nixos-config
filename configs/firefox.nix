@@ -26,6 +26,9 @@
         "devtools.theme" = "dark";
         "browser.theme.dark-private-windows" = true;
         "extensions.activeThemeID" = "firefox-compact-dark@mozilla.org";
+
+        # Smart card support
+        "security.osclientcerts.autoload" = true;
       };
       bookmarks = {
         force = true;

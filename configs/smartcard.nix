@@ -19,6 +19,9 @@
     # OpenSC for smart card support
     opensc           # Tools and libraries for smart cards
 
+    # GPG for smart card operations
+    gnupg
+
     # CCID driver is included by default with pcscd
   ];
 
