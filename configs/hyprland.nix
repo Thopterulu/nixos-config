@@ -51,7 +51,7 @@
     slurp                # Region selector for Wayland
     grimblast            # Screenshot wrapper for Hyprland
     swappy               # Screenshot annotation tool
-    wdisplays            # GUI display configuration tool
+    nwg-displays         # GUI display configuration tool for Hyprland
     jq                   # JSON processor for waybar scripts
     hyprpicker           # Color picker for Wayland
     hyprlock             # Screen locker for Hyprland
