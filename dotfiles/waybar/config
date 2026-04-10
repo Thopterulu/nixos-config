@@ -241,10 +241,11 @@
   },
 
   "custom/monitor-toggle": {
-    "format": "{}",
+    "format": "{} ",
     "return-type": "json",
     "exec": "/tmp/toggle-hdmi-a-4.sh status",
     "interval": 5,
-    "on-click": "/tmp/toggle-hdmi-a-4.sh"
+    "on-click": "/tmp/toggle-hdmi-a-4.sh",
+    "tooltip": true
   }
 }
