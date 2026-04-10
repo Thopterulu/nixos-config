@@ -68,6 +68,16 @@
       executable = true;
     };
 
+    # Monitor management scripts
+    ".local/bin/toggle-monitor" = {
+      source = ./scripts/toggle-monitor.sh;
+      executable = true;
+    };
+    ".local/bin/enable-monitor" = {
+      source = ./scripts/enable-monitor.sh;
+      executable = true;
+    };
+
     # smart card protocol handler
     ".local/share/applications/xscp-smartcard.desktop" = {
       source = ./files/xscp-smartcard.desktop;
