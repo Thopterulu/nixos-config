@@ -3,7 +3,7 @@
   "position": "top",
   "modules-left": ["custom/logo", "clock", "custom/weather", "disk", "memory", "cpu", "temperature", "custom/powerDraw", "hyprland/window"],
   "modules-center": ["hyprland/workspaces"],
-  "modules-right": ["tray", "custom/monitor-toggle", "custom/mediaplayer", "custom/clipboard", "backlight", "idle_inhibitor", "custom/colorpicker", "bluetooth", "pulseaudio", "network", "battery", "custom/power"],
+  "modules-right": ["tray", "custom/mediaplayer", "custom/clipboard", "backlight", "idle_inhibitor", "custom/colorpicker", "bluetooth", "pulseaudio", "network", "battery", "custom/power"],
   "reload_style_on_change": true,
 
   "custom/logo": {
@@ -238,14 +238,5 @@
     "interval": 1,
     "exec": "~/.config/waybar/scripts/powerdraw.sh",
     "return-type": "json"
-  },
-
-  "custom/monitor-toggle": {
-    "format": "{} ",
-    "return-type": "json",
-    "exec": "~/.config/waybar/scripts/toggle-hdmi-a-4.sh status",
-    "interval": 5,
-    "on-click": "~/.config/waybar/scripts/toggle-hdmi-a-4.sh",
-    "tooltip": true
   }
 }
