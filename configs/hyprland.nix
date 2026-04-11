@@ -2,9 +2,6 @@
 { config, lib, pkgs, inputs,... }:
 
 {
-  # Enable Wayland support in SDDM
-  services.displayManager.sddm.wayland.enable = true;
-
   # XWayland for running X11 apps on Wayland (Steam, games, etc)
   programs.xwayland.enable = true;
 

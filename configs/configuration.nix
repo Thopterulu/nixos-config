@@ -49,7 +49,22 @@
   # };
 
 
-  services.displayManager.sddm.enable = true;
+  # greetd display manager with tuigreet (TUI greeter)
+  services.greetd = {
+    enable = true;
+    settings = {
+      default_session = {
+        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland";
+        user = "greeter";
+      };
+    };
+  };
+
+  # Auto-login to user session after first boot (optional, comment out if not wanted)
+  # services.greetd.settings.initial_session = {
+  #   command = "Hyprland";
+  #   user = "thopter";
+  # };
 
   # X11 support (kept minimal for XWayland compatibility)
   services.xserver = {
