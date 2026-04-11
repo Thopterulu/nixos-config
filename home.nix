@@ -36,10 +36,11 @@
     libreoffice
     opensnitch-ui
     bubblewrap
-    insomnia
     figma-linux
     itch
     direnv
+    bruno
+    bruno-cli
   ];
 
   services.hyprshell = {
