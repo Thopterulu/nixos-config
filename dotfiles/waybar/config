@@ -243,9 +243,9 @@
   "custom/monitor-toggle": {
     "format": "{} ",
     "return-type": "json",
-    "exec": "/tmp/toggle-hdmi-a-4.sh status",
+    "exec": "~/.config/waybar/scripts/toggle-hdmi-a-4.sh status",
     "interval": 5,
-    "on-click": "/tmp/toggle-hdmi-a-4.sh",
+    "on-click": "~/.config/waybar/scripts/toggle-hdmi-a-4.sh",
     "tooltip": true
   }
 }
