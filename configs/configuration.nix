@@ -9,6 +9,7 @@
     ./bluetooth.nix
     ./hyprland.nix
     ./smartcard.nix
+    ./monitors.nix
   ];
 
   # allow unfree
