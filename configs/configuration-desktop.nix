@@ -16,7 +16,12 @@
   boot.kernelParams = [
     "mitigations=off"       # Disable CPU vulnerability mitigations for performance
     "vsyscall=emulate"      # Fix for old Windows games crashing
+    "quiet"                 # Suppress most boot messages
+    "splash"                # Enable boot splash screen
   ];
+
+  # Suppress kernel log messages on console
+  boot.consoleLogLevel = 3;  # Only show errors and critical messages
 
   # System optimizations for consistent performance
   boot.kernel.sysctl = {
