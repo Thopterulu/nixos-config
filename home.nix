@@ -149,6 +149,19 @@
         rebase = true;
         ff = "only";
       };
+      core = {
+        pager = "delta";
+      };
+      interactive = {
+        diffFilter = "delta --color-only";
+      };
+      delta = {
+        navigate = true;
+        dark = true;
+      };
+      merge = {
+        conflictStyle = "zdiff3";
+      };
     };
   };
 
