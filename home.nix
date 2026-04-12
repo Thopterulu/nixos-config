@@ -41,6 +41,7 @@
     direnv
     bruno
     bruno-cli
+    delta
   ];
 
   services.hyprshell = {
