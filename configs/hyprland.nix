@@ -33,7 +33,8 @@
 
     # XKB keyboard layout for Wayland
     XKB_DEFAULT_LAYOUT = "fr";
-    XKB_DEFAULT_OPTIONS = "eurosign:e,caps:escape";
+    XKB_DEFAULT_MODEL = "pc105";
+    XKB_DEFAULT_OPTIONS = "caps:escape";
   };
 
   # Wayland-specific packages

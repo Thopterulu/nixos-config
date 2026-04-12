@@ -70,7 +70,8 @@
   services.xserver = {
     enable = true;  # Still needed for XWayland and some apps
     xkb.layout = "fr";
-    xkb.options = "eurosign:e,caps:escape";
+    xkb.model = "pc105";
+    xkb.options = "caps:escape";
   };
 
   hardware.graphics = {
