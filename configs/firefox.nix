@@ -39,7 +39,7 @@
           bookmarks = [
             {
               name = "";
-              url = "https://soundcloud.com/discover";
+              url = "https://music.youtube.com/";
             }
             {
               name = "";
@@ -79,10 +79,6 @@
                 {
                   name = "NixOS Search - Packages";
                   url = "https://search.nixos.org/packages?channel=unstable&";
-                }
-                {
-                  name = "Nvidia - NixOS Wiki";
-                  url = "https://nixos.wiki/wiki/Nvidia";
                 }
                 {
                   name = "Nerd Fonts - Iconic font aggregator, glyphs/icons collection, & fonts patcher";
