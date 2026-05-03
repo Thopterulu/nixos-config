@@ -185,6 +185,31 @@
               ];
             }
             {
+              name = "Magic";
+              bookmarks = [
+                {
+                  name = "Moxfield";
+                  url = "https://www.moxfield.com/";
+                }
+                {
+                  name = "Archidekt";
+                  url = "https://archidekt.com/";
+                }
+                {
+                  name = "EDHREC";
+                  url = "https://edhrec.com/";
+                }
+                {
+                  name = "Manabox";
+                  url = "https://manabox.app/";
+                }
+                {
+                  name = "MTG Top 8";
+                  url = "https://mtgtop8.com/";
+                }
+              ];
+            }
+            {
               name = "Entertainment";
               bookmarks = [
                 {
