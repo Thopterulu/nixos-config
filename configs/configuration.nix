@@ -196,6 +196,8 @@
     lxappearance      # GTK theme manager
     xfce.tumbler      # Thumbnail generator for file previews
     ffmpegthumbnailer # Video thumbnails
+    psmisc            # killall, fuser, pstree
+    tmux
   ];
 
   fonts.packages = with pkgs; [
