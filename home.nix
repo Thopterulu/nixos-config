@@ -5,43 +5,14 @@
   imports = [
     ./configs/firefox.nix
     ./configs/nixvim.nix
-  ];
-
-  home.packages = with pkgs; [
-    eza      # ls moderne
-    bat
-    ripgrep
-    fd
-    htop
-    tldr
-    rclone
-    claude-code
-    just
-    dbeaver-bin
-    postgresql
-    pre-commit
-    docker
-    docker-compose
-    uv
-    obsidian
-    go
-    mixxx
-    scdl
-    ffmpeg
-    rfc
-    tor
-    tor-browser
-    protonup-qt    # Manage custom Proton versions
-    i3lock-fancy   # Screen lock (fallback for hyprlock)
-    libreoffice
-    opensnitch-ui
-    bubblewrap
-    figma-linux
-    itch
-    direnv
-    bruno
-    bruno-cli
-    delta
+    ./packages/cli.nix
+    ./packages/dev.nix
+    ./packages/devops.nix
+    ./packages/office.nix
+    ./packages/desktop.nix
+    ./packages/media.nix
+    ./packages/audio.nix
+    ./packages/theming.nix
   ];
 
   services.hyprshell = {
@@ -112,7 +83,6 @@
     "Pictures/Screenshots/.keep".text = "";
     "Videos/.keep".text = "";
     "backgrounds/.keep".text = "";
-    "game-sandbox/.keep".text = "";
   };
 
   # Enable GTK with dark theme

@@ -20,6 +20,20 @@
   };
 
   outputs = { self, nixpkgs, home-manager, nixvim, nur, ... }: {
+    # Standalone Home Manager — works on any Linux with Nix
+    homeConfigurations.thopter = home-manager.lib.homeManagerConfiguration {
+      pkgs = import nixpkgs { system = "x86_64-linux"; };
+      modules = [
+        ./home.nix
+        {
+          nixpkgs.overlays = [ nur.overlays.default ];
+          home.username = "thopter";
+          home.homeDirectory = "/home/thopter";
+        }
+      ];
+      extraSpecialArgs = { inherit nixvim; };
+    };
+
     nixosConfigurations = {
       thopter-nixos = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -32,7 +46,7 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.backupFileExtension = "hm-backup";
-            home-manager.users.thopter = import ./home.nix;
+            home-manager.users.thopter = { imports = [ ./home.nix ./home-personal.nix ]; };
             home-manager.extraSpecialArgs = { inherit nixvim; };
           }
         ];
@@ -49,7 +63,7 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.backupFileExtension = "hm-backup";
-            home-manager.users.thopter = import ./home.nix;
+            home-manager.users.thopter = { imports = [ ./home.nix ./home-personal.nix ]; };
             home-manager.extraSpecialArgs = { inherit nixvim; };
           }
         ];

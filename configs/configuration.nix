@@ -122,7 +122,6 @@
   programs.fuse.userAllowOther = true;
   programs.i3lock.enable = true;
   programs.zsh.enable = true;
-  programs.firejail.enable = true;
   programs.dconf.enable = true;
 
   services.dbus.enable = true;
@@ -145,59 +144,10 @@
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
   environment.systemPackages = with pkgs; [
-    vim
-    wget
-    neovim
-    alacritty
     refind
-    btop
-    xwallpaper
-    pcmanfm
-    rofi
-    steam
-    discord
-    git
-    neofetch
-    xclip
-    keepassxc
-    rclone
-    flameshot
-    dunst
     ntfs3g
     pciutils
-    pavucontrol       # GUI pour gérer l'audio (RECOMMANDÉ)
-    helvum            # Patchbay graphique PipeWire
-    qpwgraph          # Alternative à Helvum
-    easyeffects       # EQ et effets audio
-    pulseaudio
-    # Monitoring
-    pwvucontrol       # Contrôle PipeWire modern
-    gcc
-    gnumake
-    pkg-config
-    cryptomator
-    direnv
-    zip
-    unzip
-    # Media applications
-    vlc                # Video/audio player
-    gimp               # Image editor
-    davinci-resolve    # Video editor
-    shotcut            # Video editor
-    kdePackages.kdenlive  # Video editor
-    godot              # 2D/3D game engine
-    homebank
-    vscode
-    playerctl
-    firejail          # Application sandboxing
-    # GTK themes and icons for better file manager appearance
-    arc-theme
-    papirus-icon-theme
-    lxappearance      # GTK theme manager
-    xfce.tumbler      # Thumbnail generator for file previews
-    ffmpegthumbnailer # Video thumbnails
-    psmisc            # killall, fuser, pstree
-    tmux
+    pulseaudio        # pactl CLI
   ];
 
   fonts.packages = with pkgs; [
