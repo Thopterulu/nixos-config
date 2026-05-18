@@ -31,6 +31,9 @@
     # Enable Wayland for Electron/Chrome apps
     NIXOS_OZONE_WL = "1";
 
+    # Enable Wayland for Qt apps (KeePassXC, etc.)
+    QT_QPA_PLATFORM = "wayland;xcb";
+
     # XKB keyboard layout for Wayland
     XKB_DEFAULT_LAYOUT = "fr";
     XKB_DEFAULT_MODEL = "pc105";
@@ -39,6 +42,7 @@
 
   # Wayland-specific packages
   environment.systemPackages = with pkgs; [
+    qt6.qtwayland        # Qt6 Wayland platform plugin
     wl-clipboard         # Wayland clipboard utilities
     copyq                # Clipboard manager with GUI and tray icon
     xwayland             # X11 compatibility layer
