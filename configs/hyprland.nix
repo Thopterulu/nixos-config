@@ -28,11 +28,20 @@
     __GL_SYNC_TO_VBLANK = "0";  # Let VRR/explicit sync handle it
     __GL_YIELD = "USLEEP";  # Better CPU usage, fixes menu stuttering
 
-    # Enable Wayland for Electron/Chrome apps
+    # Enable Wayland for Electron/Chrome apps (VSCode, Discord, Obsidian...)
     NIXOS_OZONE_WL = "1";
 
-    # Enable Wayland for Qt apps (KeePassXC, etc.)
+    # Enable Wayland for Qt apps (KeePassXC, VLC...)
     QT_QPA_PLATFORM = "wayland;xcb";
+
+    # Enable Wayland for GTK apps (GIMP, PCManFm, LibreOffice...)
+    GDK_BACKEND = "wayland,x11";
+
+    # Enable Wayland for SDL apps (games, mixxx...)
+    SDL_VIDEODRIVER = "wayland";
+
+    # Enable Wayland for Clutter-based apps
+    CLUTTER_BACKEND = "wayland";
 
     # XKB keyboard layout for Wayland
     XKB_DEFAULT_LAYOUT = "fr";
