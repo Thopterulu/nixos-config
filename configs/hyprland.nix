@@ -34,8 +34,8 @@
     # Enable Wayland for Qt apps (KeePassXC, VLC...)
     QT_QPA_PLATFORM = "wayland;xcb";
 
-    # Enable Wayland for GTK apps (GIMP, PCManFm, LibreOffice...)
-    GDK_BACKEND = "wayland,x11";
+    # GTK apps auto-detect Wayland on Hyprland — do NOT set GDK_BACKEND
+    # globally, it breaks layer-shell apps like Hyprshell and Waybar
 
     # Enable Wayland for SDL apps (games, mixxx...)
     # NOTE: "wayland,x11" fallback syntax is supported since SDL 2.0.22+
