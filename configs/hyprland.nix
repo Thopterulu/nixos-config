@@ -38,7 +38,8 @@
     GDK_BACKEND = "wayland,x11";
 
     # Enable Wayland for SDL apps (games, mixxx...)
-    SDL_VIDEODRIVER = "wayland";
+    # NOTE: "wayland,x11" fallback syntax is supported since SDL 2.0.22+
+    SDL_VIDEODRIVER = "wayland,x11";
 
     # Enable Wayland for Clutter-based apps
     CLUTTER_BACKEND = "wayland";
