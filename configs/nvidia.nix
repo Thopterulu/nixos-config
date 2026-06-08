@@ -8,7 +8,7 @@
   hardware.nvidia = {
     package = config.boot.kernelPackages.nvidiaPackages.production;
     modesetting.enable = true;
-    open = true;  # Use open-source kernel modules
+    open = false;  # Proprietary modules - open modules crash on Turing (RTX 2080 Super)
 
     # Power management
     powerManagement.enable = true;
@@ -34,5 +34,6 @@
     "nvidia_drm.modeset=1"
     "nvidia.NVreg_PreserveVideoMemoryAllocations=1"
     "nvidia.NVreg_EnableGpuFirmware=0"  # Fixes random frame drops
+    "pcie_port_pm=off"                  # Prevent GPU falling off PCIe bus under load
   ];
 }

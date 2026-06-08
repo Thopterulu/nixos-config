@@ -241,6 +241,18 @@
                   name = "GoClecd";
                   url = "https://www.goclecd.fr/";
                 }
+                {
+                  name = "Patchlab";
+                  url = "https://patchlab.de/";
+                }
+                {
+                  name = "Geeked CStore";
+                  url = "https://www.geekedcstore.com/";
+                }
+                {
+                  name = "Monzemare";
+                  url = "https://www.monzemare.com/";
+                }
               ];
             }
             {
