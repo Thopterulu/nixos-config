@@ -57,7 +57,7 @@
     };
 
     # dotfiles config - link each subdirectory individually
-    ".config/alacritty".source = ./dotfiles/alacritty;
+    ".config/ghostty".source = ./dotfiles/ghostty;
     ".config/dunst".source = ./dotfiles/dunst;
     ".config/flameshot".source = ./dotfiles/flameshot;
     # Hypr config - link files individually to allow nwg-displays to write monitors.conf

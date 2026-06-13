@@ -39,7 +39,7 @@ The flake has three layers:
    nix run home-manager -- switch --flake ~/nixos-config#thopter
    ```
 
-   This gives you all work packages and dotfiles from `home.nix` — zsh, neovim, alacritty, git config, fzf, zoxide, GTK theme, devops tools, etc.
+   This gives you all work packages and dotfiles from `home.nix` — zsh, neovim, ghostty, git config, fzf, zoxide, GTK theme, devops tools, etc.
 
 ### What You Get: Portable vs NixOS Only
 
@@ -69,6 +69,27 @@ All DevOps tools are in `home.nix` so they follow you to any machine:
 | `google-cloud-sdk` | GCP CLI (gcloud) |
 | `lazydocker` | TUI for Docker containers/images |
 | `trivy` | Container and filesystem security scanner |
+| `vulnix` | CVE scanner for the Nix store (matches derivations against NVD) |
+
+## Security: Scanning for CVEs
+
+`vulnix` walks the Nix store and matches derivation name+version against the NVD CVE database.
+
+Scan the current running system closure:
+
+```bash
+vulnix --system
+```
+
+Other useful invocations:
+
+```bash
+vulnix /run/current-system            # explicit path to the running system
+vulnix /nix/var/nix/profiles/system   # the active NixOS profile
+vulnix -w whitelist.toml --system     # suppress known/accepted issues
+```
+
+For a curated view of nixpkgs-tracked vulnerabilities, see <https://tracker.security.nixos.org/>.
 
 ## Project Structure
 
@@ -81,7 +102,7 @@ packages/
   dev.nix                       # Editors & dev tools (neovim, vscode, gcc, go...)
   devops.nix                    # DevOps (kubectl, terraform, ansible, helm...)
   office.nix                    # Office & productivity (obsidian, libreoffice, bruno...)
-  desktop.nix                   # Desktop apps (alacritty, rofi, pcmanfm, dunst...)
+  desktop.nix                   # Desktop apps (ghostty, rofi, pcmanfm, dunst...)
   media.nix                     # Media (vlc, gimp, ffmpeg)
   audio.nix                     # Audio GUI (pavucontrol, helvum, easyeffects...)
   theming.nix                   # GTK themes & icons

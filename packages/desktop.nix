@@ -2,7 +2,7 @@
 
 {
   home.packages = with pkgs; [
-    alacritty    # GPU-accelerated terminal emulator
+    ghostty      # GPU-accelerated terminal emulator (Wayland-native)
     pcmanfm      # Lightweight file manager
     rofi         # Application launcher / window switcher
     dunst        # Lightweight notification daemon

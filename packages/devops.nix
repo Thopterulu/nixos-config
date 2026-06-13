@@ -12,5 +12,6 @@
     kubie            # Kubernetes context/namespace switcher
     lazydocker       # TUI for Docker containers and images
     trivy            # Container and filesystem security scanner
+    vulnix           # CVE scanner for the Nix store (matches derivations against NVD)
   ];
 }
