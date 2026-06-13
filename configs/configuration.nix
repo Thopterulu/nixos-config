@@ -141,6 +141,7 @@
   };
   # Enable Docker
   virtualisation.docker.enable = true;
+  virtualisation.docker.package = pkgs.docker_29;
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
   environment.systemPackages = with pkgs; [
