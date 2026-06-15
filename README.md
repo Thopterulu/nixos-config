@@ -91,6 +91,29 @@ vulnix -w whitelist.toml --system     # suppress known/accepted issues
 
 For a curated view of nixpkgs-tracked vulnerabilities, see <https://tracker.security.nixos.org/>.
 
+## Security: System Hardening
+
+`configs/hardening.nix` applies a gaming-safe subset of the [ANSSI GNU/Linux
+hardening guide](https://cyber.gouv.fr/publications/recommandations-de-securite-relatives-un-systeme-gnulinux)
+(rules R9, R12, R14), inspired by [cloud-gouv/securix](https://github.com/cloud-gouv/securix).
+
+Applied:
+- **R9** — kernel info hiding & misc (dmesg/kptr restrict, ASLR, ptrace scope, sysrq lockdown, BPF restrictions, perf paranoid)
+- **R12** — IPv4 hardening (redirect/SYN-cookie/rp_filter/bogus-ICMP guards, BPF JIT hardening)
+- **R14** — filesystem protections (SUID dumps, symlink/hardlink/FIFO/regular-file protections)
+- Selected kernel params (`slab_nomerge`, `page_alloc.shuffle`, `iommu=pt`)
+
+Deliberately skipped for gaming compatibility (Steam/Proton, Nvidia, controllers, VR):
+- `kernel.modules_disabled` — would break controller/VR hotplug
+- `kernel.panic_on_oops` — Nvidia oops would reboot mid-game
+- `net.ipv6.disable_ipv6` — modern multiplayer relies on IPv6
+- `mds=full,nosmt` / `l1tf=force` — would disable hyperthreading
+- `linuxPackages_hardened` — incompatible with Nvidia + Steam Runtime user namespaces
+- CPU mitigations (`spectre_v2=on`, `pti=on`, …) — overridden anyway by `mitigations=off` in `configuration-desktop.nix`
+
+System-wide AppArmor (`security.apparmor.enable`) and the OpenSnitch application
+firewall (`services.opensnitch.enable`) are also enabled in `configuration.nix`.
+
 ## Project Structure
 
 ```
@@ -112,6 +135,7 @@ configs/
   configuration.nix             # Shared NixOS system config
   configuration-desktop.nix     # Desktop: NVIDIA, gaming, performance
   configuration-laptop.nix      # Laptop: touchpad, battery, power mgmt
+  hardening.nix                 # ANSSI-inspired sysctls & kernel params (gaming-safe)
   nvidia.nix                    # NVIDIA driver config
   hyprland.nix                  # Hyprland compositor
   bluetooth.nix                 # Bluetooth

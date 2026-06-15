@@ -7,6 +7,7 @@
 {
   imports = [
     ./bluetooth.nix
+    ./hardening.nix
     ./hyprland.nix
     ./smartcard.nix
   ];
@@ -54,7 +55,7 @@
     enable = true;
     settings = {
       default_session = {
-        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland";
+        command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd Hyprland";
         user = "greeter";
       };
     };
@@ -133,6 +134,17 @@
 
   # Enable OpenSnitch application firewall
   services.opensnitch.enable = true;
+
+  # Syncthing file synchronisation (LAN sync + discovery, GUI on 127.0.0.1:8384)
+  services.syncthing = {
+    enable = true;
+    user = "thopter";
+    group = "users";
+    dataDir = "/home/thopter";
+    configDir = "/home/thopter/.config/syncthing";
+    openDefaultPorts = true;
+    guiAddress = "127.0.0.1:8384";
+  };
 
   # Enable AppArmor security framework
   security.apparmor = {

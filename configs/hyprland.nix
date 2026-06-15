@@ -56,7 +56,6 @@
     wl-clipboard         # Wayland clipboard utilities
     copyq                # Clipboard manager with GUI and tray icon
     xwayland             # X11 compatibility layer
-    kitty                # Terminal for Hyprland
     wofi                 # App launcher for Wayland
     waybar               # Status bar for Wayland
     grim                 # Screenshot tool for Wayland

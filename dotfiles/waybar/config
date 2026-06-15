@@ -165,7 +165,7 @@
     "format-critical": " {temperatureC}°C",
     "interval": 1,
     "critical-threshold": 80,
-    "on-click": "kitty btop"
+    "on-click": "ghostty -e btop"
   },
 
   "pulseaudio": {
