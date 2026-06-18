@@ -13,5 +13,6 @@
     pre-commit     # Git hooks framework
     dbeaver-bin    # Universal database GUI client
     postgresql     # PostgreSQL client tools (psql)
+    mistral-vibe   # Mistral AI client
   ];
 }

@@ -86,6 +86,10 @@
               url = "https://www.google.com/maps/";
             }
             {
+              name = "syncthing";
+              url = "http://127.0.0.1:8384/";
+            }
+            {
               name = "Nix";
               bookmarks = [
                 {
