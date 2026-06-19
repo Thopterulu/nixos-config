@@ -2,7 +2,7 @@
 
 # Power menu for Waybar using rofi
 
-options="⏻ Shutdown\n Reboot\n🌙 Suspend\n🔒 Lock"
+options="⏻ Shutdown\n Reboot\n🌙 Suspend\n🔒 Lock\n🚪 Logout"
 
 chosen=$(echo -e "$options" | rofi -dmenu -p "Power Menu" -theme-str 'window {width: 250px;}')
 
@@ -18,6 +18,9 @@ case "$chosen" in
         ;;
     "🔒 Lock")
         hyprlock || i3lock-fancy
+        ;;
+    "🚪 Logout")
+        hyprctl dispatch exit
         ;;
     *)
         ;;
