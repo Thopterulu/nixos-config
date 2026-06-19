@@ -61,8 +61,8 @@
     ".config/dunst".source = ./dotfiles/dunst;
     ".config/flameshot".source = ./dotfiles/flameshot;
     # Hypr config - link files individually to allow nwg-displays to write monitors.conf
-    # ".config/hypr/hyprland.conf".source = ./dotfiles/hypr/hyprland.conf;
-    ".config/hypr/hyprland.lua".source = ./dotfiles/hypr/hyprland.lua;
+    ".config/hypr/hyprland.conf".source = ./dotfiles/hypr/hyprland.conf;
+    # ".config/hypr/hyprland.lua".source = ./dotfiles/hypr/hyprland.lua;
     ".config/hypr/hypridle.conf".source = ./dotfiles/hypr/hypridle.conf;
     ".config/hypr/autostart.sh" = {
       source = ./dotfiles/hypr/autostart.sh;

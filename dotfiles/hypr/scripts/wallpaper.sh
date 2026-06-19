@@ -25,15 +25,15 @@ fi
 # Select random wallpaper
 RANDOM_WALLPAPER="${WALLPAPERS[$RANDOM % ${#WALLPAPERS[@]}]}"
 
-# Initialize swww daemon if not running
-if ! pgrep -x swww-daemon > /dev/null; then
-    swww-daemon &
+# Initialize awww daemon if not running
+if ! pgrep -x awww-daemon > /dev/null; then
+    awww-daemon &
     sleep 1
 fi
 
 
 # Set wallpaper with random transition
-swww img "$RANDOM_WALLPAPER" \
+awww img "$RANDOM_WALLPAPER" \
     --transition-type random \
     --transition-duration 2 \
     --transition-fps 60
