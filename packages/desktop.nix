@@ -10,5 +10,8 @@
     opensnitch-ui # Application firewall GUI
     bubblewrap   # Lightweight sandboxing tool
     i3lock-fancy # Screen locker with blur effect
+    file-roller  # GTK4 archive manager (Wayland-native)
+    p7zip        # 7z/zip/tar/iso backend for file-roller
+    unrar        # RAR support (unfree)
   ];
 }

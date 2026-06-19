@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this repo is
 
-Personal NixOS + Home Manager configuration, distributed as a single flake. Targets two physical machines (a gaming desktop with Nvidia, a laptop without) and is also usable on any non-NixOS Linux through standalone Home Manager. All inputs (nixpkgs, home-manager, nixvim) track the `nixos-25.11` / `release-25.11` branches.
+Personal NixOS + Home Manager configuration, distributed as a single flake. Targets two physical machines (a gaming desktop with Nvidia, a laptop without) and is also usable on any non-NixOS Linux through standalone Home Manager. All inputs (nixpkgs, home-manager, nixvim) track the `nixos-26.05` / `release-26.05` branches.
 
 ## The three-layer split (load-bearing)
 

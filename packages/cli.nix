@@ -16,7 +16,7 @@
     unzip          # Archive extractor
     psmisc         # Process utilities (killall, fuser, pstree)
     tmux           # Terminal multiplexer
-    neofetch       # System info display
+    fastfetch      # System info display (neofetch replacement)
     playerctl      # Media player controller (play/pause/next)
     delta          # Git diff viewer with syntax highlighting
     direnv         # Auto-load env vars per directory
