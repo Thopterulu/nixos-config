@@ -55,7 +55,7 @@
     enable = true;
     settings = {
       default_session = {
-        command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd Hyprland";
+        command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd start-hyprland";
         user = "greeter";
       };
     };
@@ -98,6 +98,29 @@
 
     # Configuration spécifique
     wireplumber.enable = true;
+    # wireplumber.extraScripts = {
+    #   "force-nova-pro-analog.lua" = ''
+    #     -- Force analog profile for SteelSeries Arctis Nova Pro Wireless
+    #     -- IEC958 (digital SPDIF) doesn't work, use analog instead
+
+    #     -- Function to set profile on matching card
+    #     local function set_nova_pro_analog(card)
+    #       if card["node.name"] == "alsa_card.usb-SteelSeries_Arctis_Nova_Pro_Wireless-00" then
+    #         wp_set_property(card, "api.alsa.profile", "output:analog-stereo+input:mono-fallback")
+    #       end
+    #     end
+
+    #     -- Monitor for new cards
+    #     wp_observe_property(ctx, "card", function(card)
+    #       set_nova_pro_analog(card)
+    #     end)
+
+    #     -- Also check existing cards on startup
+    #     for _, card in ipairs(wp_get_objects(ctx, { type = "card" })) do
+    #       set_nova_pro_analog(card)
+    #     end
+    #   '';
+    # };
   };
 
   # Ensure PulseAudio compatibility for applications
@@ -113,7 +136,7 @@
   users.users.thopter = {
     shell = pkgs.zsh;
     isNormalUser = true;
-    extraGroups = [ "wheel" "audio" "docker" "input" ]; # Enable 'sudo' for the user.
+    extraGroups = [ "wheel" "audio" "docker" "input" "realtime" ]; # Enable 'sudo' for the user + realtime audio
     packages = with pkgs; [
       tree
     ];
@@ -126,6 +149,17 @@
   programs.dconf.enable = true;
 
   services.dbus.enable = true;
+
+  # Allow users in wheel and audio groups to use realtime scheduling
+  security.polkit.extraConfig = lib.mkAfter ''
+    polkit.addRule(function(action, subject) {
+      if ((action.id == "org.freedesktop.RealtimeKit1.acquire-high-priority" ||
+           action.id == "org.freedesktop.RealtimeKit1.acquire-real-time") &&
+          (subject.isInGroup("wheel") || subject.isInGroup("audio"))) {
+        return polkit.Result.YES;
+      }
+    });
+  '';
   # Controller support
   # hardware.xone.enable = true;  # Xbox One controller USB support - disabled to avoid Bluetooth conflicts
 

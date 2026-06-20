@@ -13,7 +13,9 @@
 -- monitors.conf, so nwg-displays integration is bypassed.
 hl.monitor({ output = "desc:Samsung Electric Company LC27G7xT H4ZR601106", mode = "2560x1440@120", position = "0x0",    scale = "1", vrr = 1 })
 hl.monitor({ output = "desc:Dell Inc. DELL G2722HS C3WW7P3",               mode = "1920x1080@60",  position = "2560x0", scale = "1", vrr = 1 })
-hl.monitor({ output = "desc:JMG JMGO 0x00000001",                          mode = "3840x2160@60",  position = "4480x0", scale = "1", vrr = 1 })
+-- JMGO projector explicitly disabled — it crashed the config when active
+-- and gets picked up by the catch-all rule below otherwise.
+hl.monitor({ output = "desc:JMG JMGO 0x00000001",                          disabled = true })
 hl.monitor({ output = "",                                                  mode = "preferred",     position = "auto",   scale = "auto" })
 
 
@@ -37,22 +39,23 @@ local function strip_caps(cmd)
 end
 
 hl.on("hyprland.start", function()
-    -- Bootstrap systemd graphical-session so user units that are
-    -- WantedBy=graphical-session.target (hyprshell.service,
-    -- xdg-desktop-portal-hyprland.service) can activate.
-    hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP HYPRLAND_INSTANCE_SIGNATURE XDG_CURRENT_DESKTOP")
+    -- Import env vars into systemd user manager + dbus, then explicitly
+    -- start graphical-session.target so unit-managed services
+    -- (xdg-desktop-portal-hyprland, hyprshell, ...) can activate.
+    -- Redundant with start-hyprland but harmless if it does the same.
+    hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP HYPRLAND_INSTANCE_SIGNATURE")
     hl.exec_cmd("systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP HYPRLAND_INSTANCE_SIGNATURE")
+    hl.exec_cmd("systemctl --user start graphical-session.target")
 
     -- User autostart script (dunst, hypridle, copyq, discord, wallpaper, ...).
     -- Wrapped to strip caps so discord/electron isn't broken by bwrap.
     hl.exec_cmd(strip_caps(os.getenv("HOME") .. "/.config/hypr/autostart.sh"))
 
-    -- hyprshell + waybar are managed via systemd user units (declared in
-    -- home.nix services.hyprshell). They'll start automatically once
-    -- graphical-session.target is up via the bootstrap above. If you'd
-    -- rather start them directly, uncomment:
-    -- hl.exec_cmd(strip_caps("hyprshell run"))
-    -- hl.exec_cmd(strip_caps("waybar"))
+    -- Start waybar + hyprshell directly. The home.nix systemd units exist
+    -- but won't activate reliably if graphical-session.target setup races;
+    -- starting them imperatively here is the simplest robust path.
+    hl.exec_cmd(strip_caps("waybar"))
+    hl.exec_cmd(strip_caps("hyprshell run"))
 end)
 
 
@@ -214,8 +217,9 @@ hl.bind(mainMod .. " + right", hl.dsp.focus({ direction = "right" }))
 hl.bind(mainMod .. " + up",    hl.dsp.focus({ direction = "up" }))
 hl.bind(mainMod .. " + down",  hl.dsp.focus({ direction = "down" }))
 
--- AZERTY top-row digit keys via raw keycodes
-local wsKeycodes = { [1] = 10, [2] = 11, [3] = 12, [4] = 13 }
+-- AZERTY top-row digit keys via raw keycodes.
+-- Only 2 workspaces: one per active monitor (Samsung=1, Dell=2).
+local wsKeycodes = { [1] = 10, [2] = 11 }
 for ws, code in pairs(wsKeycodes) do
     hl.bind(mainMod .. " + code:" .. code,           hl.dsp.focus({ workspace = ws }))
     hl.bind(mainMod .. " + SHIFT + code:" .. code,   hl.dsp.window.move({ workspace = ws }))
@@ -247,9 +251,9 @@ hl.bind("XF86AudioPrev",  hl.dsp.exec_cmd("playerctl previous"),   { locked = tr
 ---- WORKSPACES PER MONITOR ----
 --------------------------------
 
-hl.workspace_rule({ workspace = "1", persistent = true, monitor = "desc:Samsung Electric Company LC27G7xT H4ZR601106", default = true })
+hl.workspace_rule({ workspace = "1", persistent = true, monitor = "desc:Samsung Electric Company LC27G7xT H4ZR601106", default = true, layout = "master" })
 hl.workspace_rule({ workspace = "2", persistent = true, monitor = "desc:Dell Inc. DELL G2722HS C3WW7P3" })
-hl.workspace_rule({ workspace = "3", persistent = true, monitor = "desc:JMG JMGO 0x00000001" })
+-- hl.workspace_rule({ workspace = "3", persistent = true, monitor = "desc:JMG JMGO 0x00000001" })
 
 
 -----------------------------

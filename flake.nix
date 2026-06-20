@@ -14,14 +14,23 @@
     nur.url = "github:nix-community/NUR";
   };
 
-  outputs = { self, nixpkgs, home-manager, nixvim, nur, ... }: {
+  outputs = { self, nixpkgs, home-manager, nixvim, nur, ... }:
+    let
+      # Patch hyprshell so the launcher's Ctrl+1..9 fire on French AZERTY,
+      # where the unshifted top row produces ampersand/eacute/... not _1.._9.
+      hyprshellAzertyOverlay = final: prev: {
+        hyprshell = prev.hyprshell.overrideAttrs (old: {
+          patches = (old.patches or []) ++ [ ./patches/hyprshell-azerty-launcher.patch ];
+        });
+      };
+      overlays = [ nur.overlays.default hyprshellAzertyOverlay ];
+    in {
     # Standalone Home Manager — works on any Linux with Nix
     homeConfigurations.thopter = home-manager.lib.homeManagerConfiguration {
-      pkgs = import nixpkgs { system = "x86_64-linux"; };
+      pkgs = import nixpkgs { system = "x86_64-linux"; inherit overlays; };
       modules = [
         ./home.nix
         {
-          nixpkgs.overlays = [ nur.overlays.default ];
           home.username = "thopter";
           home.homeDirectory = "/home/thopter";
         }
@@ -37,7 +46,7 @@
           ./configs/configuration-desktop.nix
           home-manager.nixosModules.home-manager
           {
-            nixpkgs.overlays = [ nur.overlays.default ];
+            nixpkgs.overlays = overlays;
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.backupFileExtension = "hm-backup";
@@ -54,7 +63,7 @@
           ./configs/configuration-laptop.nix
           home-manager.nixosModules.home-manager
           {
-            nixpkgs.overlays = [ nur.overlays.default ];
+            nixpkgs.overlays = overlays;
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.backupFileExtension = "hm-backup";

@@ -1,0 +1,58 @@
+Subject: Accept AZERTY top-row keysyms for launcher digit selection
+
+On French AZERTY the unshifted top-row keys produce symbol keysyms
+(ampersand, eacute, quotedbl, ...) instead of digit keysyms (_1, _2, ...).
+Hyprshell's launcher only matched _1..=_9, so Ctrl+1..Ctrl+9 never fired
+on AZERTY. Accept both forms.
+
+--- a/crates/launcher-lib/src/root.rs
++++ b/crates/launcher-lib/src/root.rs
+@@ -392,35 +392,35 @@ fn handle_key(
+             sender.input_sender().emit(LauncherRootInput::Return);
+             glib::Propagation::Stop
+         }
+-        (true, gdk::Key::_1) => {
++        (true, gdk::Key::_1 | gdk::Key::ampersand) => {
+             sender.input_sender().emit(LauncherRootInput::Launch('1'));
+             glib::Propagation::Stop
+         }
+-        (true, gdk::Key::_2) => {
++        (true, gdk::Key::_2 | gdk::Key::eacute) => {
+             sender.input_sender().emit(LauncherRootInput::Launch('2'));
+             glib::Propagation::Stop
+         }
+-        (true, gdk::Key::_3) => {
++        (true, gdk::Key::_3 | gdk::Key::quotedbl) => {
+             sender.input_sender().emit(LauncherRootInput::Launch('3'));
+             glib::Propagation::Stop
+         }
+-        (true, gdk::Key::_4) => {
++        (true, gdk::Key::_4 | gdk::Key::apostrophe) => {
+             sender.input_sender().emit(LauncherRootInput::Launch('4'));
+             glib::Propagation::Stop
+         }
+-        (true, gdk::Key::_5) => {
++        (true, gdk::Key::_5 | gdk::Key::parenleft) => {
+             sender.input_sender().emit(LauncherRootInput::Launch('5'));
+             glib::Propagation::Stop
+         }
+-        (true, gdk::Key::_6) => {
++        (true, gdk::Key::_6 | gdk::Key::minus) => {
+             sender.input_sender().emit(LauncherRootInput::Launch('6'));
+             glib::Propagation::Stop
+         }
+-        (true, gdk::Key::_7) => {
++        (true, gdk::Key::_7 | gdk::Key::egrave) => {
+             sender.input_sender().emit(LauncherRootInput::Launch('7'));
+             glib::Propagation::Stop
+         }
+-        (true, gdk::Key::_8) => {
++        (true, gdk::Key::_8 | gdk::Key::underscore) => {
+             sender.input_sender().emit(LauncherRootInput::Launch('8'));
+             glib::Propagation::Stop
+         }
+-        (true, gdk::Key::_9) => {
++        (true, gdk::Key::_9 | gdk::Key::ccedilla) => {
+             sender.input_sender().emit(LauncherRootInput::Launch('9'));
+             glib::Propagation::Stop
+         }
