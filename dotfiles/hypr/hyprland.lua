@@ -199,6 +199,8 @@ hl.bind(mainMod .. " + V",         hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + P",         hl.dsp.window.pseudo())
 hl.bind(mainMod .. " + F",         hl.dsp.window.fullscreen({ mode = "maximized" }))
 hl.bind(mainMod .. " + SHIFT + F", hl.dsp.window.fullscreen({ mode = "fullscreen" }))
+-- Force client-side fullscreen too: makes XWayland games grab the cursor.
+hl.bind(mainMod .. " + CTRL + F",  hl.dsp.exec_cmd("hyprctl dispatch fullscreenstate 2 2"))
 
 hl.bind(mainMod .. " + L", hl.dsp.exec_cmd("hyprlock"))
 
