@@ -328,4 +328,4 @@ hl.window_rule({
 -- f[1] = "workspace containing at least one fullscreen window".
 -- Strips gaps so a fullscreen game owns the entire screen with no margin,
 -- which is also what direct_scanout needs to take over.
-hl.workspace_rule({ workspace = "f[1]", gapsout = 0, gapsin = 0 })
+hl.workspace_rule({ workspace = "f[1]", gaps_out = 0, gaps_in = 0 })
