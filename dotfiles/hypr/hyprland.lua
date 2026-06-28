@@ -126,12 +126,23 @@ hl.config({
         disable_hyprland_logo   = false,
         enable_swallow          = false,
         swallow_regex           = "^(Alacritty|com\\.mitchellh\\.ghostty|foot)$",
+        -- VRR mode: 0=off, 1=always-on, 2=fullscreen+video content (gaming-safe).
+        -- Pairs with cursor.no_break_fs_vrr so the cursor doesn't drop VRR mid-game.
+        vrr                     = 2,
     },
 
     cursor = {
         no_hardware_cursors = true,
         enable_hyprcursor   = true,
         no_break_fs_vrr     = true,
+    },
+
+    -- Direct scanout: when a fullscreen window has no compositor effects
+    -- (no blur/shadow/border/rounding — see gaming window rules below),
+    -- Hyprland hands its buffer straight to the display, skipping
+    -- composition. Lowers input lag and frees GPU work.
+    render = {
+        direct_scanout = 1,
     },
 
     input = {
@@ -262,6 +273,12 @@ hl.workspace_rule({ workspace = "2", persistent = true, monitor = "desc:Dell Inc
 ---- GAMING WINDOW RULES ----
 -----------------------------
 
+-- `immediate = true` opts the window into the tearing protocol (requires
+-- general.allow_tearing = true above). Without it, allow_tearing has no
+-- effect because every window must individually consent.
+-- The no_blur / no_shadow / border_size=0 / rounding=0 combo is also a
+-- prerequisite for render.direct_scanout to actually kick in.
+
 hl.window_rule({
     name  = "steam-apps",
     match = { class = "^(steam_app_.*)$" },
@@ -270,6 +287,7 @@ hl.window_rule({
     no_shadow = true,
     border_size = 0,
     rounding = 0,
+    immediate = true,
 })
 
 hl.window_rule({
@@ -280,6 +298,7 @@ hl.window_rule({
     no_shadow = true,
     border_size = 0,
     rounding = 0,
+    immediate = true,
 })
 
 hl.window_rule({
@@ -292,6 +311,7 @@ hl.window_rule({
     no_shadow = true,
     border_size = 0,
     rounding = 0,
+    -- Battle.net itself isn't latency-critical (launcher), no immediate.
 })
 
 hl.window_rule({
@@ -302,4 +322,10 @@ hl.window_rule({
     no_shadow = true,
     border_size = 0,
     rounding = 0,
+    immediate = true,
 })
+
+-- f[1] = "workspace containing at least one fullscreen window".
+-- Strips gaps so a fullscreen game owns the entire screen with no margin,
+-- which is also what direct_scanout needs to take over.
+hl.workspace_rule({ workspace = "f[1]", gapsout = 0, gapsin = 0 })
