@@ -28,6 +28,13 @@
     __GL_SYNC_TO_VBLANK = "0";  # Let VRR/explicit sync handle it
     __GL_YIELD = "USLEEP";  # Better CPU usage, fixes menu stuttering
 
+    # Shader disk cache — default 128 MB is far too small for modern games,
+    # causing Steam to re-process Vulkan shaders nearly every reboot.
+    # Bumped to 12 GB; shared by OpenGL and the NVIDIA Vulkan ICD.
+    __GL_SHADER_DISK_CACHE = "1";
+    __GL_SHADER_DISK_CACHE_SIZE = "12000000000";
+    DXVK_STATE_CACHE = "1";
+
     # Enable Wayland for Electron/Chrome apps (VSCode, Discord, Obsidian...)
     NIXOS_OZONE_WL = "1";
 
