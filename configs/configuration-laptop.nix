@@ -35,4 +35,9 @@
   # Enable power management
   services.tlp.enable = true;
 
+  # Intel thermal daemon — reactive thermal management for Intel CPUs.
+  # Complements TLP (which sets policy); thermald handles runtime throttling
+  # to keep package temps in safe zones.
+  services.thermald.enable = true;
+
 }

@@ -2,6 +2,11 @@
 
 {
   home.stateVersion = "25.11";
+
+  # Default terminal emulator (used by file managers, scripts, xdg-terminal-exec)
+  home.sessionVariables = {
+    TERMINAL = "ghostty";
+  };
   imports = [
     ./configs/firefox.nix
     ./configs/nixvim.nix
@@ -71,6 +76,7 @@
     };
     ".config/hypr/scripts".source = ./dotfiles/hypr/scripts;
     ".config/pcmanfm".source = ./dotfiles/pcmanfm;
+    ".config/libfm".source = ./dotfiles/libfm;
     ".config/rofi".source = ./dotfiles/rofi;
     ".config/swappy".source = ./dotfiles/swappy;
     ".config/waybar".source = ./dotfiles/waybar;

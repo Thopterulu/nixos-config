@@ -12,9 +12,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nur.url = "github:nix-community/NUR";
+    nix-index-database.url = "github:nix-community/nix-index-database";
+    nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, home-manager, nixvim, nur, ... }:
+  outputs = { self, nixpkgs, home-manager, nixvim, nur, nix-index-database, ... }:
     let
       # Patch hyprshell so the launcher's Ctrl+1..9 fire on French AZERTY,
       # where the unshifted top row produces ampersand/eacute/... not _1.._9.
@@ -45,6 +47,7 @@
           ./hardware/hardware-desktop.nix
           ./configs/configuration-desktop.nix
           home-manager.nixosModules.home-manager
+          nix-index-database.nixosModules.nix-index
           {
             nixpkgs.overlays = overlays;
             home-manager.useGlobalPkgs = true;
@@ -62,6 +65,7 @@
           ./hardware/laptop.nix
           ./configs/configuration-laptop.nix
           home-manager.nixosModules.home-manager
+          nix-index-database.nixosModules.nix-index
           {
             nixpkgs.overlays = overlays;
             home-manager.useGlobalPkgs = true;

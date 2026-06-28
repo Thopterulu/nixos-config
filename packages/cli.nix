@@ -1,6 +1,10 @@
 { pkgs, ... }:
 
 {
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+  };
   home.packages = with pkgs; [
     eza            # Modern ls replacement
     bat            # Cat with syntax highlighting
@@ -15,11 +19,9 @@
     zip            # Archive compressor
     unzip          # Archive extractor
     psmisc         # Process utilities (killall, fuser, pstree)
-    tmux           # Terminal multiplexer
     fastfetch      # System info display (neofetch replacement)
     playerctl      # Media player controller (play/pause/next)
     delta          # Git diff viewer with syntax highlighting
-    direnv         # Auto-load env vars per directory
     rclone         # Cloud storage sync (Google Drive, S3...)
     claude-code    # Anthropic CLI assistant
     just           # Command runner (Makefile alternative)

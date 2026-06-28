@@ -30,6 +30,10 @@
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
 
+  # Explicit deny-by-default firewall. Default is already enabled; restated here
+  # so it's a deliberate choice and individual modules opt in via openFirewall.
+  networking.firewall.enable = true;
+
   # Enable WiFi firmware
   hardware.enableRedistributableFirmware = true;
 
@@ -43,6 +47,19 @@
 
   # Select internationalisation properties.
   i18n.defaultLocale = "fr_FR.UTF-8";
+  # LC_* categories — without these, only LANG is French; numbers, currency,
+  # dates etc. fall back to C/POSIX and apps render mixed formatting.
+  i18n.extraLocaleSettings = {
+    LC_ADDRESS        = "fr_FR.UTF-8";
+    LC_IDENTIFICATION = "fr_FR.UTF-8";
+    LC_MEASUREMENT    = "fr_FR.UTF-8";
+    LC_MONETARY       = "fr_FR.UTF-8";
+    LC_NAME           = "fr_FR.UTF-8";
+    LC_NUMERIC        = "fr_FR.UTF-8";
+    LC_PAPER          = "fr_FR.UTF-8";
+    LC_TELEPHONE      = "fr_FR.UTF-8";
+    LC_TIME           = "fr_FR.UTF-8";
+  };
   #console = {
   #  font = "Lat2-Terminus16";
   #  keyMap = "fr";
@@ -147,7 +164,9 @@
   programs.i3lock.enable = true;
   programs.zsh.enable = true;
   programs.dconf.enable = true;
-
+  # nix-index-database wires up `nix-index` + `comma` and sets
+  # programs.command-not-found.enable = false by default (mkDefault).
+  programs.nix-index-database.comma.enable = true;
   services.dbus.enable = true;
 
   # Allow users in wheel and audio groups to use realtime scheduling
@@ -168,6 +187,40 @@
 
   # Enable OpenSnitch application firewall
   services.opensnitch.enable = true;
+
+  # Periodic SSD TRIM (weekly fstrim timer)
+  services.fstrim.enable = true;
+
+  # LVFS firmware updates (`fwupdmgr refresh && fwupdmgr update`)
+  services.fwupd.enable = true;
+
+  # SMART disk-health monitoring; logs to journald, autodetects drives
+  services.smartd.enable = true;
+
+  # OOM protection — kill the worst slice before the kernel locks the box up.
+  # System slice covers misbehaving services; user slice covers user-session runaways.
+  systemd.oomd = {
+    enable = true;
+    enableSystemSlice = true;
+    enableUserSlices = true;
+  };
+
+  # RAM compression as virtual swap. With vm.swappiness=1 the kernel barely
+  # touches it, but when it does, compressing in RAM beats hitting the SSD.
+  zramSwap = {
+    enable = true;
+    algorithm = "zstd";
+  };
+
+  # Cap journald so logs don't quietly fill /var. 1G is plenty for postmortems
+  # without becoming a multi-GB blackhole.
+  services.journald.extraConfig = ''
+    SystemMaxUse=1G
+    SystemMaxFileSize=128M
+  '';
+
+  # Build mandb index so `man -k <kw>`, `apropos`, and tldr lookups work.
+  documentation.man.cache.enable = true;
 
   # Syncthing file synchronisation (LAN sync + discovery, GUI on 127.0.0.1:8384)
   services.syncthing = {
@@ -209,7 +262,20 @@
     options = "--delete-older-than 14d";
   };
   nix.settings.auto-optimise-store = true;
+  # Lets thopter use --option overrides and push to remote stores.
+  nix.settings.trusted-users = [ "thopter" ];
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  # Binary caches — nix-community covers nixvim, home-manager add-ons, lots of
+  # community packages. cache.nixos.org is added by default; listed for clarity.
+  nix.settings.substituters = [
+    "https://cache.nixos.org"
+    "https://nix-community.cachix.org"
+  ];
+  nix.settings.trusted-public-keys = [
+    "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+    "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+  ];
+  boot.tmp.cleanOnBoot = true;
   system.stateVersion = "25.11"; # Did you read the comment?
 
 }

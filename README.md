@@ -121,7 +121,7 @@ flake.nix                       # Flake entry point (NixOS + standalone HM)
 home.nix                        # Dotfiles, shell config, imports work packages (portable)
 home-personal.nix               # Imports gaming + entertainment packages (NixOS only)
 packages/
-  cli.nix                       # CLI tools (eza, bat, ripgrep, tmux...)
+  cli.nix                       # CLI tools (eza, bat, ripgrep...)
   dev.nix                       # Editors & dev tools (neovim, vscode, gcc, go...)
   devops.nix                    # DevOps (kubectl, terraform, ansible, helm...)
   office.nix                    # Office & productivity (obsidian, libreoffice, bruno...)
@@ -142,7 +142,6 @@ configs/
   smartcard.nix                 # Smart card reader
   firefox.nix                   # Firefox config (home-manager)
   nixvim.nix                    # Neovim config (home-manager)
-  monitors.nix                  # Monitor layout
 hardware/
   hardware-desktop.nix          # Desktop hardware scan
   laptop.nix                    # Laptop hardware scan
