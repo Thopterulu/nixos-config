@@ -248,6 +248,7 @@
     ntfs3g
     pciutils
     pulseaudio        # pactl CLI
+    smartmontools     # smartctl — pairs with services.smartd
   ];
 
   fonts.packages = with pkgs; [
