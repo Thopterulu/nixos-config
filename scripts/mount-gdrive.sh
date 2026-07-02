@@ -14,7 +14,7 @@ mkdir -p "$MOUNT_POINT"
 
 # Mount Google Drive
 echo "Mounting Google Drive to $MOUNT_POINT..."
-rclone mount gdrive: "$MOUNT_POINT" --vfs-cache-mode writes --daemon
+rclone mount gdrive: "$MOUNT_POINT" --vfs-cache-mode full --daemon
 
 # Check if mount was successful
 sleep 2
