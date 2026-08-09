@@ -59,6 +59,22 @@ window#waybar {
   padding-top: 3px;
 }
 
+/* hyprshell mode indicator */
+#custom-hyprshellmode {
+  padding: 0 8px;
+}
+#custom-hyprshellmode.normal {
+  color: #7645AD;
+}
+#custom-hyprshellmode.open {
+  color: #f53c3c;
+  animation-name: blink;
+  animation-duration: 0.7s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
 #temperature.critical,
 #pulseaudio.muted {
   color: #FF0000;

@@ -30,9 +30,9 @@
 
     # Shader disk cache — default 128 MB is far too small for modern games,
     # causing Steam to re-process Vulkan shaders nearly every reboot.
-    # Bumped to 12 GB; shared by OpenGL and the NVIDIA Vulkan ICD.
+    # Bumped to 24 GB; shared by OpenGL and the NVIDIA Vulkan ICD.
     __GL_SHADER_DISK_CACHE = "1";
-    __GL_SHADER_DISK_CACHE_SIZE = "12000000000";
+    __GL_SHADER_DISK_CACHE_SIZE = "24000000000";
     DXVK_STATE_CACHE = "1";
 
     # Enable Wayland for Electron/Chrome apps (VSCode, Discord, Obsidian...)

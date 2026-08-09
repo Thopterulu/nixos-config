@@ -12,6 +12,7 @@
   ],
   "modules-center": [
     "hyprland/workspaces",
+    "custom/hyprshellmode",
     "mpd"
   ],
   "modules-right": [
@@ -105,6 +106,13 @@
         6
       ]
     }
+  },
+  "custom/hyprshellmode": {
+    "format": "{}",
+    "return-type": "json",
+    "interval": 1,
+    "exec": "~/.config/waybar/scripts/hyprshell-mode.sh",
+    "on-click": "pkill hyprshell; hyprshell run"
   },
   "hyprland/window": {
     "format": "( {class} )",

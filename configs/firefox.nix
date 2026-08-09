@@ -91,6 +91,10 @@
               url = "http://127.0.0.1:8384/";
             }
             {
+              name = "";
+              url = "https://midifind.com/";
+            }
+            {
               name = "Nix";
               bookmarks = [
                 {
