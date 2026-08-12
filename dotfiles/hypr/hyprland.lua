@@ -127,14 +127,34 @@ hl.config({
         enable_swallow          = false,
         swallow_regex           = "^(Alacritty|com\\.mitchellh\\.ghostty|foot)$",
         -- VRR mode: 0=off, 1=always-on, 2=fullscreen+video content (gaming-safe).
-        -- Pairs with cursor.no_break_fs_vrr so the cursor doesn't drop VRR mid-game.
+        -- INERT on this box: the Nvidia proprietary driver implements the CRTC
+        -- VRR_ENABLED property but never exposes the `vrr_capable` *connector*
+        -- property, which is what Hyprland reads to decide VRR is available.
+        -- Verified: no /sys/class/drm/card*-*/vrr_capable exists at all, and
+        -- `hyprctl monitors` reports vrr: false even with cs2 fullscreen and
+        -- solitary. Kept only so it works if this ever moves to AMD.
         vrr                     = 2,
     },
 
     cursor = {
-        no_hardware_cursors = true,
+        -- MUST stay false. Software cursors block direct scanout entirely
+        -- ("directScanoutBlockedBy: software renders/cursors"), which forced
+        -- every fullscreen game frame through a compositing pass and produced
+        -- mouse stutter on linear movement in cs2. The old `true` here was
+        -- stale early-5xx Nvidia advice; hardware cursors are fine since 555
+        -- (currently on 595.71.05).
+        --
+        -- Tradeoff, by design: hardware cursors block the tearing protocol
+        -- ("tearingBlockedBy: HW_CURSOR"), so general.allow_tearing and the
+        -- `immediate` window rules below never fire. That is the correct side
+        -- of the trade here — direct scanout fixes frame *pacing* (the actual
+        -- symptom), tearing only shaves the vblank wait and adds tear lines.
+        no_hardware_cursors = false,
         enable_hyprcursor   = true,
-        no_break_fs_vrr     = true,
+        -- Also inert without working VRR (see misc.vrr above), and actively
+        -- harmful when it did apply: it drops frames scheduled by mouse motion,
+        -- which is precisely the reported stutter. See Hyprland #8582, #8670.
+        no_break_fs_vrr     = false,
     },
 
     -- Direct scanout: when a fullscreen window has no compositor effects
@@ -273,11 +293,18 @@ hl.workspace_rule({ workspace = "2", persistent = true, monitor = "desc:Dell Inc
 ---- GAMING WINDOW RULES ----
 -----------------------------
 
+-- The no_blur / no_shadow / border_size=0 / rounding=0 combo is a hard
+-- prerequisite for render.direct_scanout to kick in. Do not remove it —
+-- direct scanout is what fixes mouse stutter in cs2, verified via
+-- `hyprctl monitors` showing solitaryBlockedBy/directScanoutBlockedBy null.
+--
 -- `immediate = true` opts the window into the tearing protocol (requires
 -- general.allow_tearing = true above). Without it, allow_tearing has no
 -- effect because every window must individually consent.
--- The no_blur / no_shadow / border_size=0 / rounding=0 combo is also a
--- prerequisite for render.direct_scanout to actually kick in.
+-- It is however DEAD as configured: hardware cursors block tearing
+-- ("tearingBlockedBy: HW_CURSOR"), and we deliberately keep hardware cursors
+-- on for direct scanout. The two are mutually exclusive; scanout wins.
+-- Left in place so tearing resumes if that constraint is ever lifted.
 
 hl.window_rule({
     name  = "steam-apps",

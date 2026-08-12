@@ -17,15 +17,25 @@
   # Wayland environment variables for better compatibility
   environment.sessionVariables = {
     # NVIDIA Wayland support - fix flickering and performance
-    WLR_NO_HARDWARE_CURSORS = "1";  # Fix cursor issues on NVIDIA
+    # NOTE: WLR_NO_HARDWARE_CURSORS was removed here. It was a no-op anyway
+    # (Hyprland 0.55 uses Aquamarine, not wlroots), and the intent behind it was
+    # wrong: software cursors block direct scanout and caused mouse stutter in
+    # cs2. The real setting is cursor.no_hardware_cursors in
+    # dotfiles/hypr/hyprland.lua, now false. Do not reintroduce either.
     __GLX_VENDOR_LIBRARY_NAME = "nvidia";
     GBM_BACKEND = "nvidia-drm";
     LIBVA_DRIVER_NAME = "nvidia";
+    # Both are X11-only knobs and have no effect under Wayland. Kept as
+    # documentation of intent; VRR is unreachable here regardless, because the
+    # proprietary driver never exposes the `vrr_capable` connector property.
     __GL_GSYNC_ALLOWED = "1";
     __GL_VRR_ALLOWED = "1";
 
     # NVIDIA explicit sync optimization (driver 555+)
-    __GL_SYNC_TO_VBLANK = "0";  # Let VRR/explicit sync handle it
+    # The original rationale ("let VRR handle it") is void — there is no working
+    # VRR on this hardware. Left at 0 because it predates the stutter fix and
+    # changing it is untested; revisit if frame pacing regresses.
+    __GL_SYNC_TO_VBLANK = "0";
     __GL_YIELD = "USLEEP";  # Better CPU usage, fixes menu stuttering
 
     # Shader disk cache — default 128 MB is far too small for modern games,
