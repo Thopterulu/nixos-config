@@ -22,6 +22,15 @@
     # wrong: software cursors block direct scanout and caused mouse stutter in
     # cs2. The real setting is cursor.no_hardware_cursors in
     # dotfiles/hypr/hyprland.lua, now false. Do not reintroduce either.
+    # Pin Hyprland's (Aquamarine's) GPU enumeration order: NVIDIA first, so it is
+    # deterministically the primary render device. Without this, card numbering
+    # on a dual-GPU box is not guaranteed stable across boots, and everything
+    # that matters for gaming (direct scanout on DP-4) assumes NVIDIA is primary.
+    # by-path is used deliberately — /dev/dri/cardN is exactly the unstable name
+    # this is meant to defend against. PCI addresses match nvidia.nix busIds.
+    #   pci-0000:01:00.0 = RTX 2080 SUPER   pci-0000:00:02.0 = UHD 630
+    # The iGPU stays listed second: it still drives HDMI-A-1 (the Dell).
+    AQ_DRM_DEVICES = "/dev/dri/by-path/pci-0000:01:00.0-card:/dev/dri/by-path/pci-0000:00:02.0-card";
     __GLX_VENDOR_LIBRARY_NAME = "nvidia";
     GBM_BACKEND = "nvidia-drm";
     LIBVA_DRIVER_NAME = "nvidia";
@@ -79,6 +88,11 @@
     slurp                # Region selector for Wayland
     grimblast            # Screenshot wrapper for Hyprland
     swappy               # Screenshot annotation tool
+    # WARNING: nwg-displays writes ~/.config/hypr/monitors.conf, and NOTHING
+    # READS IT. The Lua config manager has no hl.source() for hyprlang files, so
+    # monitors are hardcoded in dotfiles/hypr/hyprland.lua instead. This GUI will
+    # appear to work and silently change nothing. Edit hyprland.lua by hand, or
+    # drop this package.
     nwg-displays         # GUI display configuration tool for Hyprland
     jq                   # JSON processor for waybar scripts
     hyprpicker           # Color picker for Wayland

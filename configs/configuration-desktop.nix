@@ -27,7 +27,20 @@
   boot.kernel.sysctl = {
     "vm.swappiness" = 1;           # Reduce swapping
     "vm.vfs_cache_pressure" = 50;  # Reduce cache pressure
-    "kernel.sched_migration_cost_ns" = 5000000;  # Reduce scheduler overhead
+    # Split-lock detection serialises the offending core and causes visible
+    # hitching in games that trigger it. GameMode tries to disable this itself
+    # and is DENIED by polkit on every single launch:
+    #   pkexec: Error executing command as another user: Not authorized
+    #           [COMMAND=.../gamemode-1.8.2/libexec/procsysctl split_lock_mitigate 1]
+    #   gamemoded: ERROR: Failed to update split_lock_mitigate
+    # Setting it here removes the dependency on that broken pkexec path.
+    "kernel.split_lock_mitigate" = 0;
+    # NOTE: kernel.sched_migration_cost_ns was removed. It is a CFS tunable and
+    # this kernel (6.18) uses EEVDF, which does not expose it. It failed on
+    # every single boot:
+    #   systemd-sysctl: Couldn't write '5000000' to
+    #   'kernel/sched_migration_cost_ns', ignoring: No such file or directory
+    # Do not re-add it; there is no EEVDF equivalent worth setting here.
     # Required by BG3, Star Citizen, Hogwarts Legacy, many DX12 / Source 2
     # titles. Value matches Steam Deck's default (INT32_MAX - 5).
     "vm.max_map_count" = 2147483642;

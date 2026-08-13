@@ -14,6 +14,13 @@
     powerManagement.enable = true;
     powerManagement.finegrained = false;  # Full power for gaming
 
+    # Persistence mode: keeps the driver resident so it does not tear down and
+    # re-initialise GPU state between clients, which costs latency on launch.
+    # `nvidia-smi --query-gpu=persistence_mode` reported Disabled before this.
+    # Uses the supported daemon rather than a one-shot `nvidia-smi -pm 1`, which
+    # does not survive driver reload.
+    nvidiaPersistenced = true;
+
     # Performance settings
     forceFullCompositionPipeline = false;  # Reduces input lag
 

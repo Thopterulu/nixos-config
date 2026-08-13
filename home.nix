@@ -66,8 +66,12 @@
     ".config/ghostty".source = ./dotfiles/ghostty;
     ".config/dunst".source = ./dotfiles/dunst;
     ".config/flameshot".source = ./dotfiles/flameshot;
-    # Hypr config - link files individually to allow nwg-displays to write monitors.conf
-    # ".config/hypr/hyprland.conf".source = ./dotfiles/hypr/hyprland.conf;
+    # Hypr config - link files individually (not the whole dir) so runtime
+    # writes next to them are possible.
+    # The hyprlang hyprland.conf was deleted, not merely unlinked: Hyprland is
+    # driven entirely by hyprland.lua (the Lua manager). A leftover .conf is
+    # actively harmful — it looks authoritative, diverges silently, and cost
+    # real debugging time chasing settings that were never loaded.
     ".config/hypr/hyprland.lua".source = ./dotfiles/hypr/hyprland.lua;
     ".config/hypr/hypridle.conf".source = ./dotfiles/hypr/hypridle.conf;
     ".config/hypr/autostart.sh" = {
