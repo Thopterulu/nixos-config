@@ -9,7 +9,7 @@ Y="${4:-auto}"
 
 if [ -z "$MONITOR" ] || [ -z "$MODE" ]; then
     echo "Usage: $0 MONITOR_NAME RESOLUTION@REFRESH [X] [Y]"
-    echo "Example: $0 HDMI-A-1 1920x1080@60 2560 0"
+    echo "Example: $0 HDMI-A-4 1920x1080@60 2560 0"
     exit 1
 fi
 

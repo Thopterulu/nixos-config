@@ -24,16 +24,18 @@
     # Performance settings
     forceFullCompositionPipeline = false;  # Reduces input lag
 
-    # PRIME offload: Both GPUs drive their own displays independently
-    # Intel for secondary screen, NVIDIA for main screen + projector
-    prime = {
-      offload = {
-        enable = true;
-        enableOffloadCmd = true;
-      };
-      nvidiaBusId = "PCI:1@0:0:0";   # 01:00.0
-      intelBusId = "PCI:0@0:2:0";    # 00:02.0
-    };
+    # NO PRIME BLOCK, deliberately. This used to configure offload because the
+    # Intel iGPU drove the secondary screen and NVIDIA drove the main one. Every
+    # display is now cabled to the NVIDIA card (card2: DP-4 Samsung, HDMI-A-4
+    # Dell) and every card1 connector reads "disconnected", so there is no
+    # hybrid setup left to arbitrate. PRIME is a laptop/hybrid mechanism; on a
+    # desktop where one GPU drives everything it is vestigial config that only
+    # misleads. Nothing in the repo referenced the `nvidia-offload` wrapper that
+    # enableOffloadCmd provided, so dropping it breaks no callers.
+    #
+    # The iGPU is intentionally left enabled (i915 still loads, it just drives
+    # nothing) — it is the recovery path if the NVIDIA card ever fails: cable a
+    # monitor to the motherboard and the box still boots to a display.
   };
 
   # NVIDIA-specific kernel parameters

@@ -241,9 +241,10 @@ hl.bind(mainMod .. " + C", hl.dsp.exec_cmd("copyq toggle"))
 
 hl.bind(mainMod .. " + W", hl.dsp.exec_cmd(os.getenv("HOME") .. "/.config/hypr/scripts/wallpaper.sh"))
 
--- Gaming mode: toggle the Dell (HDMI-A-1) off. It hangs off the Intel iGPU
--- while games run on the NVIDIA card, so leaving it on costs a cross-GPU
--- composite every frame. Toggle it off before launching, back on after.
+-- Toggle the Dell (HDMI-A-4) off. This was once a real gaming optimisation —
+-- the Dell hung off the Intel iGPU and cost a cross-GPU composite every frame.
+-- Both outputs are on the NVIDIA card now, so that reason is gone; what is
+-- left is one fewer output to composite and one fewer screen to distract.
 -- Caveat: disabling an output relocates its windows and does NOT restore their
 -- placement on re-enable. Use it with nothing important open on that screen.
 hl.bind(mainMod .. " + G", hl.dsp.exec_cmd(os.getenv("HOME") .. "/.config/hypr/scripts/toggle-second-monitor.sh"))

@@ -1,11 +1,16 @@
 #!/usr/bin/env bash
-# Toggle the secondary Dell monitor (HDMI-A-1) on/off.
+# Toggle the secondary Dell monitor (HDMI-A-4) on/off.
 #
-# Why this exists: HDMI-A-1 hangs off the Intel iGPU (card1/i915) while games
-# run on the NVIDIA card (card2). Every frame Hyprland renders therefore
-# involves compositing a second output on a *different GPU*, with the
-# cross-GPU buffer copy that implies. Killing that output while playing
-# removes the cost entirely.
+# Why this exists: HISTORICALLY the Dell hung off the Intel iGPU (card1/i915)
+# while games ran on the NVIDIA card (card2), so compositing it cost a
+# cross-GPU buffer copy every frame. That is NO LONGER TRUE — both outputs now
+# hang off the NVIDIA card (card2: DP-4 = Samsung, HDMI-A-4 = Dell) and every
+# card1 connector reads "disconnected". The cross-GPU cost is gone.
+#
+# What remains is ordinary: one fewer 1920x1080 output to composite, and no
+# second screen to pull focus. Worth a keybind, not worth treating as a
+# prerequisite for smooth gameplay the way it used to be. Direct scanout on
+# DP-4 is evaluated per-monitor and does not care whether this one is on.
 #
 # NOTE: `hyprctl keyword` does NOT work here — this setup uses the Lua config
 # manager, and hyprctl refuses with "keyword can't work with non-legacy
@@ -16,7 +21,12 @@
 
 set -euo pipefail
 
-MON="HDMI-A-1"
+# Connector name, NOT the description. This changed from HDMI-A-1 to HDMI-A-4
+# when the Dell moved off the iGPU onto the NVIDIA card — connector names are
+# per-card, so re-cabling renames them. The old value made this script a silent
+# no-op: the `any(.name == $m)` test never matched, so it always took the
+# enable branch and tried to configure a connector that does not exist.
+MON="HDMI-A-4"
 MODE="1920x1080@60"
 POS="2560x0"
 SCALE="1"
