@@ -22,15 +22,22 @@
     # wrong: software cursors block direct scanout and caused mouse stutter in
     # cs2. The real setting is cursor.no_hardware_cursors in
     # dotfiles/hypr/hyprland.lua, now false. Do not reintroduce either.
-    # Pin Hyprland's (Aquamarine's) GPU enumeration order: NVIDIA first, so it is
-    # deterministically the primary render device. Without this, card numbering
-    # on a dual-GPU box is not guaranteed stable across boots, and everything
-    # that matters for gaming (direct scanout on DP-4) assumes NVIDIA is primary.
-    # by-path is used deliberately — /dev/dri/cardN is exactly the unstable name
-    # this is meant to defend against. PCI addresses match nvidia.nix busIds.
-    #   pci-0000:01:00.0 = RTX 2080 SUPER   pci-0000:00:02.0 = UHD 630
-    # The iGPU stays listed second: it still drives HDMI-A-1 (the Dell).
-    AQ_DRM_DEVICES = "/dev/dri/by-path/pci-0000:01:00.0-card:/dev/dri/by-path/pci-0000:00:02.0-card";
+    # DO NOT set AQ_DRM_DEVICES to /dev/dri/by-path/* paths. The variable is
+    # COLON-separated and PCI by-path names contain colons, so a value like
+    #   /dev/dri/by-path/pci-0000:01:00.0-card
+    # is split into "/dev/dri/by-path/pci-0000", "01", "00.0-card". Aquamarine
+    # then finds no GPU at all and Hyprland aborts in CCompositor::initServer:
+    #   ERR  drm: Failed to canonicalize path /dev/dri/by-path/pci-0000
+    #   ERR  DRM Backend failed
+    #   CRIT Cannot open backend: no allocator available
+    # greetd relaunches it in a loop, so the machine never reaches a session.
+    # This bricked generation 362 (14 Aug 2026); there is no escaping syntax.
+    # If GPU ordering ever actually needs pinning, the only safe route is a udev
+    # rule minting a colon-free stable symlink (e.g. /dev/dri/gpu-nvidia, matched
+    # on KERNELS=="0000:01:00.0" plus DRIVERS=="nvidia" so the early simpledrm
+    # card0 on the same PCI address does not claim the name first) and pointing
+    # this at that. Unset is fine: NVIDIA already comes up as the primary render
+    # device here via __GLX_VENDOR_LIBRARY_NAME/GBM_BACKEND below.
     __GLX_VENDOR_LIBRARY_NAME = "nvidia";
     GBM_BACKEND = "nvidia-drm";
     LIBVA_DRIVER_NAME = "nvidia";

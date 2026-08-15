@@ -241,6 +241,13 @@ hl.bind(mainMod .. " + C", hl.dsp.exec_cmd("copyq toggle"))
 
 hl.bind(mainMod .. " + W", hl.dsp.exec_cmd(os.getenv("HOME") .. "/.config/hypr/scripts/wallpaper.sh"))
 
+-- Gaming mode: toggle the Dell (HDMI-A-1) off. It hangs off the Intel iGPU
+-- while games run on the NVIDIA card, so leaving it on costs a cross-GPU
+-- composite every frame. Toggle it off before launching, back on after.
+-- Caveat: disabling an output relocates its windows and does NOT restore their
+-- placement on re-enable. Use it with nothing important open on that screen.
+hl.bind(mainMod .. " + G", hl.dsp.exec_cmd(os.getenv("HOME") .. "/.config/hypr/scripts/toggle-second-monitor.sh"))
+
 hl.bind(mainMod .. " + SHIFT + S",       hl.dsp.exec_cmd("grim -g \"$(slurp)\" - | swappy -f -"))
 hl.bind(mainMod .. " + SHIFT + ALT + S", hl.dsp.exec_cmd("grim - | swappy -f -"))
 hl.bind(mainMod .. " + CTRL + S",        hl.dsp.exec_cmd("grimblast --notify copysave screen ~/Pictures/Screenshots/$(date +%Y%m%d-%H%M%S).png"))
@@ -317,10 +324,14 @@ hl.window_rule({
     immediate = true,
 })
 
+-- Deliberately NOT floating, unlike the steam-apps rule above. A floating
+-- window running client-side fullscreen does not reliably register as Hyprland
+-- fullscreen *state*, which keeps the monitor out of solitary and therefore
+-- kills direct_scanout — the same failure mode as a top-layer waybar. Tiled on
+-- a single-window workspace fills the output anyway, so nothing is lost.
 hl.window_rule({
     name  = "cs2",
     match = { class = "^(cs2)$" },
-    float    = true,
     no_blur  = true,
     no_shadow = true,
     border_size = 0,

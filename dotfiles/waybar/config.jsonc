@@ -1,5 +1,11 @@
 {
-  "layer": "top",
+  // MUST stay "bottom", not "top". A visible layer surface on the top/overlay
+  // layer blocks Hyprland's solitary check, which is the precondition for
+  // render.direct_scanout (hyprland.lua:160) — that silently reinstates the
+  // cs2 mouse stutter the whole gaming config exists to fix, on top of drawing
+  // the bar over fullscreen games. "bottom" still gets its exclusive zone, so
+  // tiled windows do not overlap it; only fullscreen windows cover it.
+  "layer": "bottom",
   "position": "bottom",
   "modules-left": [
     "custom/logo",
