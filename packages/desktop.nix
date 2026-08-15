@@ -3,6 +3,7 @@
 {
   home.packages = with pkgs; [
     ghostty      # GPU-accelerated terminal emulator (Wayland-native)
+    brave        # Chromium-based browser; Firefox stays the xdg default
     pcmanfm      # Lightweight file manager
     rofi         # Application launcher / window switcher
     dunst        # Lightweight notification daemon
