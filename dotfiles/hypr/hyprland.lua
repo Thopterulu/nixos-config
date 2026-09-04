@@ -224,7 +224,9 @@ local mainMod = "SUPER"
 
 hl.bind(mainMod .. " + T",         hl.dsp.exec_cmd(terminal))
 hl.bind(mainMod .. " + Q",         hl.dsp.window.close())
-hl.bind(mainMod .. " + M",         hl.dsp.exit())
+-- SUPER + M used to be hl.dsp.exit() (quit Hyprland). Unbound: it sits next to
+-- SUPER + Q (close window) and killing the compositor leaves Firefox orphaned,
+-- holding its profile lock, so later launches silently hand off and die.
 hl.bind(mainMod .. " + E",         hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + V",         hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + P",         hl.dsp.window.pseudo())

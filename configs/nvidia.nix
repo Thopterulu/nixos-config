@@ -38,6 +38,24 @@
     # monitor to the motherboard and the box still boots to a display.
   };
 
+  # Hardware video decode on the NVIDIA card. Nothing provided VA-API before:
+  # intel-media-driver is in configuration.nix, but every display is cabled to
+  # the NVIDIA card and the iGPU drives nothing, so browsers and mpv were
+  # decoding H.264/HEVC/AV1 on the CPU. Requires nvidia_drm.modeset=1, already
+  # set below.
+  hardware.graphics.extraPackages = [ pkgs.nvidia-vaapi-driver ];
+
+  # LIBVA_DRIVER_NAME=nvidia is NOT set here — hyprland.nix already sets it.
+  environment.sessionVariables = {
+    # Direct backend imports NVDEC surfaces without a CUDA context. The default
+    # "egl" path needs a GL context the caller may not have; "direct" is what
+    # upstream recommends since 0.0.10 and what Firefox/mpv expect.
+    NVD_BACKEND = "direct";
+  };
+
+  # vainfo, to verify the above actually took.
+  environment.systemPackages = [ pkgs.libva-utils ];
+
   # NVIDIA-specific kernel parameters
   boot.kernelParams = [
     "nvidia_drm.modeset=1"
