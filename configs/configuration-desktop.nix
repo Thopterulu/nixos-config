@@ -5,18 +5,9 @@
   imports = [
     ./configuration.nix
     ./nvidia.nix
+    ./secureboot.nix
   ];
 
-
-  # Windows dualboot lives on the NVMe remapped behind Intel RST, so Linux
-  # never sees the drive and systemd-boot cannot auto-detect it. Chainload it
-  # through the EDK2 shell instead, using the consistent device handle that
-  # `map -c` reports for the Windows ESP (shown as FS1 in the shell).
-  boot.loader.systemd-boot.windows."dualboot" = {
-    title = "Windows";
-    efiDeviceHandle = "HD0kg32768a1";
-    sortKey = "z_windows";  # keep it below every NixOS generation
-  };
 
   # Gaming performance tweaks (desktop only)
   powerManagement.cpuFreqGovernor = "performance";
@@ -104,5 +95,31 @@
     goverlay
     gwe  # GreenWithEnvy - GPU overclocking tool
     streamcontroller  # streamdeck controller
+
+    # Windows dualboot lives on the NVMe remapped behind Intel RST, so Linux
+    # never sees the drive and the bootloader cannot auto-detect it. The EDK2
+    # shell chainload that would have solved this is incompatible with Secure
+    # Boot twice over: the shell binary is unsigned, and signing a UEFI shell
+    # hands anyone a way to launch arbitrary unsigned binaries anyway.
+    #
+    # Instead, hand Windows back to the firmware: point BootNext at Microsoft's
+    # own signed bootmgfw.efi and reboot. This is also the friendliest path for
+    # BitLocker, since the TPM sees the measurements it expects.
+    efibootmgr
+    (writeShellApplication {
+      name = "boot-windows";
+      runtimeInputs = [ efibootmgr systemd ];
+      text = ''
+        entry=$(efibootmgr | grep -m1 "Windows Boot Manager" \
+                  | sed 's/^Boot\([0-9A-Fa-f]*\).*/\1/' || true)
+        if [ -z "$entry" ]; then
+          echo "No 'Windows Boot Manager' entry in EFI NVRAM." >&2
+          exit 1
+        fi
+        echo "BootNext=$entry (Windows); rebooting..."
+        efibootmgr --bootnext "$entry" >/dev/null
+        systemctl reboot
+      '';
+    })
   ];
 }

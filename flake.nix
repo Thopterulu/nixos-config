@@ -11,12 +11,16 @@
       url = "github:nix-community/nixvim/nixos-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    lanzaboote = {
+      url = "github:nix-community/lanzaboote";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nur.url = "github:nix-community/NUR";
     nix-index-database.url = "github:nix-community/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, home-manager, nixvim, nur, nix-index-database, ... }:
+  outputs = { self, nixpkgs, home-manager, nixvim, nur, nix-index-database, lanzaboote, ... }:
     let
       # Patch hyprshell so the launcher's Ctrl+1..9 fire on French AZERTY,
       # where the unshifted top row produces ampersand/eacute/... not _1.._9.
@@ -46,6 +50,7 @@
         modules = [
           ./hardware/hardware-desktop.nix
           ./configs/configuration-desktop.nix
+          lanzaboote.nixosModules.lanzaboote
           home-manager.nixosModules.home-manager
           nix-index-database.nixosModules.nix-index
           {
