@@ -188,6 +188,13 @@
   # Enable OpenSnitch application firewall
   services.opensnitch.enable = true;
 
+  # Mullvad VPN — the daemon must run system-side; the module also puts the
+  # package in systemPackages, so don't also list it in home.packages.
+  services.mullvad-vpn = {
+    enable = true;
+    package = pkgs.mullvad-vpn;  # default is pkgs.mullvad (CLI only); this adds the GUI
+  };
+
   # Periodic SSD TRIM (weekly fstrim timer)
   services.fstrim.enable = true;
 
