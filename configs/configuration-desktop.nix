@@ -9,10 +9,14 @@
 
 
   # Windows dualboot lives on the NVMe remapped behind Intel RST, so Linux
-  # never sees it and systemd-boot cannot auto-detect it. The EDK2 shell is
-  # here to find the drive's EFI device handle (`map -c`) for the
-  # boot.loader.systemd-boot.windows entry. Remove once that is pinned down.
-  boot.loader.systemd-boot.edk2-uefi-shell.enable = true;
+  # never sees the drive and systemd-boot cannot auto-detect it. Chainload it
+  # through the EDK2 shell instead, using the consistent device handle that
+  # `map -c` reports for the Windows ESP (shown as FS1 in the shell).
+  boot.loader.systemd-boot.windows."dualboot" = {
+    title = "Windows";
+    efiDeviceHandle = "HD0kg32768a1";
+    sortKey = "z_windows";  # keep it below every NixOS generation
+  };
 
   # Gaming performance tweaks (desktop only)
   powerManagement.cpuFreqGovernor = "performance";
