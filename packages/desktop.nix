@@ -9,6 +9,7 @@
     dunst        # Lightweight notification daemon
     xwallpaper   # Wallpaper setter for X11
     opensnitch-ui # Application firewall GUI
+    networkmanagerapplet # nm-applet tray + nm-connection-editor WiFi GUI
     bubblewrap   # Lightweight sandboxing tool
     i3lock-fancy # Screen locker with blur effect
     file-roller  # GTK4 archive manager (Wayland-native)

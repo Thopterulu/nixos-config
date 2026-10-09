@@ -276,7 +276,7 @@
     "tooltip-format-wifi": "{essid} ({signalStrength}%)  | {ipaddr}",
     "tooltip-format-ethernet": "{ifname} 🖧 | {ipaddr}",
     "tooltip-format-ethernet": "{bandwidthTotalBytes}",
-    "on-click": "networkmanager_dmenu"
+    "on-click": "nm-connection-editor"
   },
   "network#speed": {
     "format": "{bandwidthDownBits}",
@@ -286,7 +286,7 @@
     "tooltip-format-ethernet": "{ifname} 󰈀 \n{ipaddr} | {frequency} MHz{icon} ",
     "tooltip-format-disconnected": "Not Connected to any type of Network",
     "tooltip": true,
-    "on-click": "pgrep -x rofi &>/dev/null && notify-send rofi || networkmanager_dmenu"
+    "on-click": "nm-connection-editor"
   },
   "group/networking": {
     "orientation": "horizontal",

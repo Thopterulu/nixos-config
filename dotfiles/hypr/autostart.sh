@@ -15,6 +15,9 @@ hypridle &
 # Clipboard manager (copyq with tray icon)
 copyq &
 
+# NetworkManager applet (WiFi tray icon, needs waybar's tray)
+nm-applet --indicator &
+
 # Discord on workspace 3
 hyprctl dispatch exec "[workspace 2] discord" &
 
