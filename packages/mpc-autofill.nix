@@ -1,20 +1,28 @@
 # FHS sandbox for the MPC Autofill desktop tool (autofill-linux.bin).
 #
 # Why this exists: the tool is a Nuitka onefile that drives a Chromium-family
-# browser through Selenium. Its src/webdrivers.py:get_brave_driver hardcodes the
-# Brave binary as "/usr/bin/brave-browser" on Linux. Verified against upstream
-# master: the path is only overridable via a `binary_location` function
-# parameter that the CLI never exposes — there is no env var and no flag.
+# browser through Selenium. It needs a browser it can discover at an FHS path,
+# plus a loader for the chromedriver it downloads at runtime; `steam-run` has
+# neither. buildFHSEnv builds a root where both genuinely resolve.
 #
-# On NixOS that path cannot exist: /usr/bin holds only `env`, and nixpkgs ships
-# Brave as `brave`, never `brave-browser`. The tool therefore dies with
-#   {'code': 65, 'message': 'Browser path does not exist: /usr/bin/brave-browser'}
-#   selenium.common.exceptions.NoSuchDriverException: Unable to obtain driver
-# `steam-run` gets the binary running but does NOT fix this — its FHS has no
-# Brave in it, so the hardcoded path is still absent.
+# Brave is NOT an option, for two independent reasons:
 #
-# buildFHSEnv is the only thing that satisfies a hardcoded absolute path: it
-# builds a root where /usr/bin/brave-browser genuinely resolves.
+#   1. It was removed from nixpkgs ("no committers among its maintainers to
+#      unblock security issues"), so there is nothing left to put in the FHS.
+#   2. Even when it was available it crashed: src/webdrivers.py:get_brave_driver
+#      hardcodes the binary as "/usr/bin/brave-browser" (overridable only via a
+#      `binary_location` parameter the CLI never exposes), and ChromeDriver
+#      passes --test-type=webdriver on every launch, which made Brave 1.93 die
+#      with SIGTRAP (a Chromium CHECK failure) before the DevTools port opened
+#      — the "window opens and immediately closes" symptom. Bisected against
+#      the exact ChromeDriver command line: every other automation flag
+#      (--remote-debugging-port, --enable-logging, --enable-automation,
+#      --password-store=basic) ran fine alone; adding --test-type=webdriver
+#      crashed it every time, with or without this FHS.
+#
+# So PICK "chrome" AT THE TOOL'S BROWSER PROMPT. Choosing "brave" now fails
+# with {'code': 65, 'message': 'Browser path does not exist:
+# /usr/bin/brave-browser'} rather than the crash above.
 #
 # Usage, replacing `steam-run ./autofill-linux.bin` — cd to the directory
 # holding the .bin and its XML first:
@@ -29,37 +37,14 @@
 { pkgs, ... }:
 
 let
-  # nixpkgs' brave provides bin/brave only. Mint the name upstream demands.
-  brave-browser-alias = pkgs.runCommand "brave-browser-alias" { } ''
-    mkdir -p $out/bin
-    ln -s ${pkgs.brave}/bin/brave $out/bin/brave-browser
-  '';
-
   mpc-autofill-env = pkgs.buildFHSEnv {
     name = "mpc-autofill-env";
     targetPkgs = p: (with p; [
-      # PICK "chrome" AT THE TOOL'S BROWSER PROMPT, NOT "brave".
-      #
-      # Brave is unusable here and it is not a NixOS problem: ChromeDriver
-      # passes --test-type=webdriver on every single launch, and that one flag
-      # makes Brave 1.93 die with SIGTRAP (a Chromium CHECK failure) before the
-      # DevTools port ever opens — the "window opens and immediately closes"
-      # symptom. Bisected against the exact ChromeDriver command line: every
-      # other automation flag (--remote-debugging-port, --enable-logging,
-      # --enable-automation, --password-store=basic) runs fine alone; adding
-      # --test-type=webdriver crashes it every time, with or without this FHS.
-      #
-      # Chrome is also the easier target: src/webdrivers.py hardcodes a binary
-      # path ONLY for Brave. get_chrome_driver leaves binary_location unset and
-      # lets Selenium Manager discover the browser, which it does at
+      # Chrome is the easy target: src/webdrivers.py hardcodes a binary path
+      # ONLY for Brave. get_chrome_driver leaves binary_location unset and lets
+      # Selenium Manager discover the browser, which it does at
       # /usr/bin/google-chrome-stable inside this FHS.
       google-chrome
-
-      # Brave kept anyway: it is what makes /usr/bin/brave-browser resolve, so
-      # choosing "brave" fails with an honest crash rather than a confusing
-      # "Browser path does not exist". Remove both if upstream ever fixes it.
-      brave
-      brave-browser-alias
 
       # Selenium Manager downloads a chromedriver matching the browser's
       # Chromium build at runtime and caches it in ~/.cache/selenium.
