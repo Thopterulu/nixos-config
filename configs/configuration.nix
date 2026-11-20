@@ -23,6 +23,16 @@
   boot.supportedFilesystems = [ "ntfs" ];
   boot.kernelModules = [ "snd-usb-audio" ];
 
+  # Keep systemd's hands off the TPM. systemd-tpm2-setup provisions its own
+  # Storage Root Key, and on the Windows dualboot desktop that leaves the chip
+  # in a state Windows doesn't recognise: with TPM auto-provisioning on, it
+  # demands a TPM clear (RestartPending / Request 5) after every NixOS session.
+  # Nothing here needs the TPM — no LUKS volume, no systemd-cryptenroll — so
+  # the SRK buys us nothing and costs a reboot loop. Measured boot via
+  # lanzaboote is unaffected; it reads PCRs rather than owning the hierarchy.
+  systemd.tpm2.enable = false;
+  boot.initrd.systemd.tpm2.enable = false;
+
 
 
   networking.hostName = "thopter-nixos"; # Define your hostname.
